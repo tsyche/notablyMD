@@ -25,7 +25,9 @@ class AudioRecordService : Service() {
         recorder =
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
                 MediaRecorder(this)
-            } else MediaRecorder()
+            } else {
+                @Suppress("DEPRECATION") MediaRecorder()
+            }
 
         recorder.apply {
             setAudioSource(MediaRecorder.AudioSource.MIC)

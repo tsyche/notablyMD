@@ -589,6 +589,7 @@ fun Activity.resetApplication() {
         Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
     )
     startActivity(resetApplicationIntent)
+    @Suppress("DEPRECATION")
     overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
 }
 

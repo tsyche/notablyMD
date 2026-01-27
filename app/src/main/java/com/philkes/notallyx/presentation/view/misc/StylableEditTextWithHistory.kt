@@ -60,13 +60,12 @@ class StylableEditTextWithHistory(context: Context, attrs: AttributeSet) :
                     if (count > 1) {
                         val changedText = text.substring(start, start + count)
                         changedText.findWebUrls().forEach { (urlStart, urlEnd) ->
-                            super.getText()
-                                ?.setSpan(
-                                    URLSpan(changedText.substring(urlStart, urlEnd)),
-                                    start + urlStart,
-                                    start + urlEnd,
-                                    Spanned.SPAN_EXCLUSIVE_EXCLUSIVE,
-                                )
+                            editableText?.setSpan(
+                                URLSpan(changedText.substring(urlStart, urlEnd)),
+                                start + urlStart,
+                                start + urlEnd,
+                                Spanned.SPAN_EXCLUSIVE_EXCLUSIVE,
+                            )
                         }
                     }
                 },
@@ -84,19 +83,18 @@ class StylableEditTextWithHistory(context: Context, attrs: AttributeSet) :
 
     fun getSpanText(span: CharacterStyle): String {
         val (spanStart, spanEnd) = getSpanRange(span)
-        return super.getText()!!.substring(spanStart, spanEnd)
+        return editableText!!.substring(spanStart, spanEnd)
     }
 
     fun getSelectionText(): String? {
         if (selectionStart == -1 || selectionEnd == -1) {
             return null
         }
-        return super.getText()!!.substring(selectionStart, selectionEnd)
+        return editableText!!.substring(selectionStart, selectionEnd)
     }
 
     fun getSpans(start: Int = selectionStart, end: Int = selectionEnd): Collection<CharacterStyle> {
-        return super.getText()?.getSpans(start, end, CharacterStyle::class.java)?.toList()
-            ?: listOf()
+        return editableText?.getSpans(start, end, CharacterStyle::class.java)?.toList() ?: listOf()
     }
 
     fun getSpans(

@@ -54,7 +54,7 @@ class ListItemVH(
             textWatcher =
                 createListTextWatcherWithHistory(
                     listManager,
-                    this@ListItemVH::getAdapterPosition,
+                    this@ListItemVH::bindingAdapterPosition,
                 ) { text, start, count ->
                     if (count > 1) {
                         checkListPasted(text, start, count, this)
@@ -121,7 +121,7 @@ class ListItemVH(
     }
 
     fun focusEditText(
-        selectionStart: Int = binding.EditText.text!!.length,
+        selectionStart: Int = binding.EditText.editableText!!.length,
         selectionEnd: Int = selectionStart,
         inputMethodManager: InputMethodManager?,
     ) {

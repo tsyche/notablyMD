@@ -212,7 +212,7 @@ class WidgetProvider : AppWidgetProvider() {
                     preferences.deleteWidget(id)
                     val view =
                         RemoteViews(context.packageName, R.layout.widget).apply {
-                            setRemoteAdapter(R.id.ListView, intent)
+                            @Suppress("DEPRECATION") setRemoteAdapter(R.id.ListView, intent)
                             setEmptyView(R.id.ListView, R.id.Empty)
                             setOnClickPendingIntent(
                                 R.id.Empty,
@@ -229,13 +229,14 @@ class WidgetProvider : AppWidgetProvider() {
                             )
                         }
                     manager.updateAppWidget(id, view)
+                    @Suppress("DEPRECATION")
                     manager.notifyAppWidgetViewDataChanged(id, R.id.ListView)
                     return@launch
                 }
                 if (!locked) {
                     val view =
                         RemoteViews(context.packageName, R.layout.widget).apply {
-                            setRemoteAdapter(R.id.ListView, intent)
+                            @Suppress("DEPRECATION") setRemoteAdapter(R.id.ListView, intent)
                             setEmptyView(R.id.ListView, R.id.Empty)
                             setOnClickPendingIntent(
                                 R.id.Empty,
@@ -267,6 +268,7 @@ class WidgetProvider : AppWidgetProvider() {
                             }
                         }
                     manager.updateAppWidget(id, view)
+                    @Suppress("DEPRECATION")
                     manager.notifyAppWidgetViewDataChanged(id, R.id.ListView)
                 } else {
                     val view =

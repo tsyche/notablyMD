@@ -135,6 +135,7 @@ private fun promptPinAuthentication(
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
         // For API 23 and above, use isDeviceSecure
         if (keyguardManager?.isDeviceSecure == true) {
+            @Suppress("DEPRECATION")
             val intent =
                 keyguardManager.createConfirmDeviceCredentialIntent(
                     context.getString(titleResId),
@@ -151,6 +152,7 @@ private fun promptPinAuthentication(
     } else {
         // For API 21-22, use isKeyguardSecure
         if (keyguardManager?.isKeyguardSecure == true) {
+            @Suppress("DEPRECATION")
             val intent =
                 keyguardManager.createConfirmDeviceCredentialIntent(
                     context.getString(titleResId),

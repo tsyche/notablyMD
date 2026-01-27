@@ -169,7 +169,7 @@ class PlayAudioActivity : LockedActivity<ActivityPlayAudioBinding>() {
     }
 
     private fun setupToolbar(binding: ActivityPlayAudioBinding) {
-        binding.Toolbar.setNavigationOnClickListener { onBackPressed() }
+        binding.Toolbar.setNavigationOnClickListener { @Suppress("DEPRECATION") onBackPressed() }
 
         binding.Toolbar.menu.apply {
             add(R.string.share, R.drawable.share) { share() }

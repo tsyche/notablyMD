@@ -17,7 +17,7 @@ open class HighlightableEditText(context: Context, attrs: AttributeSet) :
     EditTextWithWatcher(context, attrs) {
 
     fun getSpanRange(span: CharacterStyle): Pair<Int, Int> {
-        val text = super.getText()!!
+        val text = editableText!!
         return Pair(text.getSpanStart(span), text.getSpanEnd(span))
     }
 
@@ -28,9 +28,9 @@ open class HighlightableEditText(context: Context, attrs: AttributeSet) :
      */
     protected fun removeSpan(span: CharacterStyle, removeText: Boolean = false) {
         val (start, end) = getSpanRange(span)
-        text?.removeSelectionFromSpans(start, end)
+        editableText?.removeSelectionFromSpans(start, end)
         if (removeText) {
-            text?.delete(start, end)
+            editableText?.delete(start, end)
         }
     }
 
@@ -39,7 +39,7 @@ open class HighlightableEditText(context: Context, attrs: AttributeSet) :
         start: Int = selectionStart,
         end: Int = selectionEnd,
     ) {
-        text?.setSpan(span, start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+        editableText?.setSpan(span, start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
     }
 
     private val highlightedSpans: MutableList<CharacterStyle> = mutableListOf()

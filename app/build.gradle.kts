@@ -11,7 +11,7 @@ plugins {
     id("org.jetbrains.kotlin.plugin.parcelize")
     id("com.google.devtools.ksp")
     id("com.ncorti.ktfmt.gradle") version "0.20.1"
-    id("org.jetbrains.kotlin.plugin.serialization") version "1.9.0"
+    id("org.jetbrains.kotlin.plugin.serialization") version "2.1.10"
     id("io.github.philkes.android-translations-converter") version "1.0.5"
 }
 
@@ -40,10 +40,10 @@ android {
 
     signingConfigs {
         create("release") {
-            storeFile = file(providers.gradleProperty("RELEASE_STORE_FILE").get())
-            storePassword = providers.gradleProperty("RELEASE_STORE_PASSWORD").get()
-            keyAlias = providers.gradleProperty("RELEASE_KEY_ALIAS").get()
-            keyPassword = providers.gradleProperty("RELEASE_KEY_PASSWORD").get()
+            storeFile = file(providers.gradleProperty("RELEASE_STORE_FILE").orElse("release.keystore").get())
+            storePassword = providers.gradleProperty("RELEASE_STORE_PASSWORD").orElse("").get()
+            keyAlias = providers.gradleProperty("RELEASE_KEY_ALIAS").orElse("").get()
+            keyPassword = providers.gradleProperty("RELEASE_KEY_PASSWORD").orElse("").get()
         }
     }
 
@@ -90,13 +90,13 @@ android {
                     println("Copied mapping to: ${target.absolutePath}")
                 }
             }
-            tasks.matching { it.name == "assemble${name.capitalize()}" }
+            tasks.matching { it.name == "assemble${name.replaceFirstChar { it.uppercase() }}" }
                 .forEach { bundleTask ->
                     bundleTask.doLast {
                         copyMapping("apk")
                     }
                 }
-            tasks.matching { it.name == "bundle${name.capitalize()}" }
+            tasks.matching { it.name == "bundle${name.replaceFirstChar { it.uppercase() }}" }
                 .forEach { bundleTask ->
                     bundleTask.doLast {
                         copyMapping( "bundle")
@@ -105,11 +105,11 @@ android {
 
             if (buildType.name == "release") {
                 // Match the bundle task for this variant
-                tasks.matching { it.name == "bundle${name.capitalize()}" }.forEach { bundleTask ->
+                tasks.matching { it.name == "bundle${name.replaceFirstChar { it.uppercase() }}" }.forEach { bundleTask ->
                     bundleTask.doLast {
                         // Source folder with native debug symbols
                         val nativeLibsDir = layout.buildDirectory.file(
-                            "intermediates/merged_native_libs/${buildType.name}/merge${buildType.name.capitalize()}NativeLibs/out/lib"
+                            "intermediates/merged_native_libs/${buildType.name}/merge${buildType.name.replaceFirstChar { it.uppercase() }}NativeLibs/out/lib"
                         ).get().asFile
 
                         if (!nativeLibsDir.exists()) {
@@ -143,16 +143,22 @@ android {
     }
 
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "21"
+        languageVersion = "2.2"
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
     }
 
     buildFeatures {
         viewBinding = true
+        buildConfig = true
+    }
+
+    lint {
+        baseline = file("lint-baseline.xml")
     }
 
     packaging {
@@ -187,7 +193,7 @@ tasks.register<Copy>("installLocalGitHooks") {
     into(hooksDir)
     inputs.files(file("${scriptsDir}/pre-commit"), file("${scriptsDir}/pre-commit.bat"))
     outputs.dir(hooksDir)
-    fileMode = 509 // 0775 octal in decimal
+    fileMode = "0775".toInt(8) // Convert octal to decimal
     // If this throws permission denied:
     // chmod +rwx ./.git/hooks/pre-commit*
 }
@@ -209,7 +215,7 @@ tasks.register("generateChangelogs") {
         } else {
             println("CHANGELOG_GITHUB_TOKEN not found, which limits the allowed amount of Github API calls")
         }
-        exec {
+        val execResult = exec {
             commandLine(command)
             standardOutput = System.out
             errorOutput = System.err

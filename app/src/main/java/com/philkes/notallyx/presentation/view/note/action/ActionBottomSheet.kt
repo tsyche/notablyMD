@@ -106,6 +106,7 @@ open class ActionBottomSheet(
             )
         color?.let {
             dialog.window?.apply {
+                @Suppress("DEPRECATION")
                 navigationBarColor = it
                 setLightStatusAndNavBar(it.isLightColor())
             }
@@ -117,6 +118,7 @@ open class ActionBottomSheet(
                     state = BottomSheetBehavior.STATE_EXPANDED
                     isHideable = false
                     // Disable dragging changes to allow nested scroll
+                    @Suppress("DEPRECATION")
                     setBottomSheetCallback(
                         object : BottomSheetCallback() {
                             override fun onStateChanged(bottomSheet: View, newState: Int) {
