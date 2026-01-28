@@ -101,7 +101,10 @@ open class ListManagerTestBase {
         val listItemSortingPreference = mock(EnumPreference::class.java)
         `when`(listItemSortingPreference.value).thenReturn(sorting)
         `when`(preferences.listItemSorting)
-            .thenReturn(listItemSortingPreference as EnumPreference<ListItemSort>)
+            .thenReturn(
+                @Suppress("UNCHECKED_CAST")
+                (listItemSortingPreference as EnumPreference<ListItemSort>)
+            )
     }
 
     protected val items: MutableList<ListItem>

@@ -1,5 +1,6 @@
 package com.philkes.notallyx.utils.security
 
+import android.annotation.TargetApi
 import android.content.Context
 import android.content.ContextWrapper
 import android.os.Build
@@ -88,11 +89,22 @@ private fun getOrCreateSecretKey(keyName: String = ENCRYPTION_KEY_NAME): SecretK
             // on Android 7.0 (API level 24) or higher. The variable
             // "invalidatedByBiometricEnrollment" is true by default.
             //            .setInvalidatedByBiometricEnrollment(true) // TODO:
-            // The other important property is setUserAuthenticationValidityDurationSeconds().
-            // If it is set to -1 then the key can only be unlocked using Fingerprint or Biometrics.
-            // If it is set to any other value, the key can be unlocked using a device screenlock
+            // The other important property is setUserAuthenticationParameters().
+            // If you set duration to -1 then the key can only be unlocked using Fingerprint or
+            // Biometrics.
+            // If you set it to any other value, the key can be unlocked using a device screenlock
             // too.
-            .setUserAuthenticationValidityDurationSeconds(-1)
+            .apply {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                    @TargetApi(30)
+                    setUserAuthenticationParameters(
+                        0,
+                        KeyProperties.AUTH_BIOMETRIC_STRONG or KeyProperties.AUTH_DEVICE_CREDENTIAL,
+                    )
+                } else {
+                    @Suppress("DEPRECATION") setUserAuthenticationValidityDurationSeconds(-1)
+                }
+            }
             .build()
 
     val keyGenerator = KeyGenerator.getInstance(KeyProperties.KEY_ALGORITHM_AES, ANDROID_KEYSTORE)

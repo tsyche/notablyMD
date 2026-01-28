@@ -47,17 +47,15 @@ class AudioPlayService : Service() {
     fun initialise(audio: Audio) {
         if (state == IDLE) {
             val audioRoot = application.getCurrentAudioDirectory()
-            if (audioRoot != null) {
-                try {
-                    val file = File(audioRoot, audio.name)
-                    player.setDataSource(file.absolutePath)
-                    setState(INITIALISED)
-                    player.prepareAsync()
-                } catch (exception: Exception) {
-                    setIOError()
-                    application.log(TAG, throwable = exception)
-                }
-            } else setIOError()
+            try {
+                val file = File(audioRoot, audio.name)
+                player.setDataSource(file.absolutePath)
+                setState(INITIALISED)
+                player.prepareAsync()
+            } catch (exception: Exception) {
+                setIOError()
+                application.log(TAG, throwable = exception)
+            }
         }
     }
 

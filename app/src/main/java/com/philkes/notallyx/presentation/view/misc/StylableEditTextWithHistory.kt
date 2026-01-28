@@ -180,6 +180,7 @@ class StylableEditTextWithHistory(context: Context, attrs: AttributeSet) :
     ) {
         val actualPosition =
             if (position < 0 || !hasFocus()) {
+                @Suppress("DEPRECATION")
                 text?.lastIndex?.let {
                     if (it > -1) {
                         it

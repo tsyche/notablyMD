@@ -22,13 +22,7 @@ data class ListItem(
     }
 
     override fun equals(other: Any?): Boolean {
-        if (this == null && other == null) {
-            return true
-        }
-        if (this != null && other == null) {
-            return false
-        }
-        if (this == null && other != null) {
+        if (other == null) {
             return false
         }
         if (other !is ListItem) {

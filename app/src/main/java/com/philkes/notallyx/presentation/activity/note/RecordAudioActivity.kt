@@ -42,6 +42,7 @@ class RecordAudioActivity : LockedActivity<ActivityRecordAudioBinding>() {
         connection =
             object : ServiceConnection {
                 override fun onServiceConnected(name: ComponentName, binder: IBinder) {
+                    @Suppress("UNCHECKED_CAST")
                     service = (binder as LocalBinder<AudioRecordService>).getService()
                     service?.status?.observe(this@RecordAudioActivity, serviceStatusObserver)
                 }

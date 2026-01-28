@@ -870,10 +870,8 @@ abstract class EditActivity(private val type: Type) :
     }
 
     private fun startRecordAudioActivity() {
-        if (notallyModel.audioRoot != null) {
-            val intent = Intent(this, RecordAudioActivity::class.java)
-            recordAudioActivityResultLauncher.launch(intent)
-        } else showToast(R.string.insert_an_sd_card_audio)
+        val intent = Intent(this, RecordAudioActivity::class.java)
+        recordAudioActivityResultLauncher.launch(intent)
     }
 
     private fun handleRejection() {
@@ -889,33 +887,29 @@ abstract class EditActivity(private val type: Type) :
     }
 
     override fun addImages() {
-        if (notallyModel.imageRoot != null) {
-            val intent =
-                Intent(Intent.ACTION_GET_CONTENT)
-                    .apply {
-                        type = "image/*"
-                        putExtra(Intent.EXTRA_LOCAL_ONLY, true)
-                        putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
-                        addCategory(Intent.CATEGORY_OPENABLE)
-                    }
-                    .wrapWithChooser(this)
-            addImagesActivityResultLauncher.launch(intent)
-        } else showToast(R.string.insert_an_sd_card_images)
+        val intent =
+            Intent(Intent.ACTION_GET_CONTENT)
+                .apply {
+                    type = "image/*"
+                    putExtra(Intent.EXTRA_LOCAL_ONLY, true)
+                    putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
+                    addCategory(Intent.CATEGORY_OPENABLE)
+                }
+                .wrapWithChooser(this)
+        addImagesActivityResultLauncher.launch(intent)
     }
 
     override fun attachFiles() {
-        if (notallyModel.filesRoot != null) {
-            val intent =
-                Intent(Intent.ACTION_GET_CONTENT)
-                    .apply {
-                        type = "*/*"
-                        putExtra(Intent.EXTRA_LOCAL_ONLY, true)
-                        putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
-                        addCategory(Intent.CATEGORY_OPENABLE)
-                    }
-                    .wrapWithChooser(this)
-            attachFilesActivityResultLauncher.launch(intent)
-        } else showToast(R.string.insert_an_sd_card_files)
+        val intent =
+            Intent(Intent.ACTION_GET_CONTENT)
+                .apply {
+                    type = "*/*"
+                    putExtra(Intent.EXTRA_LOCAL_ONLY, true)
+                    putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
+                    addCategory(Intent.CATEGORY_OPENABLE)
+                }
+                .wrapWithChooser(this)
+        attachFilesActivityResultLauncher.launch(intent)
     }
 
     override fun changeColor() {
@@ -1079,9 +1073,6 @@ abstract class EditActivity(private val type: Type) :
     private fun setupFiles() {
         fileAdapter =
             PreviewFileAdapter({ fileAttachment ->
-                if (notallyModel.filesRoot == null) {
-                    return@PreviewFileAdapter
-                }
                 val intent =
                     Intent(Intent.ACTION_VIEW)
                         .apply {

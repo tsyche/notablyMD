@@ -63,6 +63,7 @@ class PlayAudioActivity : LockedActivity<ActivityPlayAudioBinding>() {
             object : ServiceConnection {
 
                 override fun onServiceConnected(name: ComponentName?, binder: IBinder?) {
+                    @Suppress("UNCHECKED_CAST")
                     val service = (binder as LocalBinder<AudioPlayService>).getService()
                     service.initialise(audio)
                     service.onStateChange = { updateUI(service) }
@@ -180,8 +181,8 @@ class PlayAudioActivity : LockedActivity<ActivityPlayAudioBinding>() {
 
     private fun share() {
         val audioRoot = application.getCurrentAudioDirectory()
-        val file = if (audioRoot != null) File(audioRoot, audio.name) else null
-        if (file != null && file.exists()) {
+        val file = File(audioRoot, audio.name)
+        if (file.exists()) {
             val uri = getUriForFile(file)
             val intent =
                 Intent(Intent.ACTION_SEND)
@@ -209,8 +210,8 @@ class PlayAudioActivity : LockedActivity<ActivityPlayAudioBinding>() {
 
     private fun saveToDevice() {
         val audioRoot = application.getCurrentAudioDirectory()
-        val file = if (audioRoot != null) File(audioRoot, audio.name) else null
-        if (file != null && file.exists()) {
+        val file = File(audioRoot, audio.name)
+        if (file.exists()) {
             val intent =
                 Intent(Intent.ACTION_CREATE_DOCUMENT)
                     .apply {
@@ -231,8 +232,8 @@ class PlayAudioActivity : LockedActivity<ActivityPlayAudioBinding>() {
         lifecycleScope.launch {
             withContext(Dispatchers.IO) {
                 val audioRoot = application.getCurrentAudioDirectory()
-                val file = if (audioRoot != null) File(audioRoot, audio.name) else null
-                if (file != null && file.exists()) {
+                val file = File(audioRoot, audio.name)
+                if (file.exists()) {
                     val output = contentResolver.openOutputStream(uri) as FileOutputStream
                     output.channel.truncate(0)
                     val input = FileInputStream(file)

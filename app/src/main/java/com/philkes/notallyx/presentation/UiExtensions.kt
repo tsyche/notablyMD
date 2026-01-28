@@ -789,7 +789,7 @@ private fun TextView.setSelectHandleColor(@ColorInt color: Int) {
         val drawable = ContextCompat.getDrawable(context, drawableId)
 
         // Apply a filter on that drawable with the desired colour
-        drawable?.setColorFilter(color, PorterDuff.Mode.SRC_IN)
+        @Suppress("DEPRECATION") drawable?.setColorFilter(color, PorterDuff.Mode.SRC_IN)
 
         // Override the drawable being used by the Editor with our coloured drawable
         val selectHandleField = editor.javaClass.getDeclaredField(it.selectHandleFieldName)

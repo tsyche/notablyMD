@@ -11,7 +11,7 @@ plugins {
     id("org.jetbrains.kotlin.plugin.parcelize")
     id("com.google.devtools.ksp")
     id("com.ncorti.ktfmt.gradle") version "0.20.1"
-    id("org.jetbrains.kotlin.plugin.serialization") version "2.1.10"
+    id("org.jetbrains.kotlin.plugin.serialization") version "2.1.0"
     id("io.github.philkes.android-translations-converter") version "1.0.5"
 }
 
@@ -19,6 +19,7 @@ android {
     namespace = "com.philkes.notallyx"
     compileSdk = 36
     ndkVersion = "29.0.13113456"
+    
     defaultConfig {
         applicationId = "com.philkes.notallyx"
         minSdk = 21
@@ -52,6 +53,9 @@ android {
             applicationIdSuffix = ".debug"
             versionNameSuffix = "-DEBUG"
             resValue("string", "app_name", "NotallyX DEBUG")
+            ndk {
+                debugSymbolLevel = "NONE"
+            }
         }
         release {
             isCrunchPngs = false
@@ -62,6 +66,9 @@ android {
                 "proguard-rules.pro"
             )
             signingConfig = signingConfigs.getByName("release")
+            ndk {
+                debugSymbolLevel = "SYMBOL_TABLE"
+            }
         }
         create("beta"){
             initWith(getByName("release"))
@@ -69,6 +76,11 @@ android {
             versionNameSuffix = "-BETA"
             resValue("string", "app_name", "NotallyX BETA")
         }
+    }
+    
+    // Skip strip debug symbols task for debug builds to avoid warnings
+    tasks.matching { it.name == "stripDebugDebugSymbols" }.configureEach {
+        enabled = false
     }
 
     applicationVariants.all {
@@ -144,7 +156,7 @@ android {
 
     kotlinOptions {
         jvmTarget = "21"
-        languageVersion = "2.2"
+        languageVersion = "2.1"
     }
 
     compileOptions {
@@ -168,6 +180,12 @@ android {
             "kotlin/**.kotlin_builtins",
             "kotlin-tooling-metadata.json"
         )
+        // Handle native libraries that can't be stripped
+        jniLibs {
+            pickFirsts += listOf("**/libc++_shared.so")
+            // These libraries can't be stripped and will be packaged as-is
+            useLegacyPackaging = false
+        }
     }
 
     testOptions {

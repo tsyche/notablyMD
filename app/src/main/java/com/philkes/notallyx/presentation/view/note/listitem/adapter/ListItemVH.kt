@@ -52,10 +52,10 @@ class ListItemVH(
             setTextSize(TypedValue.COMPLEX_UNIT_SP, body)
             filters = context.textMaxLengthFilter()
             textWatcher =
-                createListTextWatcherWithHistory(
-                    listManager,
-                    this@ListItemVH::bindingAdapterPosition,
-                ) { text, start, count ->
+                createListTextWatcherWithHistory(listManager, { bindingAdapterPosition }) {
+                    text,
+                    start,
+                    count ->
                     if (count > 1) {
                         checkListPasted(text, start, count, this)
                     } else {

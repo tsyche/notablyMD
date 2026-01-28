@@ -17,7 +17,7 @@ enum class Color {
     companion object {
         fun allColorStrings() = entries.map { it.toColorString() }.toList()
 
-        fun valueOfOrDefault(value: String) =
+        fun valueOfOrDefault(value: String): Color =
             try {
                 Color.valueOf(value)
             } catch (e: Exception) {

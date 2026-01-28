@@ -241,6 +241,7 @@ object Converters {
             override fun next(): T {
                 val element = get(index)
                 index++
+                @Suppress("UNCHECKED_CAST")
                 return element as T
             }
 
