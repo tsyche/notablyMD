@@ -270,13 +270,13 @@
         esempio \'- [x]\' in Markdown, \'[✓]\' nella sintassi di NotablyMD, oppure \'*\', \'-\')
         verrà importato come Lista.</string>
     <string name="play">Play</string>
-    <string name="please_grant_notally_alarm">Per favore concedi a NotablyMD il permesso per inviare
+    <string name="please_grant_notably_alarm">Per favore concedi a NotablyMD il permesso per inviare
         promemoria</string>
-    <string name="please_grant_notally_audio">Per favore concedi a NotablyMD il permesso di
+    <string name="please_grant_notably_audio">Per favore concedi a NotablyMD il permesso di
         registrare audio. Le registrazioni non lasceranno mai il dispositivo</string>
-    <string name="please_grant_notally_notification">Per favore concedi a NotablyMD il permesso per
+    <string name="please_grant_notably_notification">Per favore concedi a NotablyMD il permesso per
         inviare notifiche</string>
-    <string name="please_grant_notally_notification_auto_backup">Se un backup automatico fallisce,
+    <string name="please_grant_notably_notification_auto_backup">Se un backup automatico fallisce,
         puoi ricevere una notifica concedendo a NotablyMD l\'autorizzazione per inviare notifiche</string>
     <string name="previous">Precedente</string>
     <string name="rate">Recensisci questa app</string>

@@ -252,10 +252,10 @@
     <string name="plain_text_files">Файли Markdown/Plain Text</string>
     <string name="plain_text_files_help">Щоб імпортувати ваші нотатки з файлів Markdown/plain text (окремий файл або папка), натисніть «Імпортувати». Кожен файл імпортується як окрема нотатка, а назва файлу стає заголовком нотатки. Якщо текстовий вміст починається з синтаксису списку (наприклад, markdown ’- [x]’, синтаксис NotablyMD ’[✓]’ або ’*’, ’-’), він буде перетворений на нотатку-список.</string>
     <string name="play">Відтворити</string>
-    <string name="please_grant_notally_alarm">Надайте NotablyMD дозвіл на надсилання нагадувань</string>
-    <string name="please_grant_notally_audio">Надайте NotablyMD дозвіл на запис аудіо. Записи ніколи не залишають ваш пристрій</string>
-    <string name="please_grant_notally_notification">Надайте NotablyMD дозвіл на надсилання сповіщень</string>
-    <string name="please_grant_notally_notification_auto_backup">Якщо автоматичне резервне копіювання не вдасться, ви можете отримати сповіщення, якщо надасте NotablyMD дозвіл на надсилання сповіщень</string>
+    <string name="please_grant_notably_alarm">Надайте NotablyMD дозвіл на надсилання нагадувань</string>
+    <string name="please_grant_notably_audio">Надайте NotablyMD дозвіл на запис аудіо. Записи ніколи не залишають ваш пристрій</string>
+    <string name="please_grant_notably_notification">Надайте NotablyMD дозвіл на надсилання сповіщень</string>
+    <string name="please_grant_notably_notification_auto_backup">Якщо автоматичне резервне копіювання не вдасться, ви можете отримати сповіщення, якщо надасте NotablyMD дозвіл на надсилання сповіщень</string>
     <string name="previous">Попередній</string>
     <string name="rate">Оцініть цей додаток</string>
     <string name="read_only">Лише для читання</string>

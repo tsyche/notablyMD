@@ -258,10 +258,10 @@
     <string name="plain_text_files">Markdown/Textové soubory</string>
     <string name="plain_text_files_help">Chcete-li importovat poznámky z textových souborů (jednotlivých souborů nebo složek), klikněte na tlačítko Importovat. Každý soubor se importuje jako samostatná poznámka, název souboru se stane názvem poznámky. Pokud textový obsah začíná syntaxí seznamu (např. syntaxí Markdown \'- [x]\', NotablyMD \'[✓]\' nebo \'*\', \'-\'), bude převeden na poznámku Seznam.</string>
     <string name="play">Přehrát</string>
-    <string name="please_grant_notally_alarm">Povolte prosím aplikaci NotablyMD zasílání upomínky</string>
-    <string name="please_grant_notally_audio">Povolte prosím NotablyMD nahrávání zvuku. Nahrávky nikdy neopustí vaše zařízení</string>
-    <string name="please_grant_notally_notification">Povolte prosím  NotablyMD zasílat oznámení</string>
-    <string name="please_grant_notally_notification_auto_backup">Pokud automatické zálohování selže, můžete obdržet oznámení, pokud NotablyMD udělíte oprávnění k zasílání oznámení</string>
+    <string name="please_grant_notably_alarm">Povolte prosím aplikaci NotablyMD zasílání upomínky</string>
+    <string name="please_grant_notably_audio">Povolte prosím NotablyMD nahrávání zvuku. Nahrávky nikdy neopustí vaše zařízení</string>
+    <string name="please_grant_notably_notification">Povolte prosím  NotablyMD zasílat oznámení</string>
+    <string name="please_grant_notably_notification_auto_backup">Pokud automatické zálohování selže, můžete obdržet oznámení, pokud NotablyMD udělíte oprávnění k zasílání oznámení</string>
     <string name="previous">Předchozí</string>
     <string name="rate">Ohodnotit aplikaci</string>
     <string name="read_only">Pouze pro čtení</string>

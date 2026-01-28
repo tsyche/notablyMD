@@ -175,7 +175,7 @@ class SettingsFragment : Fragment() {
                                 ) {
                                     MaterialAlertDialogBuilder(it)
                                         .setMessage(
-                                            R.string.please_grant_notally_notification_auto_backup
+                                            R.string.please_grant_notably_notification_auto_backup
                                         )
                                         .setNegativeButton(R.string.skip, null)
                                         .setPositiveButton(R.string.continue_) { _, _ ->

@@ -249,10 +249,10 @@
     <string name="plain_text_files">Markdown/Zwykłe pliki tekstowe</string>
     <string name="plain_text_files_help">Aby zaimportować Notatki z plików tekstowych (pojedynczy plik lub folder), kliknij Przywracanie. Każdy plik jest importowany jako osobna notatka, a nazwa pliku staje się tytułem notatki. Jeśli treść tekstu zaczyna się od składni listy (np. Markdown „- [x]”, składnia NotablyMD „[✓]” lub „*”, „-”), zostanie ona przekonwertowana na notatkę listy.</string>
     <string name="play">Nagrywaj</string>
-    <string name="please_grant_notally_alarm">Zezwól NotablyMD na wysyłanie przypomnień</string>
-    <string name="please_grant_notally_audio">Zezwól NotablyMD na nagrywanie dźwięku. Nagrania nigdy nie opuszczą Twojego urządzenia</string>
-    <string name="please_grant_notally_notification">Zezwól NotablyMD na wysyłanie powiadomień</string>
-    <string name="please_grant_notally_notification_auto_backup">Jeśli automatyczna kopia zapasowa nie powiedzie się, możesz otrzymać powiadomienie, jeśli zezwolisz NotablyMD na wysyłanie powiadomień</string>
+    <string name="please_grant_notably_alarm">Zezwól NotablyMD na wysyłanie przypomnień</string>
+    <string name="please_grant_notably_audio">Zezwól NotablyMD na nagrywanie dźwięku. Nagrania nigdy nie opuszczą Twojego urządzenia</string>
+    <string name="please_grant_notably_notification">Zezwól NotablyMD na wysyłanie powiadomień</string>
+    <string name="please_grant_notably_notification_auto_backup">Jeśli automatyczna kopia zapasowa nie powiedzie się, możesz otrzymać powiadomienie, jeśli zezwolisz NotablyMD na wysyłanie powiadomień</string>
     <string name="previous">Wstecz</string>
     <string name="rate">Oceń aplikację</string>
     <string name="read_only">Tylko do odczytu</string>

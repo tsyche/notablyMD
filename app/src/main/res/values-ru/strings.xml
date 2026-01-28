@@ -252,10 +252,10 @@
     <string name="plain_text_files">Markdown/Текстовые файлы</string>
     <string name="plain_text_files_help">Для импорта заметок из текстовых файлов (отдельный файл или папка) нажмите \"Импорт\". Каждый файл станет отдельной заметкой — имя файла будет её заголовком. Если текст начинается с элементов списка (например, Markdown \"- [x]\", синтаксис NotablyMD \"[~/\", или \"*\", ~), он преобразуется в заметку-список.</string>
     <string name="play">Играть</string>
-    <string name="please_grant_notally_alarm">Разрешите NotablyMD отправлять напоминания</string>
-    <string name="please_grant_notally_audio">Разрешите доступ к микрофону.\nЗаписи остаются на вашем устройстве</string>
-    <string name="please_grant_notally_notification">Разрешите отправку уведомлений</string>
-    <string name="please_grant_notally_notification_auto_backup">При сбое авторезервирования вы получите уведомление, если разрешите их отправку. </string>
+    <string name="please_grant_notably_alarm">Разрешите NotablyMD отправлять напоминания</string>
+    <string name="please_grant_notably_audio">Разрешите доступ к микрофону.\nЗаписи остаются на вашем устройстве</string>
+    <string name="please_grant_notably_notification">Разрешите отправку уведомлений</string>
+    <string name="please_grant_notably_notification_auto_backup">При сбое авторезервирования вы получите уведомление, если разрешите их отправку. </string>
     <string name="previous">Предыдущий</string>
     <string name="rate">Оценить приложение</string>
     <string name="read_only">Только чтение</string>

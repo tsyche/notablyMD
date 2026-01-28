@@ -859,7 +859,7 @@ abstract class EditActivity(private val type: Type) :
         if (checkSelfPermission(permission) != PackageManager.PERMISSION_GRANTED) {
             if (shouldShowRequestPermissionRationale(permission)) {
                 MaterialAlertDialogBuilder(this)
-                    .setMessage(R.string.please_grant_notally_audio)
+                    .setMessage(R.string.please_grant_notably_audio)
                     .setCancelButton()
                     .setPositiveButton(R.string.continue_) { _, _ ->
                         requestPermissions(arrayOf(permission), REQUEST_AUDIO_PERMISSION)

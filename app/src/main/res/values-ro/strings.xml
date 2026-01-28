@@ -238,10 +238,10 @@
     <string name="plain_text_files">Fișiere cu Markdown/text simplu</string>
     <string name="plain_text_files_help">Pentru a importa notele din fișiere cu text simplu (un singur fișier sau dosar), clic pe Import. Fiecare fișier este importat ca o notă separată, iar numele fișierului devine titlul notei. Dacă conținutul textului începe cu sintaxa de listă (de exemplu, Markdown „- [x]”, sintaxa NotablyMD „[✓]” sau „*”, „-”), acesta va fi convertit într-o notă de tip listă.</string>
     <string name="play">Redă</string>
-    <string name="please_grant_notally_alarm">Permite NotablyMD să trimită memento-uri.</string>
-    <string name="please_grant_notally_audio">Acordă NotablyMD permisiunea de a înregistra audio. Înregistrările nu părăsesc niciodată dispozitivul</string>
-    <string name="please_grant_notally_notification">Acordă NotablyMD permisiunea de a trimite notificări.</string>
-    <string name="please_grant_notally_notification_auto_backup">Dacă o copie de rezervă automată eșuează, poți primi o notificare, dacă acorzi permisiunea lui NotablyMD de a trimite notificări.</string>
+    <string name="please_grant_notably_alarm">Permite NotablyMD să trimită memento-uri.</string>
+    <string name="please_grant_notably_audio">Acordă NotablyMD permisiunea de a înregistra audio. Înregistrările nu părăsesc niciodată dispozitivul</string>
+    <string name="please_grant_notably_notification">Acordă NotablyMD permisiunea de a trimite notificări.</string>
+    <string name="please_grant_notably_notification_auto_backup">Dacă o copie de rezervă automată eșuează, poți primi o notificare, dacă acorzi permisiunea lui NotablyMD de a trimite notificări.</string>
     <string name="previous">Anterior</string>
     <string name="rate">Evaluează această aplicație</string>
     <string name="read_only">Doar în citire</string>

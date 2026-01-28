@@ -496,7 +496,7 @@ fun Activity.checkNotificationPermission(
         if (checkSelfPermission(permission) != PackageManager.PERMISSION_GRANTED) {
             if (shouldShowRequestPermissionRationale(permission)) {
                 MaterialAlertDialogBuilder(this)
-                    .setMessage(R.string.please_grant_notally_notification)
+                    .setMessage(R.string.please_grant_notably_notification)
                     .setCancelButton()
                     .setPositiveButton(R.string.continue_) { _, _ ->
                         requestPermissions(arrayOf(permission), requestCode)
@@ -520,7 +520,7 @@ fun Activity.checkAlarmPermission(
             onSuccess()
         } else {
             MaterialAlertDialogBuilder(this)
-                .setMessage(R.string.please_grant_notally_alarm)
+                .setMessage(R.string.please_grant_notably_alarm)
                 .setCancelButton()
                 .setPositiveButton(R.string.continue_) { _, _ ->
                     val intent = Intent(Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM)
