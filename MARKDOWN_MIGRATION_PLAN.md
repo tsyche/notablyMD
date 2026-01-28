@@ -25,11 +25,51 @@ Transform NotablyMD from SQLite-first to **markdown-first storage** leveraging e
 - ✅ **Security Framework**: SQLCipher encryption, Biometric lock
 - ✅ **Backup System**: Auto-backups with password protection
 - ✅ **Rich Media Handling**: Advanced image/audio support
+- ✅ **File Watching**: External file change detection implemented
+- ✅ **Bidirectional Sync**: DB ↔ Markdown synchronization implemented
+- ✅ **Conflict Resolution**: Multi-device conflict handling implemented
 
-#### Missing Components:
-- 🔄 **File Watching**: Need external file change detection
-- 🔄 **Bidirectional Sync**: DB ↔ Markdown synchronization
-- 🔄 **Conflict Resolution**: Multi-device conflict handling
+### 1.2 Implementation Complete ✅
+
+#### Implemented Components:
+
+**FileWatcher.kt**
+- Real-time monitoring of markdown directories
+- Event-driven architecture with coroutines
+- Support for CREATED, MODIFIED, DELETED events
+- Lifecycle-aware integration
+
+**BidirectionalSync.kt**
+- Two-way synchronization between Room database and markdown files
+- File modification cache to prevent sync loops
+- YAML frontmatter extraction and generation
+- Incremental and full sync capabilities
+
+**ConflictResolver.kt**
+- Multiple resolution strategies (latest wins, merge, manual)
+- Conflict detection for content, metadata, and structure
+- Smart merging of note changes
+- Extensible strategy pattern
+
+**MarkdownSyncManager.kt**
+- Central coordinator for sync system
+- Background periodic synchronization (15-minute intervals)
+- Integration with file watcher events
+
+**SyncWorker.kt**
+- WorkManager-based background processing
+- Battery-conscious execution constraints
+- Error handling and retry logic
+
+**Enhanced MarkdownUtils.kt**
+- Added `convertToMarkdown()` function
+- Support for span-to-markdown conversion
+- CommonMark renderer integration
+
+**Comprehensive Test Suite**
+- Unit tests for all components
+- Integration tests for end-to-end scenarios
+- Mock-based testing for file operations
 
 ### 1.2 Enhanced MarkdownManager
 

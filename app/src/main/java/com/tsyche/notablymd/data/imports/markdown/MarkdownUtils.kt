@@ -235,3 +235,79 @@ private fun appendStyledInline(parent: Node, text: String, actives: List<SpanRep
 
     appendTextNode(container)
 }
+
+/** Converts body text and spans back to markdown format */
+fun convertToMarkdown(body: String, spans: List<SpanRepresentation>): String {
+    if (spans.isEmpty()) return body
+
+    val extensions: List<Extension> = listOf(StrikethroughExtension.create())
+    val renderer = MarkdownRenderer.builder().extensions(extensions).build()
+
+    // Create a document with spans applied
+    val document = createDocumentFromSpans(body, spans)
+
+    return renderer.render(document)
+}
+
+/** Creates a CommonMark document from body text and spans */
+private fun createDocumentFromSpans(body: String, spans: List<SpanRepresentation>): Document {
+    val document = Document()
+
+    if (spans.isEmpty()) {
+        document.appendChild(Text(body))
+        return document
+    }
+
+    // Sort spans by start position
+    val sortedSpans = spans.sortedBy { it.start }
+
+    var currentIndex = 0
+
+    for (span in sortedSpans) {
+        // Add text before the span
+        if (currentIndex < span.start) {
+            document.appendChild(Text(body.substring(currentIndex, span.start)))
+        }
+
+        // Add the span with formatting
+        val spanText = body.substring(span.start, span.end)
+        val formattedNode = createFormattedNode(spanText, span)
+        document.appendChild(formattedNode)
+
+        currentIndex = span.end
+    }
+
+    // Add remaining text
+    if (currentIndex < body.length) {
+        document.appendChild(Text(body.substring(currentIndex)))
+    }
+
+    return document
+}
+
+/** Creates a formatted node based on span properties */
+private fun createFormattedNode(text: String, span: SpanRepresentation): Node {
+    var node: Node = Text(text)
+
+    if (span.monospace) {
+        node = Code(text)
+    } else {
+        if (span.strikethrough) {
+            val strike = Strikethrough("~~")
+            strike.appendChild(node)
+            node = strike
+        }
+        if (span.bold) {
+            val bold = StrongEmphasis()
+            bold.appendChild(node)
+            node = bold
+        }
+        if (span.italic) {
+            val italic = Emphasis()
+            italic.appendChild(node)
+            node = italic
+        }
+    }
+
+    return node
+}
