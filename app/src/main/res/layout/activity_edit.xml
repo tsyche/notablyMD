@@ -75,7 +75,7 @@
                     android:layout_height="wrap_content"
                     app:layout_constraintTop_toTopOf="parent">
 
-                    <com.philkes.notallyx.presentation.view.misc.AspectRatioRecyclerView
+                    <com.philkes.notablymd.presentation.view.misc.AspectRatioRecyclerView
                         android:id="@+id/ImagePreview"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
@@ -100,7 +100,7 @@
                         />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <com.philkes.notallyx.presentation.view.misc.StylableEditTextWithHistory
+                <com.philkes.notablymd.presentation.view.misc.StylableEditTextWithHistory
                     android:id="@+id/EnterTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -151,7 +151,7 @@
                     android:layout_height="1dp"
                     android:background="?android:attr/listDivider" />
 
-                <com.philkes.notallyx.presentation.view.misc.StylableEditTextWithHistory
+                <com.philkes.notablymd.presentation.view.misc.StylableEditTextWithHistory
                     android:id="@+id/EnterBody"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

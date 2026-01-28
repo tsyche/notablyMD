@@ -3,17 +3,17 @@ title: 👋 Introduction
 sidebar_position: 1
 ---
 
-# Introduction to NotallyX
+# Introduction to NotablyMD
 
-Welcome to the official documentation for **NotallyX**, a minimalistic yet powerful note-taking app for Android.
+Welcome to the official documentation for **NotablyMD**, a minimalistic yet powerful note-taking app for Android.
 
-![NotallyX Logo](/img/logo.png)
+![NotablyMD Logo](/img/logo.png)
 
-## What is NotallyX?
+## What is NotablyMD?
 
-NotallyX is an open-source note-taking application designed to be simple, intuitive, and feature-rich. It's an extended version of the original Notally app, with additional features and improvements.
+NotablyMD is an open-source note-taking application designed to be simple, intuitive, and feature-rich. It's an extended version of the original Notally app, with additional features and improvements.
 
-Whether you need to jot down quick thoughts, create detailed task lists, or organize your ideas with colors and labels, NotallyX provides all the tools you need without unnecessary complexity.
+Whether you need to jot down quick thoughts, create detailed task lists, or organize your ideas with colors and labels, NotablyMD provides all the tools you need without unnecessary complexity.
 
 ## Key Features
 
@@ -30,12 +30,12 @@ Whether you need to jot down quick thoughts, create detailed task lists, or orga
 
 ## Getting Started
 
-Ready to start using NotallyX? Check out our [Quick Start Guide](quick-start.md) to learn the basics.
+Ready to start using NotablyMD? Check out our [Quick Start Guide](quick-start.md) to learn the basics.
 
 
 ## Features Overview
 
-NotallyX offers a wide range of features to help you capture, organize, and access your notes efficiently. This page provides an overview of the main features available in the app.
+NotablyMD offers a wide range of features to help you capture, organize, and access your notes efficiently. This page provides an overview of the main features available in the app.
 
 ## Note Types
 
@@ -150,4 +150,4 @@ For more detailed information about specific features, check out the following p
 
 ## Contributing
 
-NotallyX is an open-source project, and contributions are welcome! Check out our [Contribution Guidelines](contributing.md) to learn how you can help improve the app.
+NotablyMD is an open-source project, and contributions are welcome! Check out our [Contribution Guidelines](contributing.md) to learn how you can help improve the app.

@@ -1,21 +1,21 @@
-# NotablyMD Quick Start (NotallyX Edition)
+# NotablyMD Quick Start
 
 ## One-Time Setup
 ```bash
-cd NotallyX
+cd NotablyMD
 chmod +x gradlew
-java -version  # Should be JDK 8+ (NotallyX uses Java 8)
+java -version  # Should be JDK 8+ (NotablyMD uses Java 8)
 ```
 
 ## Daily Commands
 
 ### Start Development
 ```bash
-# Start emulator (API 36 for NotallyX)
+# Start emulator (API 36 for NotablyMD)
 emulator -avd Pixel_7_API_36 -no-snapshot-load &
 
 # Full development pipeline
-./gradlew clean test connectedAndroidTest lint check assembleDebug installDebug && adb shell am start -n com.philkes.notallyx.debug/com.philkes.notallyx.presentation.activity.main.MainActivity
+./gradlew clean test connectedAndroidTest lint check assembleDebug installDebug && adb shell am start -n com.philkes.notablymd.debug/com.philkes.notablymd.presentation.activity.main.MainActivity
 ```
 
 ### Quick Commands
@@ -30,13 +30,13 @@ emulator -avd Pixel_7_API_36 -no-snapshot-load &
 ./gradlew test --tests "*markdown*"
 
 # Launch app
-adb shell am start -n com.philkes.notallyx.debug/com.philkes.notallyx.presentation.activity.main.MainActivity
+adb shell am start -n com.philkes.notablymd.debug/com.philkes.notablymd.presentation.activity.main.MainActivity
 
 # Format code (required before commits)
 ./gradlew ktfmtFormat
 ```
 
-### NotallyX-Specific Commands
+### NotablyMD-Specific Commands
 ```bash
 # Build release with obfuscation
 ./gradlew assembleRelease
@@ -57,7 +57,7 @@ adb shell am start -n com.philkes.notallyx.debug/com.philkes.notallyx.presentati
 adb devices
 
 # Check logs
-adb logcat | grep notallyx
+adb logcat | grep notablymd
 
 # Check crash reports
 adb logcat | grep -E "(FATAL|AndroidRuntime)"
@@ -65,7 +65,7 @@ adb logcat | grep -E "(FATAL|AndroidRuntime)"
 
 ## File Structure
 ```
-/app/src/main/java/com/philkes/notallyx/
+/app/src/main/java/com/philkes/notablymd/
 ├── data/                    # Database and models
 ├── presentation/            # UI components
 │   ├── activity/           # Activities
@@ -82,7 +82,7 @@ adb logcat | grep -E "(FATAL|AndroidRuntime)"
 ```
 
 ## Key Differences from Original Notally
-- ✅ **Package**: `com.philkes.notallyx` (not `com.omgodse.notally`)
+- ✅ **Package**: `com.philkes.notablymd` (not `com.omgodse.notally`)
 - ✅ **Target SDK**: 36 (vs 35)
 - ✅ **Security**: SQLCipher encryption + biometrics
 - ✅ **Markdown**: CommonMark + GFM support built-in
@@ -93,13 +93,13 @@ adb logcat | grep -E "(FATAL|AndroidRuntime)"
 ## Essential Commands (Copy-Paste)
 ```bash
 # Start emulator + full pipeline
-emulator -avd Pixel_7_API_36 -no-snapshot-load & && ./gradlew clean test connectedAndroidTest lint check assembleDebug installDebug && adb shell am start -n com.philkes.notallyx.debug/com.philkes.notallyx.presentation.activity.main.MainActivity
+emulator -avd Pixel_7_API_36 -no-snapshot-load & && ./gradlew clean test connectedAndroidTest lint check assembleDebug installDebug && adb shell am start -n com.philkes.notablymd.debug/com.philkes.notablymd.presentation.activity.main.MainActivity
 
 # Markdown tests only
 ./gradlew test --tests "*markdown*" && ./gradlew connectedAndroidTest --tests "*markdown*"
 
 # Quick build + install + launch
-./gradlew assembleDebug installDebug && adb shell am start -n com.philkes.notallyx.debug/com.philkes.notallyx.presentation.activity.main.MainActivity
+./gradlew assembleDebug installDebug && adb shell am start -n com.philkes.notablymd.debug/com.philkes.notablymd.presentation.activity.main.MainActivity
 
 # Format code before commit
 ./gradlew ktfmtFormat

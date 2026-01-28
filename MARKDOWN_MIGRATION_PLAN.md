@@ -1,8 +1,8 @@
-# NotablyMD Markdown-First Migration Plan (NotallyX Edition)
+# NotablyMD Markdown-First Migration Plan
 
 ## Overview
 
-Transform NotallyX from SQLite-first to **markdown-first storage** leveraging existing CommonMark support and advanced import/export capabilities.
+Transform NotablyMD from SQLite-first to **markdown-first storage** leveraging existing CommonMark support and advanced import/export capabilities.
 
 ## Architecture Goals
 
@@ -18,7 +18,7 @@ Transform NotallyX from SQLite-first to **markdown-first storage** leveraging ex
 
 ### 1.1 Existing Assets Analysis ✅
 
-#### Already Available in NotallyX:
+#### Already Available in NotablyMD:
 - ✅ **CommonMark Processing**: `org.commonmark:commonmark:0.27.0`
 - ✅ **Markdown Import/Export**: `MarkdownUtils.kt` with full CommonMark + GFM support
 - ✅ **Advanced Importers**: Evernote, Google Keep, JSON, Plain Text
@@ -146,7 +146,7 @@ New dialog components:
 
 ---
 
-## Implementation Advantages with NotallyX
+## Implementation Advantages with NotablyMD
 
 ### ✅ **Head Start Benefits**
 1. **CommonMark Integration**: Already implemented and tested
@@ -187,4 +187,4 @@ New dialog components:
 
 ---
 
-*This updated plan leverages NotallyX's significant existing infrastructure to accelerate markdown-first development by 50% while adding enterprise-grade security and import capabilities.*
+*This updated plan leverages NotablyMD's significant existing infrastructure to accelerate markdown-first development by 50% while adding enterprise-grade security and import capabilities.*

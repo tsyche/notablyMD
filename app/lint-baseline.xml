@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<issues format="6" by="lint 8.7.3" type="baseline" client="gradle" dependencies="false" name="AGP (8.7.3)" variant="all" version="8.7.3">
+<issues format="6" by="lint 8.8.1" type="baseline" client="gradle" dependencies="false" name="AGP (8.8.1)" variant="all" version="8.8.1">
 
     <issue
         id="SuspiciousImport"
@@ -7,7 +7,7 @@
         errorLine1="import android.R"
         errorLine2="~~~~~~~~~~~~~~~~">
         <location
-            file="src/main/java/com/philkes/notallyx/presentation/view/misc/TextWithIconAdapter.kt"
+            file="src/main/java/com/philkes/notablymd/presentation/view/misc/TextWithIconAdapter.kt"
             line="3"
             column="1"/>
     </issue>
@@ -18,20 +18,9 @@
         errorLine1="        preferences.edit().clear().commit()"
         errorLine2="                                   ~~~~~~~~">
         <location
-            file="src/main/java/com/philkes/notallyx/presentation/viewmodel/preference/NotallyXPreferences.kt"
+            file="src/main/java/com/philkes/notablymd/presentation/viewmodel/preference/NotablyMDPreferences.kt"
             line="233"
             column="36"/>
-    </issue>
-
-    <issue
-        id="CheckResult"
-        message="The result of `any` is not used"
-        errorLine1="        Mockito.any&lt;T>()"
-        errorLine2="        ~~~~~~~~~~~~~~~~">
-        <location
-            file="src/test/kotlin/com/philkes/notallyx/test/TestUtils.kt"
-            line="164"
-            column="9"/>
     </issue>
 
     <issue
@@ -40,7 +29,7 @@
         errorLine1="    val editorField = TextView::class.java.getDeclaredField(&quot;mEditor&quot;)"
         errorLine2="                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="src/main/java/com/philkes/notallyx/presentation/UiExtensions.kt"
+            file="src/main/java/com/philkes/notablymd/presentation/UiExtensions.kt"
             line="820"
             column="23"/>
     </issue>
@@ -100,7 +89,7 @@
 
     <issue
         id="NewApi"
-        message="`&lt;com.philkes.notallyx.presentation.activity.note.RecordAudioActivity>` requires API level 24 (current min is 21)"
+        message="`&lt;com.philkes.notablymd.presentation.activity.note.RecordAudioActivity>` requires API level 24 (current min is 21)"
         errorLine1="        &lt;activity"
         errorLine2="        ^">
         <location
@@ -111,12 +100,12 @@
 
     <issue
         id="NewApi"
-        message="`&lt;com.philkes.notallyx.utils.audio.AudioRecordService>` requires API level 24 (current min is 21)"
+        message="`&lt;com.philkes.notablymd.utils.audio.AudioRecordService>` requires API level 24 (current min is 21)"
         errorLine1="        &lt;service"
         errorLine2="        ^">
         <location
             file="src/main/AndroidManifest.xml"
-            line="184"
+            line="186"
             column="9"/>
     </issue>
 
@@ -408,12 +397,23 @@
 
     <issue
         id="GradleDependency"
+        message="A newer version of org.jetbrains.kotlin.plugin.serialization than 2.1.0 is available: 2.1.10"
+        errorLine1="    id(&quot;org.jetbrains.kotlin.plugin.serialization&quot;) version &quot;2.1.0&quot;"
+        errorLine2="                                                            ~~~~~~~">
+        <location
+            file="build.gradle.kts"
+            line="14"
+            column="61"/>
+    </issue>
+
+    <issue
+        id="GradleDependency"
         message="A newer version of androidx.navigation:navigation-fragment-ktx than 2.3.5 is available: 2.9.6"
         errorLine1="    implementation(&quot;androidx.navigation:navigation-fragment-ktx:$navVersion&quot;)"
         errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="build.gradle.kts"
-            line="249"
+            line="268"
             column="20"/>
     </issue>
 
@@ -424,7 +424,7 @@
         errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="build.gradle.kts"
-            line="250"
+            line="269"
             column="20"/>
     </issue>
 
@@ -435,7 +435,7 @@
         errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="build.gradle.kts"
-            line="252"
+            line="271"
             column="9"/>
     </issue>
 
@@ -446,7 +446,7 @@
         errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="build.gradle.kts"
-            line="253"
+            line="272"
             column="20"/>
     </issue>
 
@@ -457,7 +457,7 @@
         errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="build.gradle.kts"
-            line="254"
+            line="273"
             column="20"/>
     </issue>
 
@@ -468,7 +468,7 @@
         errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="build.gradle.kts"
-            line="255"
+            line="274"
             column="20"/>
     </issue>
 
@@ -479,7 +479,7 @@
         errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="build.gradle.kts"
-            line="256"
+            line="275"
             column="20"/>
     </issue>
 
@@ -490,7 +490,18 @@
         errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="build.gradle.kts"
-            line="257"
+            line="276"
+            column="20"/>
+    </issue>
+
+    <issue
+        id="GradleDependency"
+        message="A newer version of com.github.bumptech.glide:glide than 4.15.1 is available: 4.16.0"
+        errorLine1="    implementation(&quot;com.github.bumptech.glide:glide:4.15.1&quot;)"
+        errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="build.gradle.kts"
+            line="280"
             column="20"/>
     </issue>
 
@@ -501,7 +512,18 @@
         errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="build.gradle.kts"
-            line="264"
+            line="283"
+            column="20"/>
+    </issue>
+
+    <issue
+        id="GradleDependency"
+        message="A newer version of net.zetetic:sqlcipher-android than 4.10.0 is available: 4.12.0"
+        errorLine1="    implementation(&quot;net.zetetic:sqlcipher-android:4.10.0&quot;)"
+        errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="build.gradle.kts"
+            line="287"
             column="20"/>
     </issue>
 
@@ -512,7 +534,7 @@
         errorLine2="                              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="build.gradle.kts"
-            line="279"
+            line="298"
             column="31"/>
     </issue>
 
@@ -523,7 +545,7 @@
         errorLine2="                              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="build.gradle.kts"
-            line="280"
+            line="299"
             column="31"/>
     </issue>
 
@@ -534,7 +556,7 @@
         errorLine2="                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="build.gradle.kts"
-            line="282"
+            line="301"
             column="24"/>
     </issue>
 
@@ -545,7 +567,18 @@
         errorLine2="                       ~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="build.gradle.kts"
-            line="283"
+            line="302"
+            column="24"/>
+    </issue>
+
+    <issue
+        id="GradleDependency"
+        message="A newer version of org.mockito:mockito-core than 5.13.0 is available: 5.15.2"
+        errorLine1="    testImplementation(&quot;org.mockito:mockito-core:5.13.0&quot;)"
+        errorLine2="                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="build.gradle.kts"
+            line="308"
             column="24"/>
     </issue>
 
@@ -779,17 +812,6 @@
     <issue
         id="PrivateResource"
         message="Overriding `@string/copy` which is marked as private in androidx.preference:preference:1.2.1. If deliberate, use tools:override=&quot;true&quot;, otherwise pick a different name."
-        errorLine1="    &lt;string name=&quot;copy&quot;>Copia&lt;/string>"
-        errorLine2="                  ~~~~">
-        <location
-            file="src/main/res/values-it/strings.xml"
-            line="77"
-            column="19"/>
-    </issue>
-
-    <issue
-        id="PrivateResource"
-        message="Overriding `@string/copy` which is marked as private in androidx.preference:preference:1.2.1. If deliberate, use tools:override=&quot;true&quot;, otherwise pick a different name."
         errorLine1="    &lt;string name=&quot;copy&quot;>Copiază&lt;/string>"
         errorLine2="                  ~~~~">
         <location
@@ -828,17 +850,6 @@
         <location
             file="src/main/res/values-ru/strings.xml"
             line="87"
-            column="19"/>
-    </issue>
-
-    <issue
-        id="PrivateResource"
-        message="Overriding `@string/copy` which is marked as private in androidx.preference:preference:1.2.1. If deliberate, use tools:override=&quot;true&quot;, otherwise pick a different name."
-        errorLine1="    &lt;string name=&quot;copy&quot;>Copiar&lt;/string>"
-        errorLine2="                  ~~~~">
-        <location
-            file="src/main/res/values-es/strings.xml"
-            line="88"
             column="19"/>
     </issue>
 
@@ -911,11 +922,33 @@
     <issue
         id="PrivateResource"
         message="Overriding `@string/copy` which is marked as private in androidx.preference:preference:1.2.1. If deliberate, use tools:override=&quot;true&quot;, otherwise pick a different name."
+        errorLine1="    &lt;string name=&quot;copy&quot;>Copia&lt;/string>"
+        errorLine2="                  ~~~~">
+        <location
+            file="src/main/res/values-it/strings.xml"
+            line="94"
+            column="19"/>
+    </issue>
+
+    <issue
+        id="PrivateResource"
+        message="Overriding `@string/copy` which is marked as private in androidx.preference:preference:1.2.1. If deliberate, use tools:override=&quot;true&quot;, otherwise pick a different name."
+        errorLine1="    &lt;string name=&quot;copy&quot;>Copiar&lt;/string>"
+        errorLine2="                  ~~~~">
+        <location
+            file="src/main/res/values-es/strings.xml"
+            line="106"
+            column="19"/>
+    </issue>
+
+    <issue
+        id="PrivateResource"
+        message="Overriding `@string/copy` which is marked as private in androidx.preference:preference:1.2.1. If deliberate, use tools:override=&quot;true&quot;, otherwise pick a different name."
         errorLine1="    &lt;string name=&quot;copy&quot;>Copy&lt;/string>"
         errorLine2="                  ~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="93"
+            line="106"
             column="19"/>
     </issue>
 
@@ -925,7 +958,7 @@
         errorLine1="            getString(R.string.auto_backups_folder_hint, getString(R.string.documentation)),"
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="src/main/java/com/philkes/notallyx/presentation/activity/main/fragment/settings/SettingsFragment.kt"
+            file="src/main/java/com/philkes/notablymd/presentation/activity/main/fragment/settings/SettingsFragment.kt"
             line="844"
             column="13"/>
         <location
@@ -941,7 +974,7 @@
         errorLine1="        showToast(getString(R.string.not_exists, logFile.name))"
         errorLine2="                                                 ~~~~~~~~~~~~">
         <location
-            file="src/main/java/com/philkes/notallyx/utils/AndroidExtensions.kt"
+            file="src/main/java/com/philkes/notablymd/utils/AndroidExtensions.kt"
             line="180"
             column="50"/>
         <location
@@ -957,7 +990,7 @@
         errorLine1="                    note.body.length,"
         errorLine2="                    ~~~~~~~~~~~~~~~~">
         <location
-            file="src/main/java/com/philkes/notallyx/data/dao/BaseNoteDao.kt"
+            file="src/main/java/com/philkes/notablymd/data/dao/BaseNoteDao.kt"
             line="68"
             column="21"/>
         <location
@@ -973,12 +1006,12 @@
         errorLine1="                    note.body.length,"
         errorLine2="                    ~~~~~~~~~~~~~~~~">
         <location
-            file="src/main/java/com/philkes/notallyx/data/dao/BaseNoteDao.kt"
+            file="src/main/java/com/philkes/notablymd/data/dao/BaseNoteDao.kt"
             line="68"
             column="21"/>
         <location
             file="src/main/res/values/strings.xml"
-            line="258"
+            line="293"
             column="5"
             message="Conflicting argument declaration here"/>
     </issue>
@@ -989,7 +1022,7 @@
         errorLine1="                    baseNote.body.length,"
         errorLine2="                    ~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="src/main/java/com/philkes/notallyx/data/dao/BaseNoteDao.kt"
+            file="src/main/java/com/philkes/notablymd/data/dao/BaseNoteDao.kt"
             line="69"
             column="21"/>
         <location
@@ -1005,12 +1038,12 @@
         errorLine1="                    baseNote.body.length,"
         errorLine2="                    ~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="src/main/java/com/philkes/notallyx/data/dao/BaseNoteDao.kt"
+            file="src/main/java/com/philkes/notablymd/data/dao/BaseNoteDao.kt"
             line="69"
             column="21"/>
         <location
             file="src/main/res/values/strings.xml"
-            line="258"
+            line="293"
             column="5"
             message="Conflicting argument declaration here"/>
     </issue>
@@ -1026,7 +1059,7 @@
             column="33"/>
         <location
             file="src/main/res/values/strings.xml"
-            line="255"
+            line="290"
             column="5"
             message="Conflicting argument type (`s&apos;) here"/>
     </issue>
@@ -1050,17 +1083,6 @@
         <location
             file="src/main/res/values-ro/strings.xml"
             line="14"
-            column="5"/>
-    </issue>
-
-    <issue
-        id="MissingQuantity"
-        message="For locale &quot;es&quot; (Spanish) the following quantity should also be defined: `many`"
-        errorLine1="    &lt;plurals name=&quot;archived_selected_notes&quot;>"
-        errorLine2="    ^">
-        <location
-            file="src/main/res/values-es/strings.xml"
-            line="16"
             column="5"/>
     </issue>
 
@@ -1110,12 +1132,12 @@
 
     <issue
         id="MissingQuantity"
-        message="For locale &quot;it&quot; (Italian) the following quantity should also be defined: `many`"
-        errorLine1="    &lt;plurals name=&quot;cant_add_files&quot;>"
+        message="For locale &quot;es&quot; (Spanish) the following quantity should also be defined: `many`"
+        errorLine1="    &lt;plurals name=&quot;archived_selected_notes&quot;>"
         errorLine2="    ^">
         <location
-            file="src/main/res/values-it/strings.xml"
-            line="48"
+            file="src/main/res/values-es/strings.xml"
+            line="17"
             column="5"/>
     </issue>
 
@@ -1127,17 +1149,6 @@
         <location
             file="src/main/res/values-ro/strings.xml"
             line="50"
-            column="5"/>
-    </issue>
-
-    <issue
-        id="MissingQuantity"
-        message="For locale &quot;it&quot; (Italian) the following quantity should also be defined: `many`"
-        errorLine1="    &lt;plurals name=&quot;cant_add_images&quot;>"
-        errorLine2="    ^">
-        <location
-            file="src/main/res/values-it/strings.xml"
-            line="52"
             column="5"/>
     </issue>
 
@@ -1160,17 +1171,6 @@
         <location
             file="src/main/res/values-ro/strings.xml"
             line="54"
-            column="5"/>
-    </issue>
-
-    <issue
-        id="MissingQuantity"
-        message="For locale &quot;es&quot; (Spanish) the following quantity should also be defined: `many`"
-        errorLine1="    &lt;plurals name=&quot;cant_add_files&quot;>"
-        errorLine2="    ^">
-        <location
-            file="src/main/res/values-es/strings.xml"
-            line="56"
             column="5"/>
     </issue>
 
@@ -1220,11 +1220,11 @@
 
     <issue
         id="MissingQuantity"
-        message="For locale &quot;es&quot; (Spanish) the following quantity should also be defined: `many`"
-        errorLine1="    &lt;plurals name=&quot;cant_add_images&quot;>"
+        message="For locale &quot;it&quot; (Italian) the following quantity should also be defined: `many`"
+        errorLine1="    &lt;plurals name=&quot;cant_add_files&quot;>"
         errorLine2="    ^">
         <location
-            file="src/main/res/values-es/strings.xml"
+            file="src/main/res/values-it/strings.xml"
             line="60"
             column="5"/>
     </issue>
@@ -1265,11 +1265,33 @@
     <issue
         id="MissingQuantity"
         message="For locale &quot;it&quot; (Italian) the following quantity should also be defined: `many`"
-        errorLine1="    &lt;plurals name=&quot;deleted_selected_notes&quot;>"
+        errorLine1="    &lt;plurals name=&quot;cant_add_images&quot;>"
         errorLine2="    ^">
         <location
             file="src/main/res/values-it/strings.xml"
-            line="105"
+            line="64"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="MissingQuantity"
+        message="For locale &quot;es&quot; (Spanish) the following quantity should also be defined: `many`"
+        errorLine1="    &lt;plurals name=&quot;cant_add_files&quot;>"
+        errorLine2="    ^">
+        <location
+            file="src/main/res/values-es/strings.xml"
+            line="71"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="MissingQuantity"
+        message="For locale &quot;es&quot; (Spanish) the following quantity should also be defined: `many`"
+        errorLine1="    &lt;plurals name=&quot;cant_add_images&quot;>"
+        errorLine2="    ^">
+        <location
+            file="src/main/res/values-es/strings.xml"
+            line="75"
             column="5"/>
     </issue>
 
@@ -1292,17 +1314,6 @@
         <location
             file="src/main/res/values-ru/strings.xml"
             line="115"
-            column="5"/>
-    </issue>
-
-    <issue
-        id="MissingQuantity"
-        message="For locale &quot;es&quot; (Spanish) the following quantity should also be defined: `many`"
-        errorLine1="    &lt;plurals name=&quot;deleted_selected_notes&quot;>"
-        errorLine2="    ^">
-        <location
-            file="src/main/res/values-es/strings.xml"
-            line="118"
             column="5"/>
     </issue>
 
@@ -1341,23 +1352,34 @@
 
     <issue
         id="MissingQuantity"
-        message="For locale &quot;ru&quot; (Russian) the following quantity should also be defined: `many` (e.g. &quot;из 5 книг за 5 дней&quot;)"
-        errorLine1="    &lt;plurals name=&quot;exported_notes&quot;>"
+        message="For locale &quot;it&quot; (Italian) the following quantity should also be defined: `many`"
+        errorLine1="    &lt;plurals name=&quot;deleted_selected_notes&quot;>"
         errorLine2="    ^">
         <location
-            file="src/main/res/values-ru/strings.xml"
-            line="158"
+            file="src/main/res/values-it/strings.xml"
+            line="127"
             column="5"/>
     </issue>
 
     <issue
         id="MissingQuantity"
         message="For locale &quot;es&quot; (Spanish) the following quantity should also be defined: `many`"
-        errorLine1="    &lt;plurals name=&quot;exported_notes&quot;>"
+        errorLine1="    &lt;plurals name=&quot;deleted_selected_notes&quot;>"
         errorLine2="    ^">
         <location
             file="src/main/res/values-es/strings.xml"
-            line="160"
+            line="145"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="MissingQuantity"
+        message="For locale &quot;ru&quot; (Russian) the following quantity should also be defined: `many` (e.g. &quot;из 5 книг за 5 дней&quot;)"
+        errorLine1="    &lt;plurals name=&quot;exported_notes&quot;>"
+        errorLine2="    ^">
+        <location
+            file="src/main/res/values-ru/strings.xml"
+            line="158"
             column="5"/>
     </issue>
 
@@ -1396,17 +1418,6 @@
 
     <issue
         id="MissingQuantity"
-        message="For locale &quot;it&quot; (Italian) the following quantity should also be defined: `many`"
-        errorLine1="    &lt;plurals name=&quot;imported_notes&quot;>"
-        errorLine2="    ^">
-        <location
-            file="src/main/res/values-it/strings.xml"
-            line="168"
-            column="5"/>
-    </issue>
-
-    <issue
-        id="MissingQuantity"
         message="For locale &quot;ro&quot; (Romanian) the following quantity should also be defined: `few` (e.g. &quot;2 zile&quot;)"
         errorLine1="    &lt;plurals name=&quot;imported_notes&quot;>"
         errorLine2="    ^">
@@ -1424,17 +1435,6 @@
         <location
             file="src/main/res/values-ru/strings.xml"
             line="186"
-            column="5"/>
-    </issue>
-
-    <issue
-        id="MissingQuantity"
-        message="For locale &quot;es&quot; (Spanish) the following quantity should also be defined: `many`"
-        errorLine1="    &lt;plurals name=&quot;imported_notes&quot;>"
-        errorLine2="    ^">
-        <location
-            file="src/main/res/values-es/strings.xml"
-            line="187"
             column="5"/>
     </issue>
 
@@ -1473,12 +1473,23 @@
 
     <issue
         id="MissingQuantity"
+        message="For locale &quot;es&quot; (Spanish) the following quantity should also be defined: `many`"
+        errorLine1="    &lt;plurals name=&quot;exported_notes&quot;>"
+        errorLine2="    ^">
+        <location
+            file="src/main/res/values-es/strings.xml"
+            line="193"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="MissingQuantity"
         message="For locale &quot;it&quot; (Italian) the following quantity should also be defined: `many`"
-        errorLine1="    &lt;plurals name=&quot;more_files&quot;>"
+        errorLine1="    &lt;plurals name=&quot;imported_notes&quot;>"
         errorLine2="    ^">
         <location
             file="src/main/res/values-it/strings.xml"
-            line="212"
+            line="202"
             column="5"/>
     </issue>
 
@@ -1496,11 +1507,11 @@
     <issue
         id="MissingQuantity"
         message="For locale &quot;es&quot; (Spanish) the following quantity should also be defined: `many`"
-        errorLine1="    &lt;plurals name=&quot;more_files&quot;>"
+        errorLine1="    &lt;plurals name=&quot;imported_notes&quot;>"
         errorLine2="    ^">
         <location
             file="src/main/res/values-es/strings.xml"
-            line="233"
+            line="227"
             column="5"/>
     </issue>
 
@@ -1550,23 +1561,23 @@
 
     <issue
         id="MissingQuantity"
+        message="For locale &quot;it&quot; (Italian) the following quantity should also be defined: `many`"
+        errorLine1="    &lt;plurals name=&quot;more_files&quot;>"
+        errorLine2="    ^">
+        <location
+            file="src/main/res/values-it/strings.xml"
+            line="248"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="MissingQuantity"
         message="For locale &quot;fr&quot; (French) the following quantity should also be defined: `many` (e.g. &quot;1000000 de jours&quot;)"
         errorLine1="    &lt;plurals name=&quot;notes_too_big_truncating&quot;>"
         errorLine2="    ^">
         <location
             file="src/main/res/values-fr/strings.xml"
             line="254"
-            column="5"/>
-    </issue>
-
-    <issue
-        id="MissingQuantity"
-        message="For locale &quot;it&quot; (Italian) the following quantity should also be defined: `many`"
-        errorLine1="    &lt;plurals name=&quot;restored_selected_notes&quot;>"
-        errorLine2="    ^">
-        <location
-            file="src/main/res/values-it/strings.xml"
-            line="256"
             column="5"/>
     </issue>
 
@@ -1583,23 +1594,23 @@
 
     <issue
         id="MissingQuantity"
+        message="For locale &quot;es&quot; (Spanish) the following quantity should also be defined: `many`"
+        errorLine1="    &lt;plurals name=&quot;more_files&quot;>"
+        errorLine2="    ^">
+        <location
+            file="src/main/res/values-es/strings.xml"
+            line="277"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="MissingQuantity"
         message="For locale &quot;ru&quot; (Russian) the following quantity should also be defined: `many` (e.g. &quot;из 5 книг за 5 дней&quot;)"
         errorLine1="    &lt;plurals name=&quot;restored_selected_notes&quot;>"
         errorLine2="    ^">
         <location
             file="src/main/res/values-ru/strings.xml"
             line="279"
-            column="5"/>
-    </issue>
-
-    <issue
-        id="MissingQuantity"
-        message="For locale &quot;es&quot; (Spanish) the following quantity should also be defined: `many`"
-        errorLine1="    &lt;plurals name=&quot;restored_selected_notes&quot;>"
-        errorLine2="    ^">
-        <location
-            file="src/main/res/values-es/strings.xml"
-            line="280"
             column="5"/>
     </issue>
 
@@ -1628,11 +1639,11 @@
     <issue
         id="MissingQuantity"
         message="For locale &quot;it&quot; (Italian) the following quantity should also be defined: `many`"
-        errorLine1="    &lt;plurals name=&quot;unarchived_selected_notes&quot;>"
+        errorLine1="    &lt;plurals name=&quot;restored_selected_notes&quot;>"
         errorLine2="    ^">
         <location
             file="src/main/res/values-it/strings.xml"
-            line="296"
+            line="301"
             column="5"/>
     </issue>
 
@@ -1655,17 +1666,6 @@
         <location
             file="src/main/res/values-pt-rBR/strings.xml"
             line="316"
-            column="5"/>
-    </issue>
-
-    <issue
-        id="MissingQuantity"
-        message="For locale &quot;es&quot; (Spanish) the following quantity should also be defined: `many`"
-        errorLine1="    &lt;plurals name=&quot;unarchived_selected_notes&quot;>"
-        errorLine2="    ^">
-        <location
-            file="src/main/res/values-es/strings.xml"
-            line="321"
             column="5"/>
     </issue>
 
@@ -1699,6 +1699,39 @@
         <location
             file="src/main/res/values-fr/strings.xml"
             line="334"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="MissingQuantity"
+        message="For locale &quot;es&quot; (Spanish) the following quantity should also be defined: `many`"
+        errorLine1="    &lt;plurals name=&quot;restored_selected_notes&quot;>"
+        errorLine2="    ^">
+        <location
+            file="src/main/res/values-es/strings.xml"
+            line="336"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="MissingQuantity"
+        message="For locale &quot;it&quot; (Italian) the following quantity should also be defined: `many`"
+        errorLine1="    &lt;plurals name=&quot;unarchived_selected_notes&quot;>"
+        errorLine2="    ^">
+        <location
+            file="src/main/res/values-it/strings.xml"
+            line="344"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="MissingQuantity"
+        message="For locale &quot;es&quot; (Spanish) the following quantity should also be defined: `many`"
+        errorLine1="    &lt;plurals name=&quot;unarchived_selected_notes&quot;>"
+        errorLine2="    ^">
+        <location
+            file="src/main/res/values-es/strings.xml"
+            line="380"
             column="5"/>
     </issue>
 
@@ -1771,7 +1804,7 @@
     <issue
         id="MissingTranslation"
         message="&quot;always_show_search_bar_hint&quot; is not translated in &quot;nn&quot; (Norwegian Nynorsk), &quot;hu&quot; (Hungarian), &quot;sk&quot; (Slovak), &quot;ca&quot; (Catalan), &quot;sv&quot; (Swedish), &quot;el&quot; (Greek), &quot;it&quot; (Italian), &quot;my&quot; (Burmese), &quot;vi&quot; (Vietnamese), &quot;nb&quot; (Norwegian Bokmål), &quot;ja&quot; (Japanese), &quot;tl&quot; (Tagalog), &quot;pl&quot; (Polish), &quot;da&quot; (Danish), &quot;ro&quot; (Romanian), &quot;nl&quot; (Dutch), &quot;tr&quot; (Turkish)"
-        errorLine1="    &lt;string name=&quot;always_show_search_bar_hint&quot;>By enabling this, the search bar will always be shown in the layout instead of using a search icon in the top bar&lt;/string>"
+        errorLine1="    &lt;string name=&quot;always_show_search_bar_hint&quot;>By enabling this, the search bar will always be shown"
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
@@ -1786,7 +1819,7 @@
         errorLine2="             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="17"
+            line="18"
             column="14"/>
     </issue>
 
@@ -1797,7 +1830,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="21"
+            line="22"
             column="13"/>
     </issue>
 
@@ -1808,7 +1841,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="22"
+            line="23"
             column="13"/>
     </issue>
 
@@ -1819,7 +1852,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="23"
+            line="24"
             column="13"/>
     </issue>
 
@@ -1830,29 +1863,29 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="24"
-            column="13"/>
-    </issue>
-
-    <issue
-        id="MissingTranslation"
-        message="&quot;auto_backup_error_message&quot; is not translated in &quot;nn&quot; (Norwegian Nynorsk), &quot;hu&quot; (Hungarian), &quot;sk&quot; (Slovak), &quot;ca&quot; (Catalan), &quot;sv&quot; (Swedish), &quot;el&quot; (Greek), &quot;my&quot; (Burmese), &quot;vi&quot; (Vietnamese), &quot;nb&quot; (Norwegian Bokmål), &quot;ja&quot; (Japanese), &quot;tl&quot; (Tagalog), &quot;da&quot; (Danish), &quot;nl&quot; (Dutch), &quot;tr&quot; (Turkish)"
-        errorLine1="    &lt;string name=&quot;auto_backup_error_message&quot;>An error occurred during auto backup:\n\&apos;%1$s\&apos;\nPlease check your settings or report a bug&lt;/string>"
-        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/main/res/values/strings.xml"
             line="25"
             column="13"/>
     </issue>
 
     <issue
         id="MissingTranslation"
-        message="&quot;auto_backup_failed&quot; is not translated in &quot;nn&quot; (Norwegian Nynorsk), &quot;hu&quot; (Hungarian), &quot;sk&quot; (Slovak), &quot;ca&quot; (Catalan), &quot;sv&quot; (Swedish), &quot;el&quot; (Greek), &quot;my&quot; (Burmese), &quot;vi&quot; (Vietnamese), &quot;nb&quot; (Norwegian Bokmål), &quot;ja&quot; (Japanese), &quot;tl&quot; (Tagalog), &quot;da&quot; (Danish), &quot;nl&quot; (Dutch), &quot;tr&quot; (Turkish)"
-        errorLine1="    &lt;string name=&quot;auto_backup_failed&quot;>NotallyX Auto Backup failed&lt;/string>"
-        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~">
+        message="&quot;auto_backup_error_message&quot; is not translated in &quot;nn&quot; (Norwegian Nynorsk), &quot;hu&quot; (Hungarian), &quot;sk&quot; (Slovak), &quot;ca&quot; (Catalan), &quot;sv&quot; (Swedish), &quot;el&quot; (Greek), &quot;my&quot; (Burmese), &quot;vi&quot; (Vietnamese), &quot;nb&quot; (Norwegian Bokmål), &quot;ja&quot; (Japanese), &quot;tl&quot; (Tagalog), &quot;da&quot; (Danish), &quot;nl&quot; (Dutch), &quot;tr&quot; (Turkish)"
+        errorLine1="    &lt;string name=&quot;auto_backup_error_message&quot;>An error occurred during auto backup:\n\&apos;%1$s\&apos;\nPlease"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
             line="26"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;auto_backup_failed&quot; is not translated in &quot;nn&quot; (Norwegian Nynorsk), &quot;hu&quot; (Hungarian), &quot;sk&quot; (Slovak), &quot;ca&quot; (Catalan), &quot;sv&quot; (Swedish), &quot;el&quot; (Greek), &quot;my&quot; (Burmese), &quot;vi&quot; (Vietnamese), &quot;nb&quot; (Norwegian Bokmål), &quot;ja&quot; (Japanese), &quot;tl&quot; (Tagalog), &quot;da&quot; (Danish), &quot;nl&quot; (Dutch), &quot;tr&quot; (Turkish)"
+        errorLine1="    &lt;string name=&quot;auto_backup_failed&quot;>NotablyMD Auto Backup failed&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="28"
             column="13"/>
     </issue>
 
@@ -1863,7 +1896,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="27"
+            line="29"
             column="13"/>
     </issue>
 
@@ -1874,18 +1907,18 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="28"
+            line="30"
             column="13"/>
     </issue>
 
     <issue
         id="MissingTranslation"
         message="&quot;auto_backup_on_save_hint&quot; is not translated in &quot;nn&quot; (Norwegian Nynorsk), &quot;hu&quot; (Hungarian), &quot;sk&quot; (Slovak), &quot;ca&quot; (Catalan), &quot;sv&quot; (Swedish), &quot;el&quot; (Greek), &quot;my&quot; (Burmese), &quot;vi&quot; (Vietnamese), &quot;nb&quot; (Norwegian Bokmål), &quot;ja&quot; (Japanese), &quot;tl&quot; (Tagalog), &quot;da&quot; (Danish), &quot;nl&quot; (Dutch), &quot;tr&quot; (Turkish)"
-        errorLine1="    &lt;string name=&quot;auto_backup_on_save_hint&quot;>By enabling this, a backup (\&quot;NotallyX_AutoBackup.zip\&quot;) is automatically created in the configured \&quot;Backups Folder\&quot; whenever a note is exited.\nBe aware this might affect performance&lt;/string>"
+        errorLine1="    &lt;string name=&quot;auto_backup_on_save_hint&quot;>By enabling this, a backup (\&quot;NotablyMD_AutoBackup.zip\&quot;)"
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="29"
+            line="31"
             column="13"/>
     </issue>
 
@@ -1896,7 +1929,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="30"
+            line="34"
             column="13"/>
     </issue>
 
@@ -1907,29 +1940,29 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="31"
+            line="35"
             column="13"/>
     </issue>
 
     <issue
         id="MissingTranslation"
         message="&quot;auto_backups_folder_hint&quot; is not translated in &quot;nn&quot; (Norwegian Nynorsk), &quot;hu&quot; (Hungarian), &quot;sk&quot; (Slovak), &quot;ca&quot; (Catalan), &quot;sv&quot; (Swedish), &quot;el&quot; (Greek), &quot;my&quot; (Burmese), &quot;vi&quot; (Vietnamese), &quot;nb&quot; (Norwegian Bokmål), &quot;ja&quot; (Japanese), &quot;tl&quot; (Tagalog), &quot;da&quot; (Danish), &quot;nl&quot; (Dutch), &quot;tr&quot; (Turkish)"
-        errorLine1="    &lt;string name=&quot;auto_backups_folder_hint&quot;>Folder in which all auto backups will be stored in.\nIf you want to use Cloud-Storage/WebDAV for your backups, please read the docs (click \&quot;%1$s\&quot;)&lt;/string>"
+        errorLine1="    &lt;string name=&quot;auto_backups_folder_hint&quot;>Folder in which all auto backups will be stored in.\nIf"
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="32"
+            line="36"
             column="13"/>
     </issue>
 
     <issue
         id="MissingTranslation"
         message="&quot;auto_backups_folder_rechoose&quot; is not translated in &quot;nn&quot; (Norwegian Nynorsk), &quot;hu&quot; (Hungarian), &quot;sk&quot; (Slovak), &quot;ca&quot; (Catalan), &quot;sv&quot; (Swedish), &quot;el&quot; (Greek), &quot;my&quot; (Burmese), &quot;vi&quot; (Vietnamese), &quot;nb&quot; (Norwegian Bokmål), &quot;ja&quot; (Japanese), &quot;tl&quot; (Tagalog), &quot;da&quot; (Danish), &quot;nl&quot; (Dutch), &quot;tr&quot; (Turkish)"
-        errorLine1="    &lt;string name=&quot;auto_backups_folder_rechoose&quot;>You need to re-choose your Backups Folder so that NotallyX has permission to write to it.\nYou can also press cancel to skip importing Backups Folder value&lt;/string>"
+        errorLine1="    &lt;string name=&quot;auto_backups_folder_rechoose&quot;>You need to re-choose your Backups Folder so that"
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="33"
+            line="38"
             column="13"/>
     </issue>
 
@@ -1940,7 +1973,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="34"
+            line="41"
             column="13"/>
     </issue>
 
@@ -1951,7 +1984,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="35"
+            line="42"
             column="13"/>
     </issue>
 
@@ -1962,7 +1995,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="36"
+            line="43"
             column="13"/>
     </issue>
 
@@ -1973,7 +2006,7 @@
         errorLine2="            ~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="37"
+            line="44"
             column="13"/>
     </issue>
 
@@ -1984,18 +2017,18 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="39"
+            line="46"
             column="13"/>
     </issue>
 
     <issue
         id="MissingTranslation"
         message="&quot;backup_password_hint&quot; is not translated in &quot;nn&quot; (Norwegian Nynorsk), &quot;hu&quot; (Hungarian), &quot;sk&quot; (Slovak), &quot;ca&quot; (Catalan), &quot;sv&quot; (Swedish), &quot;el&quot; (Greek), &quot;my&quot; (Burmese), &quot;vi&quot; (Vietnamese), &quot;nb&quot; (Norwegian Bokmål), &quot;ja&quot; (Japanese), &quot;tl&quot; (Tagalog), &quot;da&quot; (Danish), &quot;tr&quot; (Turkish)"
-        errorLine1="    &lt;string name=&quot;backup_password_hint&quot;>By setting this, all future backup ZIPs will be encrypted and password-protected&lt;/string>"
+        errorLine1="    &lt;string name=&quot;backup_password_hint&quot;>By setting this, all future backup ZIPs will be encrypted"
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="40"
+            line="47"
             column="13"/>
     </issue>
 
@@ -2006,7 +2039,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="41"
+            line="49"
             column="13"/>
     </issue>
 
@@ -2017,18 +2050,18 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="42"
+            line="50"
             column="13"/>
     </issue>
 
     <issue
         id="MissingTranslation"
         message="&quot;backup_periodic_hint&quot; is not translated in &quot;nn&quot; (Norwegian Nynorsk), &quot;hu&quot; (Hungarian), &quot;sk&quot; (Slovak), &quot;ca&quot; (Catalan), &quot;sv&quot; (Swedish), &quot;el&quot; (Greek), &quot;my&quot; (Burmese), &quot;vi&quot; (Vietnamese), &quot;nb&quot; (Norwegian Bokmål), &quot;ja&quot; (Japanese), &quot;tl&quot; (Tagalog), &quot;da&quot; (Danish), &quot;nl&quot; (Dutch), &quot;tr&quot; (Turkish)"
-        errorLine1="    &lt;string name=&quot;backup_periodic_hint&quot;>By enabling this, backups are automatically created in the configured Backups Folder.\nThis may not work if you have power saving mode enabled&lt;/string>"
+        errorLine1="    &lt;string name=&quot;backup_periodic_hint&quot;>By enabling this, backups are automatically created in the"
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="43"
+            line="51"
             column="13"/>
     </issue>
 
@@ -2039,18 +2072,18 @@
         errorLine2="            ~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="44"
+            line="53"
             column="13"/>
     </issue>
 
     <issue
         id="MissingTranslation"
         message="&quot;biometric_backup_advice&quot; is not translated in &quot;nn&quot; (Norwegian Nynorsk), &quot;de&quot; (German), &quot;ru&quot; (Russian), &quot;hu&quot; (Hungarian), &quot;sk&quot; (Slovak), &quot;ca&quot; (Catalan), &quot;sv&quot; (Swedish), &quot;el&quot; (Greek), &quot;it&quot; (Italian), &quot;my&quot; (Burmese), &quot;cs&quot; (Czech), &quot;vi&quot; (Vietnamese), &quot;nb&quot; (Norwegian Bokmål), &quot;ja&quot; (Japanese), &quot;tl&quot; (Tagalog), &quot;pl&quot; (Polish), &quot;da&quot; (Danish), &quot;ro&quot; (Romanian), &quot;nl&quot; (Dutch), &quot;tr&quot; (Turkish)"
-        errorLine1="    &lt;string name=&quot;biometric_backup_advice&quot;>It is advised to export a full backup of all notes before dis-/enabling biometric lock, in case the encryption via biometric lock fails&lt;/string>"
+        errorLine1="    &lt;string name=&quot;biometric_backup_advice&quot;>It is advised to export a full backup of all notes before"
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="45"
+            line="54"
             column="13"/>
     </issue>
 
@@ -2061,7 +2094,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="46"
+            line="56"
             column="13"/>
     </issue>
 
@@ -2072,7 +2105,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="47"
+            line="57"
             column="13"/>
     </issue>
 
@@ -2083,7 +2116,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="48"
+            line="58"
             column="13"/>
     </issue>
 
@@ -2094,7 +2127,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="49"
+            line="59"
             column="13"/>
     </issue>
 
@@ -2105,7 +2138,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="50"
+            line="60"
             column="13"/>
     </issue>
 
@@ -2116,29 +2149,29 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="51"
+            line="61"
             column="13"/>
     </issue>
 
     <issue
         id="MissingTranslation"
         message="&quot;biometrics_setup_failure_decrypt&quot; is not translated in &quot;nn&quot; (Norwegian Nynorsk), &quot;ru&quot; (Russian), &quot;hu&quot; (Hungarian), &quot;sk&quot; (Slovak), &quot;ca&quot; (Catalan), &quot;sv&quot; (Swedish), &quot;el&quot; (Greek), &quot;it&quot; (Italian), &quot;my&quot; (Burmese), &quot;vi&quot; (Vietnamese), &quot;nb&quot; (Norwegian Bokmål), &quot;ja&quot; (Japanese), &quot;tl&quot; (Tagalog), &quot;pl&quot; (Polish), &quot;da&quot; (Danish), &quot;ro&quot; (Romanian), &quot;nl&quot; (Dutch), &quot;tr&quot; (Turkish)"
-        errorLine1="    &lt;string name=&quot;biometrics_setup_failure_decrypt&quot;>Decryption of the database failed.\nPlease use \&apos;%1$s\&apos; to report the error&lt;/string>"
+        errorLine1="    &lt;string name=&quot;biometrics_setup_failure_decrypt&quot;>Decryption of the database failed.\nPlease use"
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="52"
+            line="62"
             column="13"/>
     </issue>
 
     <issue
         id="MissingTranslation"
         message="&quot;biometrics_setup_failure_encrypt&quot; is not translated in &quot;nn&quot; (Norwegian Nynorsk), &quot;ru&quot; (Russian), &quot;hu&quot; (Hungarian), &quot;sk&quot; (Slovak), &quot;ca&quot; (Catalan), &quot;sv&quot; (Swedish), &quot;el&quot; (Greek), &quot;it&quot; (Italian), &quot;my&quot; (Burmese), &quot;vi&quot; (Vietnamese), &quot;nb&quot; (Norwegian Bokmål), &quot;ja&quot; (Japanese), &quot;tl&quot; (Tagalog), &quot;pl&quot; (Polish), &quot;da&quot; (Danish), &quot;ro&quot; (Romanian), &quot;nl&quot; (Dutch), &quot;tr&quot; (Turkish)"
-        errorLine1="    &lt;string name=&quot;biometrics_setup_failure_encrypt&quot;>Encryption of the database failed.\nPlease use \&apos;%1$s\&apos; to report the error&lt;/string>"
+        errorLine1="    &lt;string name=&quot;biometrics_setup_failure_encrypt&quot;>Encryption of the database failed.\nPlease use"
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="53"
+            line="64"
             column="13"/>
     </issue>
 
@@ -2149,7 +2182,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="54"
+            line="66"
             column="13"/>
     </issue>
 
@@ -2160,7 +2193,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="56"
+            line="68"
             column="13"/>
     </issue>
 
@@ -2171,7 +2204,7 @@
         errorLine2="             ~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="58"
+            line="70"
             column="14"/>
     </issue>
 
@@ -2182,7 +2215,7 @@
         errorLine2="             ~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="62"
+            line="74"
             column="14"/>
     </issue>
 
@@ -2193,7 +2226,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="66"
+            line="78"
             column="13"/>
     </issue>
 
@@ -2204,7 +2237,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="67"
+            line="79"
             column="13"/>
     </issue>
 
@@ -2215,7 +2248,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="68"
+            line="80"
             column="13"/>
     </issue>
 
@@ -2226,7 +2259,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="69"
+            line="81"
             column="13"/>
     </issue>
 
@@ -2237,18 +2270,18 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="71"
+            line="83"
             column="13"/>
     </issue>
 
     <issue
         id="MissingTranslation"
         message="&quot;change_color_message&quot; is not translated in &quot;nn&quot; (Norwegian Nynorsk), &quot;hu&quot; (Hungarian), &quot;sk&quot; (Slovak), &quot;ca&quot; (Catalan), &quot;sv&quot; (Swedish), &quot;el&quot; (Greek), &quot;my&quot; (Burmese), &quot;vi&quot; (Vietnamese), &quot;nb&quot; (Norwegian Bokmål), &quot;ja&quot; (Japanese), &quot;tl&quot; (Tagalog), &quot;da&quot; (Danish), &quot;nl&quot; (Dutch), &quot;tr&quot; (Turkish)"
-        errorLine1="    &lt;string name=&quot;change_color_message&quot;>Pick a color or create a new one.\nYou can also edit a Color by long pressing it.&lt;/string>"
+        errorLine1="    &lt;string name=&quot;change_color_message&quot;>Pick a color or create a new one.\nYou can also edit a Color"
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="72"
+            line="84"
             column="13"/>
     </issue>
 
@@ -2259,7 +2292,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="73"
+            line="86"
             column="13"/>
     </issue>
 
@@ -2270,7 +2303,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="74"
+            line="87"
             column="13"/>
     </issue>
 
@@ -2281,7 +2314,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="75"
+            line="88"
             column="13"/>
     </issue>
 
@@ -2292,7 +2325,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="76"
+            line="89"
             column="13"/>
     </issue>
 
@@ -2303,7 +2336,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="77"
+            line="90"
             column="13"/>
     </issue>
 
@@ -2314,7 +2347,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="78"
+            line="91"
             column="13"/>
     </issue>
 
@@ -2325,7 +2358,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="79"
+            line="92"
             column="13"/>
     </issue>
 
@@ -2336,7 +2369,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="80"
+            line="93"
             column="13"/>
     </issue>
 
@@ -2347,7 +2380,7 @@
         errorLine2="            ~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="81"
+            line="94"
             column="13"/>
     </issue>
 
@@ -2358,7 +2391,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="82"
+            line="95"
             column="13"/>
     </issue>
 
@@ -2369,7 +2402,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="83"
+            line="96"
             column="13"/>
     </issue>
 
@@ -2380,7 +2413,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="85"
+            line="98"
             column="13"/>
     </issue>
 
@@ -2391,7 +2424,7 @@
         errorLine2="            ~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="86"
+            line="99"
             column="13"/>
     </issue>
 
@@ -2402,7 +2435,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="87"
+            line="100"
             column="13"/>
     </issue>
 
@@ -2413,7 +2446,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="89"
+            line="102"
             column="13"/>
     </issue>
 
@@ -2424,7 +2457,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="90"
+            line="103"
             column="13"/>
     </issue>
 
@@ -2435,7 +2468,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="91"
+            line="104"
             column="13"/>
     </issue>
 
@@ -2446,7 +2479,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="92"
+            line="105"
             column="13"/>
     </issue>
 
@@ -2457,29 +2490,29 @@
         errorLine2="            ~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="93"
+            line="106"
             column="13"/>
     </issue>
 
     <issue
         id="MissingTranslation"
         message="&quot;crash_export_backup_failed&quot; is not translated in &quot;nn&quot; (Norwegian Nynorsk), &quot;ru&quot; (Russian), &quot;hu&quot; (Hungarian), &quot;sk&quot; (Slovak), &quot;ca&quot; (Catalan), &quot;sv&quot; (Swedish), &quot;el&quot; (Greek), &quot;it&quot; (Italian), &quot;my&quot; (Burmese), &quot;vi&quot; (Vietnamese), &quot;nb&quot; (Norwegian Bokmål), &quot;ja&quot; (Japanese), &quot;tl&quot; (Tagalog), &quot;pl&quot; (Polish), &quot;da&quot; (Danish), &quot;ro&quot; (Romanian), &quot;nl&quot; (Dutch), &quot;tr&quot; (Turkish)"
-        errorLine1="    &lt;string name=&quot;crash_export_backup_failed&quot;>Unfortunately, exporting the backup failed.\nPlease use the \&apos;%1$s\&apos; button to report the crash&lt;/string>"
+        errorLine1="    &lt;string name=&quot;crash_export_backup_failed&quot;>Unfortunately, exporting the backup failed.\nPlease"
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="95"
+            line="108"
             column="13"/>
     </issue>
 
     <issue
         id="MissingTranslation"
         message="&quot;crash_export_backup_message&quot; is not translated in &quot;nn&quot; (Norwegian Nynorsk), &quot;ru&quot; (Russian), &quot;hu&quot; (Hungarian), &quot;sk&quot; (Slovak), &quot;ca&quot; (Catalan), &quot;sv&quot; (Swedish), &quot;el&quot; (Greek), &quot;it&quot; (Italian), &quot;my&quot; (Burmese), &quot;vi&quot; (Vietnamese), &quot;nb&quot; (Norwegian Bokmål), &quot;ja&quot; (Japanese), &quot;tl&quot; (Tagalog), &quot;pl&quot; (Polish), &quot;da&quot; (Danish), &quot;ro&quot; (Romanian), &quot;nl&quot; (Dutch), &quot;tr&quot; (Turkish)"
-        errorLine1="    &lt;string name=&quot;crash_export_backup_message&quot;>You can try to create a backup of your notes by clicking \&apos;%1$s\&apos;.\nThis might fail if the crash lead to broken/corrupted data. In that case, please use the \&apos;%2$s\&apos; button to report the crash&lt;/string>"
+        errorLine1="    &lt;string name=&quot;crash_export_backup_message&quot;>You can try to create a backup of your notes by"
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="96"
+            line="110"
             column="13"/>
     </issue>
 
@@ -2490,7 +2523,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="97"
+            line="113"
             column="13"/>
     </issue>
 
@@ -2501,7 +2534,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="98"
+            line="114"
             column="13"/>
     </issue>
 
@@ -2512,7 +2545,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="99"
+            line="115"
             column="13"/>
     </issue>
 
@@ -2523,7 +2556,7 @@
         errorLine2="            ~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="100"
+            line="116"
             column="13"/>
     </issue>
 
@@ -2534,7 +2567,7 @@
         errorLine2="            ~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="101"
+            line="117"
             column="13"/>
     </issue>
 
@@ -2545,18 +2578,18 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="103"
+            line="119"
             column="13"/>
     </issue>
 
     <issue
         id="MissingTranslation"
         message="&quot;data_in_public_message&quot; is not translated in &quot;nn&quot; (Norwegian Nynorsk), &quot;hu&quot; (Hungarian), &quot;sk&quot; (Slovak), &quot;ca&quot; (Catalan), &quot;sv&quot; (Swedish), &quot;el&quot; (Greek), &quot;my&quot; (Burmese), &quot;vi&quot; (Vietnamese), &quot;nb&quot; (Norwegian Bokmål), &quot;ja&quot; (Japanese), &quot;tl&quot; (Tagalog), &quot;da&quot; (Danish), &quot;nl&quot; (Dutch), &quot;tr&quot; (Turkish)"
-        errorLine1="    &lt;string name=&quot;data_in_public_message&quot;>By enabling this, the app’s internal database and attached files will be moved into the app’s public folder (Android/media/com.philkes.notallyx). In combination with file synchronization apps this can be used to synchronize NotallyX data between multiple devices.&lt;/string>"
+        errorLine1="    &lt;string name=&quot;data_in_public_message&quot;>By enabling this, the app’s internal database and attached"
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="104"
+            line="120"
             column="13"/>
     </issue>
 
@@ -2567,7 +2600,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="106"
+            line="125"
             column="13"/>
     </issue>
 
@@ -2578,7 +2611,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="107"
+            line="126"
             column="13"/>
     </issue>
 
@@ -2589,7 +2622,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="108"
+            line="127"
             column="13"/>
     </issue>
 
@@ -2600,7 +2633,7 @@
         errorLine2="            ~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="109"
+            line="128"
             column="13"/>
     </issue>
 
@@ -2611,7 +2644,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="113"
+            line="132"
             column="13"/>
     </issue>
 
@@ -2622,18 +2655,18 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="114"
+            line="133"
             column="13"/>
     </issue>
 
     <issue
         id="MissingTranslation"
         message="&quot;delete_color_message&quot; is not translated in &quot;nn&quot; (Norwegian Nynorsk), &quot;hu&quot; (Hungarian), &quot;sk&quot; (Slovak), &quot;ca&quot; (Catalan), &quot;sv&quot; (Swedish), &quot;el&quot; (Greek), &quot;my&quot; (Burmese), &quot;vi&quot; (Vietnamese), &quot;nb&quot; (Norwegian Bokmål), &quot;ja&quot; (Japanese), &quot;tl&quot; (Tagalog), &quot;da&quot; (Danish), &quot;nl&quot; (Dutch), &quot;tr&quot; (Turkish)"
-        errorLine1="    &lt;string name=&quot;delete_color_message&quot;>What color should the notes have that currently use this color\?&lt;/string>"
+        errorLine1="    &lt;string name=&quot;delete_color_message&quot;>What color should the notes have that currently use this"
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="115"
+            line="134"
             column="13"/>
     </issue>
 
@@ -2644,7 +2677,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="116"
+            line="136"
             column="13"/>
     </issue>
 
@@ -2655,7 +2688,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="118"
+            line="138"
             column="13"/>
     </issue>
 
@@ -2666,7 +2699,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="121"
+            line="141"
             column="13"/>
     </issue>
 
@@ -2677,7 +2710,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="122"
+            line="142"
             column="13"/>
     </issue>
 
@@ -2688,7 +2721,7 @@
         errorLine2="             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="124"
+            line="144"
             column="14"/>
     </issue>
 
@@ -2699,7 +2732,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="128"
+            line="148"
             column="13"/>
     </issue>
 
@@ -2710,7 +2743,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="129"
+            line="149"
             column="13"/>
     </issue>
 
@@ -2721,7 +2754,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="130"
+            line="150"
             column="13"/>
     </issue>
 
@@ -2732,7 +2765,7 @@
         errorLine2="            ~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="131"
+            line="151"
             column="13"/>
     </issue>
 
@@ -2743,7 +2776,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="132"
+            line="152"
             column="13"/>
     </issue>
 
@@ -2754,7 +2787,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="133"
+            line="153"
             column="13"/>
     </issue>
 
@@ -2765,7 +2798,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="134"
+            line="154"
             column="13"/>
     </issue>
 
@@ -2776,7 +2809,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="135"
+            line="155"
             column="13"/>
     </issue>
 
@@ -2787,7 +2820,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="136"
+            line="156"
             column="13"/>
     </issue>
 
@@ -2798,7 +2831,7 @@
         errorLine2="            ~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="137"
+            line="157"
             column="13"/>
     </issue>
 
@@ -2809,7 +2842,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="138"
+            line="158"
             column="13"/>
     </issue>
 
@@ -2820,7 +2853,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="139"
+            line="159"
             column="13"/>
     </issue>
 
@@ -2831,7 +2864,7 @@
         errorLine2="            ~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="140"
+            line="160"
             column="13"/>
     </issue>
 
@@ -2842,7 +2875,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="142"
+            line="162"
             column="13"/>
     </issue>
 
@@ -2853,7 +2886,7 @@
         errorLine2="             ~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="143"
+            line="163"
             column="14"/>
     </issue>
 
@@ -2864,7 +2897,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="148"
+            line="168"
             column="13"/>
     </issue>
 
@@ -2875,7 +2908,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="150"
+            line="170"
             column="13"/>
     </issue>
 
@@ -2886,7 +2919,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="151"
+            line="171"
             column="13"/>
     </issue>
 
@@ -2897,7 +2930,7 @@
         errorLine2="            ~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="152"
+            line="172"
             column="13"/>
     </issue>
 
@@ -2908,7 +2941,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="156"
+            line="176"
             column="13"/>
     </issue>
 
@@ -2919,7 +2952,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="157"
+            line="177"
             column="13"/>
     </issue>
 
@@ -2930,7 +2963,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="158"
+            line="178"
             column="13"/>
     </issue>
 
@@ -2941,7 +2974,7 @@
         errorLine2="            ~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="159"
+            line="179"
             column="13"/>
     </issue>
 
@@ -2952,7 +2985,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="160"
+            line="180"
             column="13"/>
     </issue>
 
@@ -2963,7 +2996,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="161"
+            line="181"
             column="13"/>
     </issue>
 
@@ -2974,18 +3007,18 @@
         errorLine2="            ~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="162"
+            line="182"
             column="13"/>
     </issue>
 
     <issue
         id="MissingTranslation"
         message="&quot;evernote_help&quot; is not translated in &quot;nn&quot; (Norwegian Nynorsk), &quot;hu&quot; (Hungarian), &quot;sk&quot; (Slovak), &quot;ca&quot; (Catalan), &quot;sv&quot; (Swedish), &quot;el&quot; (Greek), &quot;my&quot; (Burmese), &quot;vi&quot; (Vietnamese), &quot;nb&quot; (Norwegian Bokmål), &quot;ja&quot; (Japanese), &quot;tl&quot; (Tagalog), &quot;da&quot; (Danish), &quot;tr&quot; (Turkish)"
-        errorLine1="    &lt;string name=&quot;evernote_help&quot;>In order to import your Notes from Evernote you must export your Evernote Notebook as ENEX. Click Help to get more information.\n\nIf you already have a ENEX file, click Import and choose it.&lt;/string>"
+        errorLine1="    &lt;string name=&quot;evernote_help&quot;>In order to import your Notes from Evernote you must export your"
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="163"
+            line="183"
             column="13"/>
     </issue>
 
@@ -2996,7 +3029,7 @@
         errorLine2="            ~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="164"
+            line="186"
             column="13"/>
     </issue>
 
@@ -3007,7 +3040,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="166"
+            line="188"
             column="13"/>
     </issue>
 
@@ -3018,29 +3051,29 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="167"
+            line="189"
             column="13"/>
     </issue>
 
     <issue
         id="MissingTranslation"
         message="&quot;export_settings_failure&quot; is not translated in &quot;nn&quot; (Norwegian Nynorsk), &quot;hu&quot; (Hungarian), &quot;sk&quot; (Slovak), &quot;ca&quot; (Catalan), &quot;sv&quot; (Swedish), &quot;el&quot; (Greek), &quot;my&quot; (Burmese), &quot;vi&quot; (Vietnamese), &quot;nb&quot; (Norwegian Bokmål), &quot;ja&quot; (Japanese), &quot;tl&quot; (Tagalog), &quot;da&quot; (Danish), &quot;nl&quot; (Dutch), &quot;tr&quot; (Turkish)"
-        errorLine1="    &lt;string name=&quot;export_settings_failure&quot;>Failed to export settings, did you choose an invalid path\?&lt;/string>"
+        errorLine1="    &lt;string name=&quot;export_settings_failure&quot;>Failed to export settings, did you choose an invalid"
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="168"
+            line="190"
             column="13"/>
     </issue>
 
     <issue
         id="MissingTranslation"
         message="&quot;export_settings_message&quot; is not translated in &quot;nn&quot; (Norwegian Nynorsk), &quot;hu&quot; (Hungarian), &quot;sk&quot; (Slovak), &quot;ca&quot; (Catalan), &quot;sv&quot; (Swedish), &quot;el&quot; (Greek), &quot;my&quot; (Burmese), &quot;vi&quot; (Vietnamese), &quot;nb&quot; (Norwegian Bokmål), &quot;ja&quot; (Japanese), &quot;tl&quot; (Tagalog), &quot;da&quot; (Danish), &quot;nl&quot; (Dutch), &quot;tr&quot; (Turkish)"
-        errorLine1="    &lt;string name=&quot;export_settings_message&quot;>All Settings will be exported to a JSON file, which can be used to re-import stored settings.\n\nBe aware, that this does not include encrypted settings like the auto-backup password or the biometric encryption key&lt;/string>"
+        errorLine1="    &lt;string name=&quot;export_settings_message&quot;>All Settings will be exported to a JSON file, which can"
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="169"
+            line="192"
             column="13"/>
     </issue>
 
@@ -3051,7 +3084,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="170"
+            line="195"
             column="13"/>
     </issue>
 
@@ -3062,7 +3095,7 @@
         errorLine2="             ~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="171"
+            line="196"
             column="14"/>
     </issue>
 
@@ -3073,7 +3106,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="175"
+            line="200"
             column="13"/>
     </issue>
 
@@ -3084,7 +3117,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="176"
+            line="201"
             column="13"/>
     </issue>
 
@@ -3095,7 +3128,7 @@
         errorLine2="            ~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="177"
+            line="202"
             column="13"/>
     </issue>
 
@@ -3106,7 +3139,7 @@
         errorLine2="            ~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="178"
+            line="203"
             column="13"/>
     </issue>
 
@@ -3117,18 +3150,18 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="180"
+            line="205"
             column="13"/>
     </issue>
 
     <issue
         id="MissingTranslation"
         message="&quot;google_keep_help&quot; is not translated in &quot;nn&quot; (Norwegian Nynorsk), &quot;hu&quot; (Hungarian), &quot;sk&quot; (Slovak), &quot;ca&quot; (Catalan), &quot;sv&quot; (Swedish), &quot;el&quot; (Greek), &quot;my&quot; (Burmese), &quot;vi&quot; (Vietnamese), &quot;nb&quot; (Norwegian Bokmål), &quot;ja&quot; (Japanese), &quot;tl&quot; (Tagalog), &quot;da&quot; (Danish), &quot;tr&quot; (Turkish)"
-        errorLine1="    &lt;string name=&quot;google_keep_help&quot;>In order to import your Notes from Google Keep you must download your Google Takeout ZIP file. Only select the \&quot;Keep\&quot; data. Click Help to get more information.\n\nIf you already have a Takeout ZIP file, click Import and choose the ZIP file.&lt;/string>"
+        errorLine1="    &lt;string name=&quot;google_keep_help&quot;>In order to import your Notes from Google Keep you must download"
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="181"
+            line="206"
             column="13"/>
     </issue>
 
@@ -3139,7 +3172,7 @@
         errorLine2="            ~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="183"
+            line="211"
             column="13"/>
     </issue>
 
@@ -3150,7 +3183,7 @@
         errorLine2="            ~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="184"
+            line="212"
             column="13"/>
     </issue>
 
@@ -3161,18 +3194,18 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="185"
+            line="213"
             column="13"/>
     </issue>
 
     <issue
         id="MissingTranslation"
         message="&quot;images_hidden_in_overview&quot; is not translated in &quot;nn&quot; (Norwegian Nynorsk), &quot;hu&quot; (Hungarian), &quot;sk&quot; (Slovak), &quot;ca&quot; (Catalan), &quot;sv&quot; (Swedish), &quot;el&quot; (Greek), &quot;my&quot; (Burmese), &quot;vi&quot; (Vietnamese), &quot;nb&quot; (Norwegian Bokmål), &quot;ja&quot; (Japanese), &quot;tl&quot; (Tagalog), &quot;da&quot; (Danish), &quot;nl&quot; (Dutch), &quot;tr&quot; (Turkish)"
-        errorLine1="    &lt;string name=&quot;images_hidden_in_overview&quot;>By enabling this, the notes’ images will be hidden in the overview&lt;/string>"
+        errorLine1="    &lt;string name=&quot;images_hidden_in_overview&quot;>By enabling this, the notes’ images will be hidden in"
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="186"
+            line="214"
             column="13"/>
     </issue>
 
@@ -3183,7 +3216,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="187"
+            line="216"
             column="13"/>
     </issue>
 
@@ -3194,7 +3227,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="188"
+            line="217"
             column="13"/>
     </issue>
 
@@ -3205,18 +3238,18 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="189"
+            line="218"
             column="13"/>
     </issue>
 
     <issue
         id="MissingTranslation"
         message="&quot;import_backup_password_hint&quot; is not translated in &quot;nn&quot; (Norwegian Nynorsk), &quot;hu&quot; (Hungarian), &quot;sk&quot; (Slovak), &quot;ca&quot; (Catalan), &quot;sv&quot; (Swedish), &quot;el&quot; (Greek), &quot;my&quot; (Burmese), &quot;vi&quot; (Vietnamese), &quot;nb&quot; (Norwegian Bokmål), &quot;ja&quot; (Japanese), &quot;tl&quot; (Tagalog), &quot;da&quot; (Danish), &quot;tr&quot; (Turkish)"
-        errorLine1="    &lt;string name=&quot;import_backup_password_hint&quot;>If your backup is not password-protected simply press Import, otherwise enter the correct password.&lt;/string>"
+        errorLine1="    &lt;string name=&quot;import_backup_password_hint&quot;>If your backup is not password-protected simply press"
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="190"
+            line="219"
             column="13"/>
     </issue>
 
@@ -3227,7 +3260,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="191"
+            line="221"
             column="13"/>
     </issue>
 
@@ -3238,29 +3271,29 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="192"
+            line="222"
             column="13"/>
     </issue>
 
     <issue
         id="MissingTranslation"
         message="&quot;import_settings_failure&quot; is not translated in &quot;nn&quot; (Norwegian Nynorsk), &quot;hu&quot; (Hungarian), &quot;sk&quot; (Slovak), &quot;ca&quot; (Catalan), &quot;sv&quot; (Swedish), &quot;el&quot; (Greek), &quot;my&quot; (Burmese), &quot;vi&quot; (Vietnamese), &quot;nb&quot; (Norwegian Bokmål), &quot;ja&quot; (Japanese), &quot;tl&quot; (Tagalog), &quot;da&quot; (Danish), &quot;nl&quot; (Dutch), &quot;tr&quot; (Turkish)"
-        errorLine1="    &lt;string name=&quot;import_settings_failure&quot;>Failed to import settings, did you choose the correct file\?&lt;/string>"
+        errorLine1="    &lt;string name=&quot;import_settings_failure&quot;>Failed to import settings, did you choose the correct"
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="193"
+            line="223"
             column="13"/>
     </issue>
 
     <issue
         id="MissingTranslation"
         message="&quot;import_settings_message&quot; is not translated in &quot;nn&quot; (Norwegian Nynorsk), &quot;hu&quot; (Hungarian), &quot;sk&quot; (Slovak), &quot;ca&quot; (Catalan), &quot;sv&quot; (Swedish), &quot;el&quot; (Greek), &quot;my&quot; (Burmese), &quot;vi&quot; (Vietnamese), &quot;nb&quot; (Norwegian Bokmål), &quot;ja&quot; (Japanese), &quot;tl&quot; (Tagalog), &quot;da&quot; (Danish), &quot;nl&quot; (Dutch), &quot;tr&quot; (Turkish)"
-        errorLine1="    &lt;string name=&quot;import_settings_message&quot;>In order to import settings, please choose a valid NotallyX settings JSON file&lt;/string>"
+        errorLine1="    &lt;string name=&quot;import_settings_message&quot;>In order to import settings, please choose a valid"
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="194"
+            line="225"
             column="13"/>
     </issue>
 
@@ -3271,7 +3304,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="195"
+            line="227"
             column="13"/>
     </issue>
 
@@ -3282,7 +3315,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="196"
+            line="228"
             column="13"/>
     </issue>
 
@@ -3293,7 +3326,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="197"
+            line="229"
             column="13"/>
     </issue>
 
@@ -3304,7 +3337,7 @@
         errorLine2="             ~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="198"
+            line="230"
             column="14"/>
     </issue>
 
@@ -3315,7 +3348,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="202"
+            line="234"
             column="13"/>
     </issue>
 
@@ -3326,7 +3359,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="203"
+            line="235"
             column="13"/>
     </issue>
 
@@ -3337,7 +3370,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="204"
+            line="236"
             column="13"/>
     </issue>
 
@@ -3348,7 +3381,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="205"
+            line="237"
             column="13"/>
     </issue>
 
@@ -3359,7 +3392,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="206"
+            line="238"
             column="13"/>
     </issue>
 
@@ -3370,7 +3403,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="207"
+            line="239"
             column="13"/>
     </issue>
 
@@ -3381,7 +3414,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="208"
+            line="240"
             column="13"/>
     </issue>
 
@@ -3392,7 +3425,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="209"
+            line="241"
             column="13"/>
     </issue>
 
@@ -3403,7 +3436,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="210"
+            line="242"
             column="13"/>
     </issue>
 
@@ -3414,7 +3447,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="211"
+            line="243"
             column="13"/>
     </issue>
 
@@ -3425,7 +3458,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="212"
+            line="244"
             column="13"/>
     </issue>
 
@@ -3436,18 +3469,18 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="215"
+            line="247"
             column="13"/>
     </issue>
 
     <issue
         id="MissingTranslation"
         message="&quot;json_files_help&quot; is not translated in &quot;nn&quot; (Norwegian Nynorsk), &quot;hu&quot; (Hungarian), &quot;sk&quot; (Slovak), &quot;ca&quot; (Catalan), &quot;sv&quot; (Swedish), &quot;el&quot; (Greek), &quot;it&quot; (Italian), &quot;my&quot; (Burmese), &quot;vi&quot; (Vietnamese), &quot;nb&quot; (Norwegian Bokmål), &quot;ja&quot; (Japanese), &quot;tl&quot; (Tagalog), &quot;da&quot; (Danish), &quot;nl&quot; (Dutch), &quot;tr&quot; (Turkish)"
-        errorLine1="    &lt;string name=&quot;json_files_help&quot;>In order to import your Notes from JSON files (single file or folder), click Import. Every valid JSON file is imported as a separate note, the file’s name becomes the note’s title.&lt;/string>"
+        errorLine1="    &lt;string name=&quot;json_files_help&quot;>In order to import your Notes from JSON files (single file or"
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="216"
+            line="248"
             column="13"/>
     </issue>
 
@@ -3458,18 +3491,18 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="218"
+            line="252"
             column="13"/>
     </issue>
 
     <issue
         id="MissingTranslation"
         message="&quot;labels_hidden_in_overview&quot; is not translated in &quot;nn&quot; (Norwegian Nynorsk), &quot;hu&quot; (Hungarian), &quot;sk&quot; (Slovak), &quot;ca&quot; (Catalan), &quot;sv&quot; (Swedish), &quot;el&quot; (Greek), &quot;my&quot; (Burmese), &quot;vi&quot; (Vietnamese), &quot;nb&quot; (Norwegian Bokmål), &quot;ja&quot; (Japanese), &quot;tl&quot; (Tagalog), &quot;da&quot; (Danish), &quot;nl&quot; (Dutch), &quot;tr&quot; (Turkish)"
-        errorLine1="    &lt;string name=&quot;labels_hidden_in_overview&quot;>By enabling this, the notes’ labels will be hidden in the overview&lt;/string>"
+        errorLine1="    &lt;string name=&quot;labels_hidden_in_overview&quot;>By enabling this, the notes’ labels will be hidden in"
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="220"
+            line="254"
             column="13"/>
     </issue>
 
@@ -3480,7 +3513,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="221"
+            line="256"
             column="13"/>
     </issue>
 
@@ -3491,7 +3524,7 @@
         errorLine2="            ~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="222"
+            line="257"
             column="13"/>
     </issue>
 
@@ -3502,7 +3535,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="226"
+            line="261"
             column="13"/>
     </issue>
 
@@ -3513,7 +3546,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="228"
+            line="263"
             column="13"/>
     </issue>
 
@@ -3524,7 +3557,7 @@
         errorLine2="            ~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="229"
+            line="264"
             column="13"/>
     </issue>
 
@@ -3535,7 +3568,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="230"
+            line="265"
             column="13"/>
     </issue>
 
@@ -3546,7 +3579,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="232"
+            line="267"
             column="13"/>
     </issue>
 
@@ -3557,7 +3590,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="234"
+            line="269"
             column="13"/>
     </issue>
 
@@ -3568,7 +3601,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="236"
+            line="271"
             column="13"/>
     </issue>
 
@@ -3579,7 +3612,7 @@
         errorLine2="            ~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="237"
+            line="272"
             column="13"/>
     </issue>
 
@@ -3590,7 +3623,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="238"
+            line="273"
             column="13"/>
     </issue>
 
@@ -3601,7 +3634,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="239"
+            line="274"
             column="13"/>
     </issue>
 
@@ -3612,7 +3645,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="240"
+            line="275"
             column="13"/>
     </issue>
 
@@ -3623,7 +3656,7 @@
         errorLine2="            ~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="241"
+            line="276"
             column="13"/>
     </issue>
 
@@ -3634,7 +3667,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="242"
+            line="277"
             column="13"/>
     </issue>
 
@@ -3645,7 +3678,7 @@
         errorLine2="            ~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="244"
+            line="279"
             column="13"/>
     </issue>
 
@@ -3656,7 +3689,7 @@
         errorLine2="            ~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="245"
+            line="280"
             column="13"/>
     </issue>
 
@@ -3667,7 +3700,7 @@
         errorLine2="            ~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="246"
+            line="281"
             column="13"/>
     </issue>
 
@@ -3678,7 +3711,7 @@
         errorLine2="             ~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="247"
+            line="282"
             column="14"/>
     </issue>
 
@@ -3689,7 +3722,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="251"
+            line="286"
             column="13"/>
     </issue>
 
@@ -3700,7 +3733,7 @@
         errorLine2="            ~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="252"
+            line="287"
             column="13"/>
     </issue>
 
@@ -3711,7 +3744,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="253"
+            line="288"
             column="13"/>
     </issue>
 
@@ -3722,7 +3755,7 @@
         errorLine2="            ~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="254"
+            line="289"
             column="13"/>
     </issue>
 
@@ -3733,7 +3766,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="255"
+            line="290"
             column="13"/>
     </issue>
 
@@ -3744,18 +3777,18 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="257"
+            line="292"
             column="13"/>
     </issue>
 
     <issue
         id="MissingTranslation"
         message="&quot;note_too_big_truncating&quot; is not translated in &quot;nn&quot; (Norwegian Nynorsk), &quot;de&quot; (German), &quot;ru&quot; (Russian), &quot;hu&quot; (Hungarian), &quot;uk&quot; (Ukrainian), &quot;sk&quot; (Slovak), &quot;ca&quot; (Catalan), &quot;sv&quot; (Swedish), &quot;el&quot; (Greek), &quot;it&quot; (Italian), &quot;my&quot; (Burmese), &quot;es&quot; (Spanish), &quot;cs&quot; (Czech), &quot;vi&quot; (Vietnamese), &quot;nb&quot; (Norwegian Bokmål), &quot;ja&quot; (Japanese), &quot;tl&quot; (Tagalog), &quot;pl&quot; (Polish), &quot;da&quot; (Danish), &quot;ro&quot; (Romanian), &quot;nl&quot; (Dutch), &quot;tr&quot; (Turkish)"
-        errorLine1="    &lt;string name=&quot;note_too_big_truncating&quot;>Note is too big to save, it was truncated to %1$s characters (was: %2$s)&lt;/string>"
+        errorLine1="    &lt;string name=&quot;note_too_big_truncating&quot;>Note is too big to save, it was truncated to %1$s"
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="258"
+            line="293"
             column="13"/>
     </issue>
 
@@ -3766,7 +3799,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="260"
+            line="296"
             column="13"/>
     </issue>
 
@@ -3777,7 +3810,7 @@
         errorLine2="             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="261"
+            line="297"
             column="14"/>
     </issue>
 
@@ -3788,7 +3821,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="265"
+            line="302"
             column="13"/>
     </issue>
 
@@ -3799,7 +3832,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="266"
+            line="303"
             column="13"/>
     </issue>
 
@@ -3810,7 +3843,7 @@
         errorLine2="            ~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="267"
+            line="304"
             column="13"/>
     </issue>
 
@@ -3821,7 +3854,7 @@
         errorLine2="            ~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="268"
+            line="305"
             column="13"/>
     </issue>
 
@@ -3832,7 +3865,7 @@
         errorLine2="            ~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="269"
+            line="306"
             column="13"/>
     </issue>
 
@@ -3843,18 +3876,18 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="272"
+            line="309"
             column="13"/>
     </issue>
 
     <issue
         id="MissingTranslation"
         message="&quot;plain_text_files_help&quot; is not translated in &quot;nn&quot; (Norwegian Nynorsk), &quot;hu&quot; (Hungarian), &quot;sk&quot; (Slovak), &quot;ca&quot; (Catalan), &quot;sv&quot; (Swedish), &quot;el&quot; (Greek), &quot;my&quot; (Burmese), &quot;vi&quot; (Vietnamese), &quot;nb&quot; (Norwegian Bokmål), &quot;ja&quot; (Japanese), &quot;tl&quot; (Tagalog), &quot;da&quot; (Danish), &quot;nl&quot; (Dutch), &quot;tr&quot; (Turkish)"
-        errorLine1="    &lt;string name=&quot;plain_text_files_help&quot;>In order to import your Notes from markdown/plain text files (single file or folder), click Import. Every file is imported as a separate note, the file’s name becomes the note’s title. If the text contents start with list syntax (e.g. Markdown ’- [x]’, NotallyX syntax ’[✓]’, or ’*’, ’-’) it will be converted to a List note.&lt;/string>"
+        errorLine1="    &lt;string name=&quot;plain_text_files_help&quot;>In order to import your Notes from markdown/plain text"
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="273"
+            line="310"
             column="13"/>
     </issue>
 
@@ -3865,51 +3898,51 @@
         errorLine2="            ~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="274"
+            line="314"
             column="13"/>
     </issue>
 
     <issue
         id="MissingTranslation"
-        message="&quot;please_grant_notally_alarm&quot; is not translated in &quot;nn&quot; (Norwegian Nynorsk), &quot;hu&quot; (Hungarian), &quot;sk&quot; (Slovak), &quot;ca&quot; (Catalan), &quot;sv&quot; (Swedish), &quot;el&quot; (Greek), &quot;my&quot; (Burmese), &quot;vi&quot; (Vietnamese), &quot;nb&quot; (Norwegian Bokmål), &quot;ja&quot; (Japanese), &quot;tl&quot; (Tagalog), &quot;da&quot; (Danish), &quot;nl&quot; (Dutch), &quot;tr&quot; (Turkish)"
-        errorLine1="    &lt;string name=&quot;please_grant_notally_alarm&quot;>Please grant NotallyX to send reminders&lt;/string>"
+        message="&quot;please_grant_notally_alarm&quot; is not translated in &quot;nn&quot; (Norwegian Nynorsk), &quot;hu&quot; (Hungarian), &quot;sk&quot; (Slovak), &quot;ca&quot; (Catalan), &quot;sv&quot; (Swedish), &quot;el&quot; (Greek), &quot;my&quot; (Burmese), &quot;es&quot; (Spanish), &quot;vi&quot; (Vietnamese), &quot;nb&quot; (Norwegian Bokmål), &quot;ja&quot; (Japanese), &quot;tl&quot; (Tagalog), &quot;da&quot; (Danish), &quot;nl&quot; (Dutch), &quot;tr&quot; (Turkish)"
+        errorLine1="    &lt;string name=&quot;please_grant_notally_alarm&quot;>Please grant NotablyMD to send reminders&lt;/string>"
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="275"
+            line="315"
             column="13"/>
     </issue>
 
     <issue
         id="MissingTranslation"
-        message="&quot;please_grant_notally_audio&quot; is not translated in &quot;nn&quot; (Norwegian Nynorsk), &quot;hu&quot; (Hungarian), &quot;sk&quot; (Slovak), &quot;ca&quot; (Catalan), &quot;sv&quot; (Swedish), &quot;el&quot; (Greek), &quot;my&quot; (Burmese), &quot;vi&quot; (Vietnamese), &quot;nb&quot; (Norwegian Bokmål), &quot;ja&quot; (Japanese), &quot;tl&quot; (Tagalog), &quot;da&quot; (Danish), &quot;tr&quot; (Turkish)"
-        errorLine1="    &lt;string name=&quot;please_grant_notally_audio&quot;>Please grant NotallyX the permission to record audio. Recordings never leave your device&lt;/string>"
+        message="&quot;please_grant_notally_audio&quot; is not translated in &quot;nn&quot; (Norwegian Nynorsk), &quot;hu&quot; (Hungarian), &quot;sk&quot; (Slovak), &quot;ca&quot; (Catalan), &quot;sv&quot; (Swedish), &quot;el&quot; (Greek), &quot;my&quot; (Burmese), &quot;es&quot; (Spanish), &quot;vi&quot; (Vietnamese), &quot;nb&quot; (Norwegian Bokmål), &quot;ja&quot; (Japanese), &quot;tl&quot; (Tagalog), &quot;da&quot; (Danish), &quot;tr&quot; (Turkish)"
+        errorLine1="    &lt;string name=&quot;please_grant_notally_audio&quot;>Please grant NotablyMD the permission to record audio."
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="276"
+            line="316"
             column="13"/>
     </issue>
 
     <issue
         id="MissingTranslation"
-        message="&quot;please_grant_notally_notification&quot; is not translated in &quot;nn&quot; (Norwegian Nynorsk), &quot;hu&quot; (Hungarian), &quot;sk&quot; (Slovak), &quot;ca&quot; (Catalan), &quot;sv&quot; (Swedish), &quot;el&quot; (Greek), &quot;my&quot; (Burmese), &quot;vi&quot; (Vietnamese), &quot;nb&quot; (Norwegian Bokmål), &quot;ja&quot; (Japanese), &quot;tl&quot; (Tagalog), &quot;da&quot; (Danish), &quot;nl&quot; (Dutch), &quot;tr&quot; (Turkish)"
-        errorLine1="    &lt;string name=&quot;please_grant_notally_notification&quot;>Please grant NotallyX the permission to send notifications&lt;/string>"
+        message="&quot;please_grant_notally_notification&quot; is not translated in &quot;nn&quot; (Norwegian Nynorsk), &quot;hu&quot; (Hungarian), &quot;sk&quot; (Slovak), &quot;ca&quot; (Catalan), &quot;sv&quot; (Swedish), &quot;el&quot; (Greek), &quot;my&quot; (Burmese), &quot;es&quot; (Spanish), &quot;vi&quot; (Vietnamese), &quot;nb&quot; (Norwegian Bokmål), &quot;ja&quot; (Japanese), &quot;tl&quot; (Tagalog), &quot;da&quot; (Danish), &quot;nl&quot; (Dutch), &quot;tr&quot; (Turkish)"
+        errorLine1="    &lt;string name=&quot;please_grant_notally_notification&quot;>Please grant NotablyMD the permission to send"
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="277"
+            line="318"
             column="13"/>
     </issue>
 
     <issue
         id="MissingTranslation"
-        message="&quot;please_grant_notally_notification_auto_backup&quot; is not translated in &quot;nn&quot; (Norwegian Nynorsk), &quot;hu&quot; (Hungarian), &quot;sk&quot; (Slovak), &quot;ca&quot; (Catalan), &quot;sv&quot; (Swedish), &quot;el&quot; (Greek), &quot;my&quot; (Burmese), &quot;vi&quot; (Vietnamese), &quot;nb&quot; (Norwegian Bokmål), &quot;ja&quot; (Japanese), &quot;tl&quot; (Tagalog), &quot;da&quot; (Danish), &quot;nl&quot; (Dutch), &quot;tr&quot; (Turkish)"
-        errorLine1="    &lt;string name=&quot;please_grant_notally_notification_auto_backup&quot;>If an auto backup fails you can receive a notification, if you grant NotallyX permission to send notifications&lt;/string>"
+        message="&quot;please_grant_notally_notification_auto_backup&quot; is not translated in &quot;nn&quot; (Norwegian Nynorsk), &quot;hu&quot; (Hungarian), &quot;sk&quot; (Slovak), &quot;ca&quot; (Catalan), &quot;sv&quot; (Swedish), &quot;el&quot; (Greek), &quot;my&quot; (Burmese), &quot;es&quot; (Spanish), &quot;vi&quot; (Vietnamese), &quot;nb&quot; (Norwegian Bokmål), &quot;ja&quot; (Japanese), &quot;tl&quot; (Tagalog), &quot;da&quot; (Danish), &quot;nl&quot; (Dutch), &quot;tr&quot; (Turkish)"
+        errorLine1="    &lt;string name=&quot;please_grant_notally_notification_auto_backup&quot;>If an auto backup fails you can"
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="278"
+            line="320"
             column="13"/>
     </issue>
 
@@ -3920,7 +3953,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="279"
+            line="322"
             column="13"/>
     </issue>
 
@@ -3931,7 +3964,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="281"
+            line="324"
             column="13"/>
     </issue>
 
@@ -3942,7 +3975,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="282"
+            line="325"
             column="13"/>
     </issue>
 
@@ -3953,7 +3986,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="283"
+            line="326"
             column="13"/>
     </issue>
 
@@ -3964,7 +3997,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="284"
+            line="327"
             column="13"/>
     </issue>
 
@@ -3975,7 +4008,7 @@
         errorLine2="            ~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="285"
+            line="328"
             column="13"/>
     </issue>
 
@@ -3986,7 +4019,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="286"
+            line="329"
             column="13"/>
     </issue>
 
@@ -3997,7 +4030,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="287"
+            line="330"
             column="13"/>
     </issue>
 
@@ -4008,7 +4041,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="288"
+            line="331"
             column="13"/>
     </issue>
 
@@ -4019,7 +4052,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="289"
+            line="332"
             column="13"/>
     </issue>
 
@@ -4030,7 +4063,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="290"
+            line="333"
             column="13"/>
     </issue>
 
@@ -4041,7 +4074,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="291"
+            line="334"
             column="13"/>
     </issue>
 
@@ -4052,18 +4085,18 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="292"
+            line="335"
             column="13"/>
     </issue>
 
     <issue
         id="MissingTranslation"
         message="&quot;report_bug_stacktrace_too_long&quot; is not translated in &quot;nn&quot; (Norwegian Nynorsk), &quot;ru&quot; (Russian), &quot;hu&quot; (Hungarian), &quot;sk&quot; (Slovak), &quot;ca&quot; (Catalan), &quot;sv&quot; (Swedish), &quot;el&quot; (Greek), &quot;it&quot; (Italian), &quot;my&quot; (Burmese), &quot;vi&quot; (Vietnamese), &quot;nb&quot; (Norwegian Bokmål), &quot;ja&quot; (Japanese), &quot;tl&quot; (Tagalog), &quot;pl&quot; (Polish), &quot;da&quot; (Danish), &quot;ro&quot; (Romanian), &quot;nl&quot; (Dutch), &quot;tr&quot; (Turkish)"
-        errorLine1="    &lt;string name=&quot;report_bug_stacktrace_too_long&quot;>The crash logs are too long to automatically pre-fill the Github issue with it, therefore the crash logs have been copied to your clipboard.\nWhen you click \&apos;%1$s\&apos;, your browser will open to create a Github issue for your crash.It is important that you paste the automatically copied crash logs into the Github issue\&apos;s \&apos;(Optional) Relevant log output\&apos; field.&lt;/string>"
+        errorLine1="    &lt;string name=&quot;report_bug_stacktrace_too_long&quot;>The crash logs are too long to automatically"
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="293"
+            line="336"
             column="13"/>
     </issue>
 
@@ -4074,7 +4107,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="294"
+            line="341"
             column="13"/>
     </issue>
 
@@ -4085,7 +4118,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="295"
+            line="342"
             column="13"/>
     </issue>
 
@@ -4096,7 +4129,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="296"
+            line="343"
             column="13"/>
     </issue>
 
@@ -4107,7 +4140,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="297"
+            line="344"
             column="13"/>
     </issue>
 
@@ -4118,7 +4151,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="298"
+            line="345"
             column="13"/>
     </issue>
 
@@ -4129,7 +4162,7 @@
         errorLine2="             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="300"
+            line="347"
             column="14"/>
     </issue>
 
@@ -4140,7 +4173,7 @@
         errorLine2="            ~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="304"
+            line="351"
             column="13"/>
     </issue>
 
@@ -4151,7 +4184,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="306"
+            line="353"
             column="13"/>
     </issue>
 
@@ -4162,7 +4195,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="311"
+            line="358"
             column="13"/>
     </issue>
 
@@ -4173,7 +4206,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="312"
+            line="359"
             column="13"/>
     </issue>
 
@@ -4184,7 +4217,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="313"
+            line="360"
             column="13"/>
     </issue>
 
@@ -4195,7 +4228,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="314"
+            line="361"
             column="13"/>
     </issue>
 
@@ -4206,7 +4239,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="315"
+            line="362"
             column="13"/>
     </issue>
 
@@ -4217,7 +4250,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="318"
+            line="365"
             column="13"/>
     </issue>
 
@@ -4228,7 +4261,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="319"
+            line="366"
             column="13"/>
     </issue>
 
@@ -4239,7 +4272,7 @@
         errorLine2="            ~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="320"
+            line="367"
             column="13"/>
     </issue>
 
@@ -4250,18 +4283,18 @@
         errorLine2="            ~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="321"
+            line="368"
             column="13"/>
     </issue>
 
     <issue
         id="MissingTranslation"
         message="&quot;something_went_wrong_audio&quot; is not translated in &quot;nn&quot; (Norwegian Nynorsk), &quot;hu&quot; (Hungarian), &quot;sk&quot; (Slovak), &quot;ca&quot; (Catalan), &quot;sv&quot; (Swedish), &quot;el&quot; (Greek), &quot;my&quot; (Burmese), &quot;vi&quot; (Vietnamese), &quot;nb&quot; (Norwegian Bokmål), &quot;ja&quot; (Japanese), &quot;tl&quot; (Tagalog), &quot;da&quot; (Danish), &quot;tr&quot; (Turkish)"
-        errorLine1="    &lt;string name=&quot;something_went_wrong_audio&quot;>Something went wrong. The audio recording may have been moved or deleted.\n\nError : (%1$d, %2$d)&lt;/string>"
+        errorLine1="    &lt;string name=&quot;something_went_wrong_audio&quot;>Something went wrong. The audio recording may have"
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="323"
+            line="370"
             column="13"/>
     </issue>
 
@@ -4272,7 +4305,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="324"
+            line="372"
             column="13"/>
     </issue>
 
@@ -4283,7 +4316,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="325"
+            line="373"
             column="13"/>
     </issue>
 
@@ -4294,7 +4327,7 @@
         errorLine2="            ~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="326"
+            line="374"
             column="13"/>
     </issue>
 
@@ -4305,18 +4338,18 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="327"
+            line="375"
             column="13"/>
     </issue>
 
     <issue
         id="MissingTranslation"
         message="&quot;start_view_hint&quot; is not translated in &quot;nn&quot; (Norwegian Nynorsk), &quot;hu&quot; (Hungarian), &quot;sk&quot; (Slovak), &quot;ca&quot; (Catalan), &quot;sv&quot; (Swedish), &quot;el&quot; (Greek), &quot;my&quot; (Burmese), &quot;vi&quot; (Vietnamese), &quot;nb&quot; (Norwegian Bokmål), &quot;ja&quot; (Japanese), &quot;tl&quot; (Tagalog), &quot;da&quot; (Danish), &quot;nl&quot; (Dutch), &quot;tr&quot; (Turkish)"
-        errorLine1="    &lt;string name=&quot;start_view_hint&quot;>Select which View/Label should be shown when the app is started.\nDefaults to the main Notes View&lt;/string>"
+        errorLine1="    &lt;string name=&quot;start_view_hint&quot;>Select which View/Label should be shown when the app is"
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="328"
+            line="376"
             column="13"/>
     </issue>
 
@@ -4327,7 +4360,7 @@
         errorLine2="            ~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="329"
+            line="378"
             column="13"/>
     </issue>
 
@@ -4338,7 +4371,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="332"
+            line="381"
             column="13"/>
     </issue>
 
@@ -4349,7 +4382,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="333"
+            line="382"
             column="13"/>
     </issue>
 
@@ -4360,7 +4393,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="334"
+            line="383"
             column="13"/>
     </issue>
 
@@ -4371,7 +4404,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="335"
+            line="384"
             column="13"/>
     </issue>
 
@@ -4382,18 +4415,18 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="337"
+            line="386"
             column="13"/>
     </issue>
 
     <issue
         id="MissingTranslation"
         message="&quot;to_record_audio&quot; is not translated in &quot;nn&quot; (Norwegian Nynorsk), &quot;hu&quot; (Hungarian), &quot;sk&quot; (Slovak), &quot;ca&quot; (Catalan), &quot;sv&quot; (Swedish), &quot;el&quot; (Greek), &quot;my&quot; (Burmese), &quot;vi&quot; (Vietnamese), &quot;nb&quot; (Norwegian Bokmål), &quot;ja&quot; (Japanese), &quot;tl&quot; (Tagalog), &quot;da&quot; (Danish), &quot;tr&quot; (Turkish)"
-        errorLine1="    &lt;string name=&quot;to_record_audio&quot;>To record audio, allow NotallyX access to your microphone. Tap Settings &amp;gt; Permissions and turn Microphone on&lt;/string>"
+        errorLine1="    &lt;string name=&quot;to_record_audio&quot;>To record audio, allow NotablyMD access to your microphone. Tap"
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="339"
+            line="388"
             column="13"/>
     </issue>
 
@@ -4404,7 +4437,7 @@
         errorLine2="             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="341"
+            line="391"
             column="14"/>
     </issue>
 
@@ -4415,7 +4448,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="345"
+            line="395"
             column="13"/>
     </issue>
 
@@ -4426,7 +4459,7 @@
         errorLine2="            ~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="346"
+            line="396"
             column="13"/>
     </issue>
 
@@ -4437,7 +4470,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="347"
+            line="397"
             column="13"/>
     </issue>
 
@@ -4448,7 +4481,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="348"
+            line="398"
             column="13"/>
     </issue>
 
@@ -4459,7 +4492,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="349"
+            line="399"
             column="13"/>
     </issue>
 
@@ -4470,18 +4503,18 @@
         errorLine2="            ~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="350"
+            line="400"
             column="13"/>
     </issue>
 
     <issue
         id="MissingTranslation"
         message="&quot;unlock_with_biometrics_not_setup&quot; is not translated in &quot;nn&quot; (Norwegian Nynorsk), &quot;hu&quot; (Hungarian), &quot;sk&quot; (Slovak), &quot;ca&quot; (Catalan), &quot;sv&quot; (Swedish), &quot;el&quot; (Greek), &quot;my&quot; (Burmese), &quot;vi&quot; (Vietnamese), &quot;nb&quot; (Norwegian Bokmål), &quot;ja&quot; (Japanese), &quot;tl&quot; (Tagalog), &quot;da&quot; (Danish), &quot;nl&quot; (Dutch), &quot;tr&quot; (Turkish)"
-        errorLine1="    &lt;string name=&quot;unlock_with_biometrics_not_setup&quot;>You have previously enabled biometric lock but Biometrics/PIN are not setup for your device anymore.\n\nIf you wish to disable biometric lock press Disable, otherwise setup Biometrics/PIN for your device&lt;/string>"
+        errorLine1="    &lt;string name=&quot;unlock_with_biometrics_not_setup&quot;>You have previously enabled biometric lock but"
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="351"
+            line="401"
             column="13"/>
     </issue>
 
@@ -4492,7 +4525,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="353"
+            line="405"
             column="13"/>
     </issue>
 
@@ -4503,7 +4536,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="354"
+            line="406"
             column="13"/>
     </issue>
 
@@ -4514,7 +4547,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="356"
+            line="408"
             column="13"/>
     </issue>
 
@@ -4525,7 +4558,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="357"
+            line="409"
             column="13"/>
     </issue>
 
@@ -4536,7 +4569,7 @@
         errorLine2="            ~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="359"
+            line="411"
             column="13"/>
     </issue>
 
@@ -4547,7 +4580,7 @@
         errorLine2="            ~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="360"
+            line="412"
             column="13"/>
     </issue>
 
@@ -4558,7 +4591,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="361"
+            line="413"
             column="13"/>
     </issue>
 
@@ -4569,7 +4602,7 @@
         errorLine2="            ~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="362"
+            line="414"
             column="13"/>
     </issue>
 
@@ -4580,7 +4613,7 @@
         errorLine2="            ~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="363"
+            line="415"
             column="13"/>
     </issue>
 
@@ -4598,12 +4631,56 @@
     <issue
         id="Typos"
         message="Repeated word &quot;fichero&quot; in message: possible typo"
-        errorLine1="    &lt;string name=&quot;json_files_help&quot;>Para importar tus notas desde ficheros JSON (fichero único o carpeta), pincha en Importar. Cada fichero fichero JSON válido se importa como nota separada, el nombre del fichero será el título de la nota.&lt;/string>"
-        errorLine2="                                                                                                                                   ^">
+        errorLine1="        carpeta), pincha en Importar. Cada fichero fichero JSON válido se importa como nota"
+        errorLine2="                                           ^">
         <location
             file="src/main/res/values-es/strings.xml"
-            line="205"
-            column="132"/>
+            line="247"
+            column="44"/>
+    </issue>
+
+    <issue
+        id="ExtraTranslation"
+        message="&quot;please_grant_notably_alarm&quot; is translated here but not found in default locale"
+        errorLine1="    &lt;string name=&quot;please_grant_notably_alarm&quot;>Otorgar permiso a NotablyMD para enviar recordatorios&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values-es/strings.xml"
+            line="301"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="ExtraTranslation"
+        message="&quot;please_grant_notably_audio&quot; is translated here but not found in default locale"
+        errorLine1="    &lt;string name=&quot;please_grant_notably_audio&quot;>Otorgar permiso de grabación de audio a"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values-es/strings.xml"
+            line="302"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="ExtraTranslation"
+        message="&quot;please_grant_notably_notification&quot; is translated here but not found in default locale"
+        errorLine1="    &lt;string name=&quot;please_grant_notably_notification&quot;>Otorgar permisos para enviar notificaciones a"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values-es/strings.xml"
+            line="304"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="ExtraTranslation"
+        message="&quot;please_grant_notably_notification_auto_backup&quot; is translated here but not found in default locale"
+        errorLine1="    &lt;string name=&quot;please_grant_notably_notification_auto_backup&quot;>Si falla una copia de seguridad"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values-es/strings.xml"
+            line="306"
+            column="13"/>
     </issue>
 
     <issue
@@ -4613,7 +4690,7 @@
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="30"
+            line="34"
             column="5"/>
     </issue>
 
@@ -4624,7 +4701,7 @@
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="79"
+            line="92"
             column="5"/>
     </issue>
 
@@ -4635,7 +4712,7 @@
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="246"
+            line="281"
             column="5"/>
     </issue>
 
@@ -4646,24 +4723,8 @@
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="257"
+            line="292"
             column="5"/>
-    </issue>
-
-    <issue
-        id="StringFormatCount"
-        message="Inconsistent number of arguments in formatting string `auto_backups_folder_hint`; found both 0 here and 1 in values/strings.xml"
-        errorLine1="    &lt;string name=&quot;auto_backups_folder_hint&quot;>Cartella in cui tutti i backup automatici verranno salvati.&lt;/string>"
-        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/main/res/values-it/strings.xml"
-            line="28"
-            column="5"/>
-        <location
-            file="src/main/res/values/strings.xml"
-            line="32"
-            column="5"
-            message="Conflicting number of arguments (1) here"/>
     </issue>
 
     <issue
@@ -4677,7 +4738,7 @@
             column="5"/>
         <location
             file="src/main/res/values/strings.xml"
-            line="32"
+            line="36"
             column="5"
             message="Conflicting number of arguments (1) here"/>
     </issue>
@@ -4693,7 +4754,7 @@
             column="5"/>
         <location
             file="src/main/res/values/strings.xml"
-            line="32"
+            line="36"
             column="5"
             message="Conflicting number of arguments (1) here"/>
     </issue>
@@ -4709,23 +4770,7 @@
             column="5"/>
         <location
             file="src/main/res/values/strings.xml"
-            line="32"
-            column="5"
-            message="Conflicting number of arguments (1) here"/>
-    </issue>
-
-    <issue
-        id="StringFormatCount"
-        message="Inconsistent number of arguments in formatting string `auto_backups_folder_hint`; found both 0 here and 1 in values/strings.xml"
-        errorLine1="    &lt;string name=&quot;auto_backups_folder_hint&quot;>Carpeta donde se guardan las copias de seguridad automáticas.&lt;/string>"
-        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/main/res/values-es/strings.xml"
-            line="30"
-            column="5"/>
-        <location
-            file="src/main/res/values/strings.xml"
-            line="32"
+            line="36"
             column="5"
             message="Conflicting number of arguments (1) here"/>
     </issue>
@@ -4741,7 +4786,7 @@
             column="5"/>
         <location
             file="src/main/res/values/strings.xml"
-            line="32"
+            line="36"
             column="5"
             message="Conflicting number of arguments (1) here"/>
     </issue>
@@ -4757,7 +4802,7 @@
             column="5"/>
         <location
             file="src/main/res/values/strings.xml"
-            line="32"
+            line="36"
             column="5"
             message="Conflicting number of arguments (1) here"/>
     </issue>
@@ -4773,7 +4818,7 @@
             column="5"/>
         <location
             file="src/main/res/values/strings.xml"
-            line="32"
+            line="36"
             column="5"
             message="Conflicting number of arguments (1) here"/>
     </issue>
@@ -4789,7 +4834,7 @@
             column="5"/>
         <location
             file="src/main/res/values/strings.xml"
-            line="32"
+            line="36"
             column="5"
             message="Conflicting number of arguments (1) here"/>
     </issue>
@@ -4805,7 +4850,39 @@
             column="5"/>
         <location
             file="src/main/res/values/strings.xml"
+            line="36"
+            column="5"
+            message="Conflicting number of arguments (1) here"/>
+    </issue>
+
+    <issue
+        id="StringFormatCount"
+        message="Inconsistent number of arguments in formatting string `auto_backups_folder_hint`; found both 0 here and 1 in values/strings.xml"
+        errorLine1="    &lt;string name=&quot;auto_backups_folder_hint&quot;>Cartella in cui tutti i backup automatici verranno"
+        errorLine2="    ^">
+        <location
+            file="src/main/res/values-it/strings.xml"
             line="32"
+            column="5"/>
+        <location
+            file="src/main/res/values/strings.xml"
+            line="36"
+            column="5"
+            message="Conflicting number of arguments (1) here"/>
+    </issue>
+
+    <issue
+        id="StringFormatCount"
+        message="Inconsistent number of arguments in formatting string `auto_backups_folder_hint`; found both 0 here and 1 in values/strings.xml"
+        errorLine1="    &lt;string name=&quot;auto_backups_folder_hint&quot;>Carpeta donde se guardan las copias de seguridad"
+        errorLine2="    ^">
+        <location
+            file="src/main/res/values-es/strings.xml"
+            line="35"
+            column="5"/>
+        <location
+            file="src/main/res/values/strings.xml"
+            line="36"
             column="5"
             message="Conflicting number of arguments (1) here"/>
     </issue>
@@ -5025,7 +5102,7 @@
         errorLine1="        notifyDataSetChanged()"
         errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="src/main/java/com/philkes/notallyx/presentation/view/note/audio/AudioAdapter.kt"
+            file="src/main/java/com/philkes/notablymd/presentation/view/note/audio/AudioAdapter.kt"
             line="19"
             column="9"/>
     </issue>
@@ -5036,7 +5113,7 @@
         errorLine1="            notifyDataSetChanged()"
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="src/main/java/com/philkes/notallyx/presentation/view/main/BaseNoteAdapter.kt"
+            file="src/main/java/com/philkes/notablymd/presentation/view/main/BaseNoteAdapter.kt"
             line="62"
             column="13"/>
     </issue>
@@ -5047,7 +5124,7 @@
         errorLine1="            notifyDataSetChanged()"
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="src/main/java/com/philkes/notallyx/presentation/view/note/listitem/adapter/CheckedListItemAdapter.kt"
+            file="src/main/java/com/philkes/notablymd/presentation/view/note/listitem/adapter/CheckedListItemAdapter.kt"
             line="45"
             column="13"/>
     </issue>
@@ -5058,7 +5135,7 @@
         errorLine1="            notifyDataSetChanged()"
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="src/main/java/com/philkes/notallyx/presentation/view/note/listitem/adapter/ListItemAdapter.kt"
+            file="src/main/java/com/philkes/notablymd/presentation/view/note/listitem/adapter/ListItemAdapter.kt"
             line="44"
             column="13"/>
     </issue>
@@ -5069,7 +5146,7 @@
         errorLine1="        adapter.notifyDataSetChanged()"
         errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="src/main/java/com/philkes/notallyx/presentation/view/note/listitem/adapter/ListItemAdapterBase.kt"
+            file="src/main/java/com/philkes/notablymd/presentation/view/note/listitem/adapter/ListItemAdapterBase.kt"
             line="67"
             column="9"/>
     </issue>
@@ -5080,7 +5157,7 @@
         errorLine1="        model.actionMode.addListener = { notesAdapter?.notifyDataSetChanged() }"
         errorLine2="                                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="src/main/java/com/philkes/notallyx/presentation/activity/main/fragment/NotallyFragment.kt"
+            file="src/main/java/com/philkes/notablymd/presentation/activity/main/fragment/NotablyMDFragment.kt"
             line="270"
             column="42"/>
     </issue>
@@ -5091,7 +5168,7 @@
         errorLine1="        notifyDataSetChanged()"
         errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="src/main/java/com/philkes/notallyx/presentation/view/note/preview/PreviewFileAdapter.kt"
+            file="src/main/java/com/philkes/notablymd/presentation/view/note/preview/PreviewFileAdapter.kt"
             line="20"
             column="9"/>
     </issue>
@@ -5102,18 +5179,18 @@
         errorLine1="        notifyDataSetChanged()"
         errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="src/main/java/com/philkes/notallyx/presentation/view/note/TextFormattingAdapter.kt"
+            file="src/main/java/com/philkes/notablymd/presentation/view/note/TextFormattingAdapter.kt"
             line="116"
             column="9"/>
     </issue>
 
     <issue
         id="StaticFieldLeak"
-        message="Do not place Android context classes in static fields (static reference to `NotallyXPreferences` which has field `context` pointing to `Context`); this is a memory leak"
-        errorLine1="        @Volatile private var instance: NotallyXPreferences? = null"
-        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        message="Do not place Android context classes in static fields (static reference to `NotablyMDPreferences` which has field `context` pointing to `Context`); this is a memory leak"
+        errorLine1="        @Volatile private var instance: NotablyMDPreferences? = null"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="src/main/java/com/philkes/notallyx/presentation/viewmodel/preference/NotallyXPreferences.kt"
+            file="src/main/java/com/philkes/notablymd/presentation/viewmodel/preference/NotablyMDPreferences.kt"
             line="275"
             column="9"/>
     </issue>
@@ -6474,11 +6551,11 @@
     <issue
         id="UnusedResources"
         message="The resource `R.string.auto_backup_on_save_hint` appears to be unused"
-        errorLine1="    &lt;string name=&quot;auto_backup_on_save_hint&quot;>By enabling this, a backup (\&quot;NotallyX_AutoBackup.zip\&quot;) is automatically created in the configured \&quot;Backups Folder\&quot; whenever a note is exited.\nBe aware this might affect performance&lt;/string>"
+        errorLine1="    &lt;string name=&quot;auto_backup_on_save_hint&quot;>By enabling this, a backup (\&quot;NotablyMD_AutoBackup.zip\&quot;)"
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="29"
+            line="31"
             column="13"/>
     </issue>
 
@@ -6489,7 +6566,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="48"
+            line="58"
             column="13"/>
     </issue>
 
@@ -6500,7 +6577,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="98"
+            line="114"
             column="13"/>
     </issue>
 
@@ -6511,7 +6588,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="129"
+            line="149"
             column="13"/>
     </issue>
 
@@ -6522,7 +6599,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="132"
+            line="152"
             column="13"/>
     </issue>
 
@@ -6533,7 +6610,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="175"
+            line="200"
             column="13"/>
     </issue>
 
@@ -6544,7 +6621,40 @@
         errorLine2="            ~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="177"
+            line="202"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.string.insert_an_sd_card_audio` appears to be unused"
+        errorLine1="    &lt;string name=&quot;insert_an_sd_card_audio&quot;>Insert an SD card to record audio&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="235"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.string.insert_an_sd_card_files` appears to be unused"
+        errorLine1="    &lt;string name=&quot;insert_an_sd_card_files&quot;>Insert an SD card to add files&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="236"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.string.insert_an_sd_card_images` appears to be unused"
+        errorLine1="    &lt;string name=&quot;insert_an_sd_card_images&quot;>Insert an SD card to add images&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="237"
             column="13"/>
     </issue>
 
@@ -6555,7 +6665,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="212"
+            line="244"
             column="13"/>
     </issue>
 
@@ -6566,7 +6676,40 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="218"
+            line="252"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.string.please_grant_notably_alarm` appears to be unused"
+        errorLine1="    &lt;string name=&quot;please_grant_notably_alarm&quot;>Otorgar permiso a NotablyMD para enviar recordatorios&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values-es/strings.xml"
+            line="301"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.string.please_grant_notably_audio` appears to be unused"
+        errorLine1="    &lt;string name=&quot;please_grant_notably_audio&quot;>Otorgar permiso de grabación de audio a"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values-es/strings.xml"
+            line="302"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.string.please_grant_notably_notification` appears to be unused"
+        errorLine1="    &lt;string name=&quot;please_grant_notably_notification&quot;>Otorgar permisos para enviar notificaciones a"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values-es/strings.xml"
+            line="304"
             column="13"/>
     </issue>
 
@@ -6577,7 +6720,18 @@
         errorLine2="            ~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="269"
+            line="306"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.string.please_grant_notably_notification_auto_backup` appears to be unused"
+        errorLine1="    &lt;string name=&quot;please_grant_notably_notification_auto_backup&quot;>Si falla una copia de seguridad"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values-es/strings.xml"
+            line="306"
             column="13"/>
     </issue>
 
@@ -6588,7 +6742,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="282"
+            line="325"
             column="13"/>
     </issue>
 
@@ -6599,7 +6753,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="284"
+            line="327"
             column="13"/>
     </issue>
 
@@ -6610,18 +6764,18 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="294"
+            line="341"
             column="13"/>
     </issue>
 
     <issue
         id="UnusedResources"
         message="The resource `R.string.saved_to_notally` appears to be unused"
-        errorLine1="    &lt;string name=&quot;saved_to_notally&quot;>Saved to NotallyX&lt;/string>"
+        errorLine1="    &lt;string name=&quot;saved_to_notally&quot;>Saved to NotablyMD&lt;/string>"
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="309"
+            line="356"
             column="13"/>
     </issue>
 
@@ -6632,7 +6786,7 @@
         errorLine2="             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="341"
+            line="391"
             column="14"/>
     </issue>
 
@@ -6643,7 +6797,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="354"
+            line="406"
             column="13"/>
     </issue>
 
@@ -6654,7 +6808,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="356"
+            line="408"
             column="13"/>
     </issue>
 
@@ -6665,7 +6819,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="358"
+            line="410"
             column="13"/>
     </issue>
 
@@ -6851,7 +7005,7 @@
         errorLine1="        binding.DragHandle.setOnTouchListener { _, event ->"
         errorLine2="        ^">
         <location
-            file="src/main/java/com/philkes/notallyx/presentation/view/note/listitem/adapter/ListItemVH.kt"
+            file="src/main/java/com/philkes/notablymd/presentation/view/note/listitem/adapter/ListItemVH.kt"
             line="67"
             column="9"/>
     </issue>
@@ -6862,7 +7016,7 @@
         errorLine1="        binding.DragHandle.setOnTouchListener { _, event ->"
         errorLine2="                                              ^">
         <location
-            file="src/main/java/com/philkes/notallyx/presentation/view/note/listitem/adapter/ListItemVH.kt"
+            file="src/main/java/com/philkes/notablymd/presentation/view/note/listitem/adapter/ListItemVH.kt"
             line="67"
             column="47"/>
     </issue>
@@ -7005,7 +7159,7 @@
         errorLine1="                text = (totalItems - displayedItems).toString()"
         errorLine2="                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="src/main/java/com/philkes/notallyx/presentation/view/main/BaseNoteVH.kt"
+            file="src/main/java/com/philkes/notablymd/presentation/view/main/BaseNoteVH.kt"
             line="245"
             column="24"/>
     </issue>
@@ -7016,7 +7170,7 @@
         errorLine1="                        text = images.size.toString()"
         errorLine2="                               ~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="src/main/java/com/philkes/notallyx/presentation/view/main/BaseNoteVH.kt"
+            file="src/main/java/com/philkes/notablymd/presentation/view/main/BaseNoteVH.kt"
             line="334"
             column="32"/>
     </issue>
@@ -7027,8 +7181,8 @@
         errorLine1="                        &quot;${positionStart + 1}/${imageAdapter.itemCount}&quot;"
         errorLine2="                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="src/main/java/com/philkes/notallyx/presentation/activity/note/EditActivity.kt"
-            line="1044"
+            file="src/main/java/com/philkes/notablymd/presentation/activity/note/EditActivity.kt"
+            line="1038"
             column="25"/>
     </issue>
 
@@ -7038,8 +7192,8 @@
         errorLine1="                        &quot;${positionStart + 1}/${imageAdapter.itemCount}&quot;"
         errorLine2="                           ~~~~~~~~~~~~~~~~~">
         <location
-            file="src/main/java/com/philkes/notallyx/presentation/activity/note/EditActivity.kt"
-            line="1044"
+            file="src/main/java/com/philkes/notablymd/presentation/activity/note/EditActivity.kt"
+            line="1038"
             column="28"/>
     </issue>
 
@@ -7049,8 +7203,8 @@
         errorLine1="                                    &quot;${position + 1}/${imageAdapter.itemCount}&quot;"
         errorLine2="                                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="src/main/java/com/philkes/notallyx/presentation/activity/note/EditActivity.kt"
-            line="1064"
+            file="src/main/java/com/philkes/notablymd/presentation/activity/note/EditActivity.kt"
+            line="1058"
             column="37"/>
     </issue>
 
@@ -7060,8 +7214,8 @@
         errorLine1="                                    &quot;${position + 1}/${imageAdapter.itemCount}&quot;"
         errorLine2="                                       ~~~~~~~~~~~~">
         <location
-            file="src/main/java/com/philkes/notallyx/presentation/activity/note/EditActivity.kt"
-            line="1064"
+            file="src/main/java/com/philkes/notablymd/presentation/activity/note/EditActivity.kt"
+            line="1058"
             column="40"/>
     </issue>
 
@@ -7071,7 +7225,7 @@
         errorLine1="            Reminders.text = value.reminders.size.toString()"
         errorLine2="                             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="src/main/java/com/philkes/notallyx/presentation/view/main/reminder/NoteReminderVH.kt"
+            file="src/main/java/com/philkes/notablymd/presentation/view/main/reminder/NoteReminderVH.kt"
             line="25"
             column="30"/>
     </issue>
@@ -7082,7 +7236,7 @@
         errorLine1="                    Value.setText(it.value.toString())"
         errorLine2="                                  ~~~~~~~~~~~~~~~~~~~">
         <location
-            file="src/main/java/com/philkes/notallyx/presentation/activity/note/reminders/RemindersActivity.kt"
+            file="src/main/java/com/philkes/notablymd/presentation/activity/note/reminders/RemindersActivity.kt"
             line="307"
             column="35"/>
     </issue>
@@ -7093,7 +7247,7 @@
         errorLine1="                        &quot;${requireContext().getString(R.string.auto_backup_last)}: ${Date(time).toText()}&quot;"
         errorLine2="                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="src/main/java/com/philkes/notallyx/presentation/activity/main/fragment/settings/SettingsFragment.kt"
+            file="src/main/java/com/philkes/notablymd/presentation/activity/main/fragment/settings/SettingsFragment.kt"
             line="583"
             column="25"/>
     </issue>
@@ -7104,7 +7258,7 @@
         errorLine1="                VersionText.text = &quot;v$version&quot;"
         errorLine2="                                   ~~~~~~~~~~~">
         <location
-            file="src/main/java/com/philkes/notallyx/presentation/activity/main/fragment/settings/SettingsFragment.kt"
+            file="src/main/java/com/philkes/notablymd/presentation/activity/main/fragment/settings/SettingsFragment.kt"
             line="837"
             column="36"/>
     </issue>
@@ -7115,7 +7269,7 @@
         errorLine1="            &quot;${prefixResId?.let { getString(it) } ?: &quot;&quot;} ${formatTimestamp(timestamp, dateFormat)}&quot;"
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="src/main/java/com/philkes/notallyx/presentation/UiExtensions.kt"
+            file="src/main/java/com/philkes/notablymd/presentation/UiExtensions.kt"
             line="284"
             column="13"/>
     </issue>
@@ -7126,7 +7280,7 @@
         errorLine1="            &quot;${context.getString(R.string.count, progress.current, progress.total)} $stageStr&quot;"
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="src/main/java/com/philkes/notallyx/presentation/UiExtensions.kt"
+            file="src/main/java/com/philkes/notablymd/presentation/UiExtensions.kt"
             line="430"
             column="13"/>
     </issue>

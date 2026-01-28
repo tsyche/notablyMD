@@ -1,4 +1,4 @@
-# NotallyX Development Checklist
+# NotablyMD Development Checklist
 
 ## Prerequisites
 
@@ -13,7 +13,7 @@
 ```bash
 # Clone repository (if not already done)
 git clone <repository-url>
-cd NotallyX
+cd NotablyMD
 
 # Verify Java version
 java -version
@@ -93,7 +93,7 @@ adb devices
 ./gradlew test
 
 # Run specific test class
-./gradlew test --tests "com.philkes.notallyx.data.imports.markdown.MarkdownUtilsTest"
+./gradlew test --tests "com.philkes.notablymd.data.imports.markdown.MarkdownUtilsTest"
 
 # Run tests with coverage report
 ./gradlew testDebugUnitTest jacocoTestReport
@@ -114,7 +114,7 @@ adb devices
 ./gradlew connectedAndroidTest
 
 # Run specific connected test
-./gradlew connectedDebugAndroidTest --tests "com.philkes.notallyx.ExampleTest"
+./gradlew connectedDebugAndroidTest --tests "com.philkes.notablymd.ExampleTest"
 
 # Combined: Run integration tests for markdown components
 ./gradlew connectedAndroidTest --tests "*markdown*"
@@ -152,22 +152,22 @@ adb devices
 #### Launch Application
 ```bash
 # Launch main activity
-adb shell am start -n com.philkes.notallyx.debug/com.philkes.notallyx.presentation.activity.main.MainActivity
+adb shell am start -n com.philkes.notablymd.debug/com.philkes.notablymd.presentation.activity.main.MainActivity
 
 # Alternative: Launch using package name
-adb shell monkey -p com.philkes.notallyx.debug -c android.intent.category.LAUNCHER 1
+adb shell monkey -p com.philkes.notablymd.debug -c android.intent.category.LAUNCHER 1
 ```
 
 #### Verify Installation
 ```bash
 # Check installed packages
-adb shell pm list packages | grep notallyx
+adb shell pm list packages | grep notablymd
 
 # Check app version
-adb shell dumpsys package com.philkes.notallyx.debug | grep version
+adb shell dumpsys package com.philkes.notablymd.debug | grep version
 
 # Combined: Install and launch
-./gradlew installDebug && adb shell am start -n com.philkes.notallyx.debug/com.philkes.notallyx.presentation.activity.main.MainActivity
+./gradlew installDebug && adb shell am start -n com.philkes.notablymd.debug/com.philkes.notablymd.presentation.activity.main.MainActivity
 ```
 
 ---
@@ -205,7 +205,7 @@ adb shell dumpsys package com.philkes.notallyx.debug | grep version
 ./gradlew connectedAndroidTest
 
 # Run specific connected test
-./gradlew connectedDebugAndroidTest --tests "com.philkes.notallyx.integration.*"
+./gradlew connectedDebugAndroidTest --tests "com.philkes.notablymd.integration.*"
 
 # Run instrumented tests for specific components
 ./gradlew connectedDebugAndroidTest --tests "*markdown*"
@@ -220,9 +220,9 @@ adb shell dumpsys package com.philkes.notallyx.debug | grep version
 ./gradlew test --tests "*PerformanceTest"
 
 # Combined: Build and profile
-./gradlew assembleDebug && adb shell am start -n com.philkes.notallyx.debug/.presentation.activity.main.MainActivity
+./gradlew assembleDebug && adb shell am start -n com.philkes.notablymd.debug/.presentation.activity.main.MainActivity
 
-# Monitor with: adb shell dumpsys meminfo com.philkes.notallyx.debug
+# Monitor with: adb shell dumpsys meminfo com.philkes.notablymd.debug
 ```
 
 ---
@@ -253,7 +253,7 @@ adb shell dumpsys package com.philkes.notallyx.debug | grep version
 ./gradlew installRelease
 
 # Release build features:
-# - Application ID: com.philkes.notallyx
+# - Application ID: com.philkes.notablymd
 # - Debuggable: false
 # - Minify: true (ProGuard/R8)
 # - Signing: release keystore (configure in app/build.gradle.kts)
@@ -277,7 +277,7 @@ adb devices
 adb kill-server && adb start-server
 
 # Check emulator logs
-adb logcat | grep -i notallyx
+adb logcat | grep -i notablymd
 ```
 
 #### Build Issues
@@ -318,22 +318,22 @@ rm -rf .gradle
 ./gradlew ktfmtCheck
 
 # Fix specific files
-./gradlew ktfmtFormat --files="app/src/main/java/com/philkes/notallyx/data/imports/markdown/MarkdownUtils.kt"
+./gradlew ktfmtFormat --files="app/src/main/java/com/philkes/notablymd/data/imports/markdown/MarkdownUtils.kt"
 ```
 
 ### Memory and Performance
 ```bash
 # Monitor app memory usage
-adb shell dumpsys meminfo com.philkes.notallyx.debug
+adb shell dumpsys meminfo com.philkes.notablymd.debug
 
 # Monitor CPU usage
-adb shell top | grep notallyx
+adb shell top | grep notablymd
 
 # Check app storage usage
-adb shell dumpsys diskstats | grep notallyx
+adb shell dumpsys diskstats | grep notablymd
 
 # Profile app startup time
-adb shell am start -W -n com.philkes.notallyx.debug/.presentation.activity.main.MainActivity
+adb shell am start -W -n com.philkes.notablymd.debug/.presentation.activity.main.MainActivity
 ```
 
 ---
@@ -423,7 +423,7 @@ adb shell mkdir -p /storage/emulated/0/Documents/NotablyMDTest
 ./gradlew clean ktfmtFormat test connectedAndroidTest lint check assembleDebug
 
 # Combined: Install and verify
-./gradlew installDebug && adb shell am start -n com.philkes.notallyx.debug/com.philkes.notallyx.presentation.activity.main.MainActivity
+./gradlew installDebug && adb shell am start -n com.philkes.notablymd.debug/com.philkes.notablymd.presentation.activity.main.MainActivity
 
 # Combined: Code quality and tests
 ./gradlew lint lintFix ktfmtFormat test connectedAndroidTest
@@ -472,7 +472,7 @@ echo "📦 Building and installing..."
 
 # Launch app
 echo "🚀 Launching application..."
-adb shell am start -n com.philkes.notallyx.debug/com.philkes.notallyx.presentation.activity.main.MainActivity
+adb shell am start -n com.philkes.notablymd.debug/com.philkes.notablymd.presentation.activity.main.MainActivity
 
 echo "✅ Full checklist completed successfully!"
 
@@ -493,13 +493,13 @@ emulator -avd Pixel_7_API_36 -no-snapshot-load &
 ./gradlew ktfmtFormat clean test connectedAndroidTest assembleDebug installDebug
 
 # Launch app
-adb shell am start -n com.philkes.notallyx.debug/com.philkes.notallyx.presentation.activity.main.MainActivity
+adb shell am start -n com.philkes.notablymd.debug/com.philkes.notablymd.presentation.activity.main.MainActivity
 
 # Combined: Run markdown tests specifically
 ./gradlew test --tests "*markdown*" && ./gradlew connectedAndroidTest --tests "*markdown*"
 
 # Combined: Check everything (full pipeline)
-./gradlew clean ktfmtFormat test connectedAndroidTest lint check assembleDebug installDebug && adb shell am start -n com.philkes.notallyx.debug/com.philkes.notallyx.presentation.activity.main.MainActivity
+./gradlew clean ktfmtFormat test connectedAndroidTest lint check assembleDebug installDebug && adb shell am start -n com.philkes.notablymd.debug/com.philkes.notablymd.presentation.activity.main.MainActivity
 ```
 
 ### Development Environment Reset
@@ -523,8 +523,8 @@ emulator -avd Pixel_7_API_36 -wipe-data &
 - **Build Time**: First build may take 2-3 minutes, subsequent builds are faster
 - **Memory**: Emulator requires at least 4GB RAM, 8GB recommended for smooth development
 
-### NotallyX Specific Notes
-- **Package**: `com.philkes.notallyx`
+### NotablyMD Specific Notes
+- **Package**: `com.philkes.notablymd`
 - **CommonMark**: Version 0.27.0 with GFM extensions already integrated
 - **Security**: SQLCipher encryption framework available
 - **Import/Export**: Support for Evernote, Google Keep, JSON, Plain Text

@@ -9,8 +9,9 @@
     <string name="adding_images">Adding images</string>
     <string name="all">All</string>
     <string name="always_show_search_bar">Always show search bar expanded</string>
-    <string name="always_show_search_bar_hint">By enabling this, the search bar will always be shown in the layout instead of using a search icon in the top bar</string>
-    <string name="app_name" translatable="false">NotallyX</string>
+    <string name="always_show_search_bar_hint">By enabling this, the search bar will always be shown
+        in the layout instead of using a search icon in the top bar</string>
+    <string name="app_name" translatable="false">NotablyMD</string>
     <string name="appearance">Appearance</string>
     <string name="archive">Archive</string>
     <string name="archived">Archived</string>
@@ -22,35 +23,46 @@
     <string name="attach_file">Attach file</string>
     <string name="audio_recordings">Audio Recordings</string>
     <string name="auto_backup">Auto Backups</string>
-    <string name="auto_backup_error_message">An error occurred during auto backup:\n\'%1$s\'\nPlease check your settings or report a bug</string>
-    <string name="auto_backup_failed">NotallyX Auto Backup failed</string>
+    <string name="auto_backup_error_message">An error occurred during auto backup:\n\'%1$s\'\nPlease
+        check your settings or report a bug</string>
+    <string name="auto_backup_failed">NotablyMD Auto Backup failed</string>
     <string name="auto_backup_last">Last Backup</string>
     <string name="auto_backup_on_save">Backup on exit Note automatically</string>
-    <string name="auto_backup_on_save_hint">By enabling this, a backup (\"NotallyX_AutoBackup.zip\") is automatically created in the configured \"Backups Folder\" whenever a note is exited.\nBe aware this might affect performance</string>
+    <string name="auto_backup_on_save_hint">By enabling this, a backup (\"NotablyMD_AutoBackup.zip\")
+        is automatically created in the configured \"Backups Folder\" whenever a note is exited.\nBe
+        aware this might affect performance</string>
     <string name="auto_backup_skipped_files">Skipped %1$d missing attached files/images</string>
     <string name="auto_backups_folder">Backups Folder</string>
-    <string name="auto_backups_folder_hint">Folder in which all auto backups will be stored in.\nIf you want to use Cloud-Storage/WebDAV for your backups, please read the docs (click \"%1$s\")</string>
-    <string name="auto_backups_folder_rechoose">You need to re-choose your Backups Folder so that NotallyX has permission to write to it.\nYou can also press cancel to skip importing Backups Folder value</string>
+    <string name="auto_backups_folder_hint">Folder in which all auto backups will be stored in.\nIf
+        you want to use Cloud-Storage/WebDAV for your backups, please read the docs (click \"%1$s\")</string>
+    <string name="auto_backups_folder_rechoose">You need to re-choose your Backups Folder so that
+        NotablyMD has permission to write to it.\nYou can also press cancel to skip importing Backups
+        Folder value</string>
     <string name="auto_backups_folder_set">Set up a Backups Folder above first</string>
     <string name="auto_save_after_idle_time">Auto save note after specified idle time</string>
     <string name="auto_sort_by_checked">Sort checked items to the end</string>
     <string name="back">Back</string>
     <string name="backup">Backup</string>
     <string name="backup_password">Backup Password</string>
-    <string name="backup_password_hint">By setting this, all future backup ZIPs will be encrypted and password-protected</string>
+    <string name="backup_password_hint">By setting this, all future backup ZIPs will be encrypted
+        and password-protected</string>
     <string name="backup_period_days">Auto backup period in days</string>
     <string name="backup_periodic">Periodic Backups</string>
-    <string name="backup_periodic_hint">By enabling this, backups are automatically created in the configured Backups Folder.\nThis may not work if you have power saving mode enabled</string>
+    <string name="backup_periodic_hint">By enabling this, backups are automatically created in the
+        configured Backups Folder.\nThis may not work if you have power saving mode enabled</string>
     <string name="behaviour">Behaviour</string>
-    <string name="biometric_backup_advice">It is advised to export a full backup of all notes before dis-/enabling biometric lock, in case the encryption via biometric lock fails</string>
+    <string name="biometric_backup_advice">It is advised to export a full backup of all notes before
+        dis-/enabling biometric lock, in case the encryption via biometric lock fails</string>
     <string name="biometric_lock">Lock app with device biometric or PIN</string>
     <string name="biometrics_disable_success">Biometric/PIN lock has been disabled</string>
     <string name="biometrics_failure">Failed to authenticate via Biometric/PIN</string>
     <string name="biometrics_no_support">No biometric features available on this device</string>
     <string name="biometrics_not_setup">Biometrics/PIN are not setup for your device yet</string>
     <string name="biometrics_setup_failure">Failed to setup Biometric/PIN lock</string>
-    <string name="biometrics_setup_failure_decrypt">Decryption of the database failed.\nPlease use \'%1$s\' to report the error</string>
-    <string name="biometrics_setup_failure_encrypt">Encryption of the database failed.\nPlease use \'%1$s\' to report the error</string>
+    <string name="biometrics_setup_failure_decrypt">Decryption of the database failed.\nPlease use
+        \'%1$s\' to report the error</string>
+    <string name="biometrics_setup_failure_encrypt">Encryption of the database failed.\nPlease use
+        \'%1$s\' to report the error</string>
     <string name="biometrics_setup_success">Biometric/PIN lock has been enabled</string>
     <string name="bold">Bold</string>
     <string name="calculating">Calculating…</string>
@@ -69,7 +81,8 @@
     <string name="cant_load_image">Can’t load image. It may have been moved or deleted</string>
     <string name="cant_open_link">Can’t open link</string>
     <string name="change_color">Change Color</string>
-    <string name="change_color_message">Pick a color or create a new one.\nYou can also edit a Color by long pressing it.</string>
+    <string name="change_color_message">Pick a color or create a new one.\nYou can also edit a Color
+        by long pressing it.</string>
     <string name="change_note">Change Note</string>
     <string name="check_all_items">Check all items</string>
     <string name="choose_another_folder">Choose another folder</string>
@@ -92,8 +105,11 @@
     <string name="copied_link">Copied Link to Clipboard</string>
     <string name="copy">Copy</string>
     <string name="count" translatable="false">%1$d / %2$d</string>
-    <string name="crash_export_backup_failed">Unfortunately, exporting the backup failed.\nPlease use the \'%1$s\' button to report the crash</string>
-    <string name="crash_export_backup_message">You can try to create a backup of your notes by clicking \'%1$s\'.\nThis might fail if the crash lead to broken/corrupted data. In that case, please use the \'%2$s\' button to report the crash</string>
+    <string name="crash_export_backup_failed">Unfortunately, exporting the backup failed.\nPlease
+        use the \'%1$s\' button to report the crash</string>
+    <string name="crash_export_backup_message">You can try to create a backup of your notes by
+        clicking \'%1$s\'.\nThis might fail if the crash lead to broken/corrupted data. In that
+        case, please use the \'%2$s\' button to report the crash</string>
     <string name="crash_message">An unexpected error occurred.\nSorry for the inconvenience.</string>
     <string name="create_github_issue">Create Github Issue</string>
     <string name="creation_date">Created</string>
@@ -101,7 +117,10 @@
     <string name="daily">Daily</string>
     <string name="dark">Dark</string>
     <string name="data_in_public">Store data in public folder</string>
-    <string name="data_in_public_message">By enabling this, the app’s internal database and attached files will be moved into the app’s public folder (Android/media/com.philkes.notallyx). In combination with file synchronization apps this can be used to synchronize NotallyX data between multiple devices.</string>
+    <string name="data_in_public_message">By enabling this, the app’s internal database and attached
+        files will be moved into the app’s public folder (Android/media/com.philkes.notablymd). In
+        combination with file synchronization apps this can be used to synchronize NotablyMD data
+        between multiple devices.</string>
     <string name="date">Date</string>
     <string name="date_format">Date format</string>
     <string name="date_format_apply_in_note_view">Also apply in Note View</string>
@@ -112,7 +131,8 @@
     <string name="delete_all_notes">Delete all notes\?</string>
     <string name="delete_audio_recording_forever">Delete audio recording forever\?</string>
     <string name="delete_checked_items">Delete checked items</string>
-    <string name="delete_color_message">What color should the notes have that currently use this color\?</string>
+    <string name="delete_color_message">What color should the notes have that currently use this
+        color\?</string>
     <string name="delete_file">Delete file \'%1$s\'\?</string>
     <string name="delete_forever">Delete forever</string>
     <string name="delete_image_forever">Delete image forever\?</string>
@@ -160,13 +180,18 @@
     <string name="error_while_renaming_file">Error while renaming file</string>
     <string name="error_while_renaming_image">Error while renaming image</string>
     <string name="evernote">Evernote</string>
-    <string name="evernote_help">In order to import your Notes from Evernote you must export your Evernote Notebook as ENEX. Click Help to get more information.\n\nIf you already have a ENEX file, click Import and choose it.</string>
+    <string name="evernote_help">In order to import your Notes from Evernote you must export your
+        Evernote Notebook as ENEX. Click Help to get more information.\n\nIf you already have a ENEX
+        file, click Import and choose it.</string>
     <string name="every">Every</string>
     <string name="export">Export</string>
     <string name="export_backup">Export backup</string>
     <string name="export_settings">Export Settings</string>
-    <string name="export_settings_failure">Failed to export settings, did you choose an invalid path\?</string>
-    <string name="export_settings_message">All Settings will be exported to a JSON file, which can be used to re-import stored settings.\n\nBe aware, that this does not include encrypted settings like the auto-backup password or the biometric encryption key</string>
+    <string name="export_settings_failure">Failed to export settings, did you choose an invalid
+        path\?</string>
+    <string name="export_settings_message">All Settings will be exported to a JSON file, which can
+        be used to re-import stored settings.\n\nBe aware, that this does not include encrypted
+        settings like the auto-backup password or the biometric encryption key</string>
     <string name="export_settings_success">Successfully exported settings</string>
     <plurals name="exported_notes">
         <item quantity="one">Exported %1$s Note</item>
@@ -178,20 +203,27 @@
     <string name="folder">Folder</string>
     <string name="follow_system">Follow system</string>
     <string name="google_keep">Google Keep</string>
-    <string name="google_keep_help">In order to import your Notes from Google Keep you must download your Google Takeout ZIP file. Only select the \"Keep\" data. Click Help to get more information.\n\nIf you already have a Takeout ZIP file, click Import and choose the ZIP file.</string>
+    <string name="google_keep_help">In order to import your Notes from Google Keep you must download
+        your Google Takeout ZIP file. Only select the \"Keep\" data. Click Help to get more
+        information.\n\nIf you already have a Takeout ZIP file, click Import and choose the ZIP
+        file.</string>
     <string name="grid">Grid</string>
     <string name="help">Help</string>
     <string name="hours">Hours</string>
     <string name="image_format_not_supported">Image format not supported</string>
-    <string name="images_hidden_in_overview">By enabling this, the notes’ images will be hidden in the overview</string>
+    <string name="images_hidden_in_overview">By enabling this, the notes’ images will be hidden in
+        the overview</string>
     <string name="images_hidden_in_overview_title">Hide Images in Overview</string>
     <string name="import_action">Import</string>
     <string name="import_backup">Import backup</string>
-    <string name="import_backup_password_hint">If your backup is not password-protected simply press Import, otherwise enter the correct password.</string>
+    <string name="import_backup_password_hint">If your backup is not password-protected simply press
+        Import, otherwise enter the correct password.</string>
     <string name="import_other">Import Notes from other App</string>
     <string name="import_settings">Import Settings</string>
-    <string name="import_settings_failure">Failed to import settings, did you choose the correct file\?</string>
-    <string name="import_settings_message">In order to import settings, please choose a valid NotallyX settings JSON file</string>
+    <string name="import_settings_failure">Failed to import settings, did you choose the correct
+        file\?</string>
+    <string name="import_settings_message">In order to import settings, please choose a valid
+        NotablyMD settings JSON file</string>
     <string name="import_settings_success">Successfully imported settings</string>
     <string name="imported_files">Files imported</string>
     <string name="imported_notes">Notes imported</string>
@@ -213,11 +245,14 @@
     <string name="italic">Italic</string>
     <string name="item">Item</string>
     <string name="json_files">JSON Files</string>
-    <string name="json_files_help">In order to import your Notes from JSON files (single file or folder), click Import. Every valid JSON file is imported as a separate note, the file’s name becomes the note’s title.</string>
+    <string name="json_files_help">In order to import your Notes from JSON files (single file or
+        folder), click Import. Every valid JSON file is imported as a separate note, the file’s name
+        becomes the note’s title.</string>
     <string name="label_exists">Label exists</string>
     <string name="label_visibility">Hide/Show the label in the navigation panel</string>
     <string name="labels">Labels</string>
-    <string name="labels_hidden_in_overview">By enabling this, the notes’ labels will be hidden in the overview</string>
+    <string name="labels_hidden_in_overview">By enabling this, the notes’ labels will be hidden in
+        the overview</string>
     <string name="labels_hidden_in_overview_title">Hide Labels in Overview</string>
     <string name="large">Large</string>
     <string name="libraries">Libraries</string>
@@ -255,12 +290,14 @@
     <string name="not_exists">\'%1$s\' does not exist</string>
     <string name="note">Note</string>
     <string name="note_text_too_long_truncated">Text too long, truncated to %1$d characters</string>
-    <string name="note_too_big_truncating">Note is too big to save, it was truncated to %1$s characters (was: %2$s)</string>
+    <string name="note_too_big_truncating">Note is too big to save, it was truncated to %1$s
+        characters (was: %2$s)</string>
     <string name="notes">Notes</string>
     <string name="notes_sorted_by">Notes sorted by</string>
     <plurals name="notes_too_big_truncating">
         <item quantity="one">%1$s Note is too big to save, it was truncated to %2$s characters</item>
-        <item quantity="other">%1$s Notes are too big to save, they were truncated to %2$s characters</item>
+        <item quantity="other">%1$s Notes are too big to save, they were truncated to %2$s
+            characters</item>
     </plurals>
     <string name="open_link">Open link</string>
     <string name="open_note">Open Note</string>
@@ -270,12 +307,18 @@
     <string name="pin">Pin</string>
     <string name="pinned">Pinned</string>
     <string name="plain_text_files">Markdown/Plain Text Files</string>
-    <string name="plain_text_files_help">In order to import your Notes from markdown/plain text files (single file or folder), click Import. Every file is imported as a separate note, the file’s name becomes the note’s title. If the text contents start with list syntax (e.g. Markdown ’- [x]’, NotallyX syntax ’[✓]’, or ’*’, ’-’) it will be converted to a List note.</string>
+    <string name="plain_text_files_help">In order to import your Notes from markdown/plain text
+        files (single file or folder), click Import. Every file is imported as a separate note, the
+        file’s name becomes the note’s title. If the text contents start with list syntax (e.g.
+        Markdown ’- [x]’, NotablyMD syntax ’[✓]’, or ’*’, ’-’) it will be converted to a List note.</string>
     <string name="play">Play</string>
-    <string name="please_grant_notally_alarm">Please grant NotallyX to send reminders</string>
-    <string name="please_grant_notally_audio">Please grant NotallyX the permission to record audio. Recordings never leave your device</string>
-    <string name="please_grant_notally_notification">Please grant NotallyX the permission to send notifications</string>
-    <string name="please_grant_notally_notification_auto_backup">If an auto backup fails you can receive a notification, if you grant NotallyX permission to send notifications</string>
+    <string name="please_grant_notally_alarm">Please grant NotablyMD to send reminders</string>
+    <string name="please_grant_notally_audio">Please grant NotablyMD the permission to record audio.
+        Recordings never leave your device</string>
+    <string name="please_grant_notally_notification">Please grant NotablyMD the permission to send
+        notifications</string>
+    <string name="please_grant_notally_notification_auto_backup">If an auto backup fails you can
+        receive a notification, if you grant NotablyMD permission to send notifications</string>
     <string name="previous">Previous</string>
     <string name="rate">Rate this app</string>
     <string name="read_only">Read Only</string>
@@ -290,7 +333,11 @@
     <string name="repetition_custom">Custom Repetition</string>
     <string name="repetition_value_hint">Value</string>
     <string name="report_bug">Report Bug</string>
-    <string name="report_bug_stacktrace_too_long">The crash logs are too long to automatically pre-fill the Github issue with it, therefore the crash logs have been copied to your clipboard.\nWhen you click \'%1$s\', your browser will open to create a Github issue for your crash.It is important that you paste the automatically copied crash logs into the Github issue\'s \'(Optional) Relevant log output\' field.</string>
+    <string name="report_bug_stacktrace_too_long">The crash logs are too long to automatically
+        pre-fill the Github issue with it, therefore the crash logs have been copied to your
+        clipboard.\nWhen you click \'%1$s\', your browser will open to create a Github issue for
+        your crash.It is important that you paste the automatically copied crash logs into the
+        Github issue\'s \'(Optional) Relevant log output\' field.</string>
     <string name="report_crash">Report bug with crash logs</string>
     <string name="reset_settings">Reset Settings</string>
     <string name="reset_settings_message">All Settings will be reset to their default value</string>
@@ -306,7 +353,7 @@
     <string name="save_recording">Save recording\?</string>
     <string name="save_to_device">Save to device</string>
     <string name="saved_to_device">Saved to device</string>
-    <string name="saved_to_notally">Saved to NotallyX</string>
+    <string name="saved_to_notally">Saved to NotablyMD</string>
     <string name="search">Search</string>
     <string name="security">Security</string>
     <string name="select_all">Select All</string>
@@ -320,12 +367,14 @@
     <string name="skip">Skip</string>
     <string name="small">Small</string>
     <string name="something_went_wrong">Something went wrong. Please try again.</string>
-    <string name="something_went_wrong_audio">Something went wrong. The audio recording may have been moved or deleted.\n\nError : (%1$d, %2$d)</string>
+    <string name="something_went_wrong_audio">Something went wrong. The audio recording may have
+        been moved or deleted.\n\nError : (%1$d, %2$d)</string>
     <string name="sort_direction">Sort Direction</string>
     <string name="source_code">Source Code</string>
     <string name="start">Start</string>
     <string name="start_view">Start View</string>
-    <string name="start_view_hint">Select which View/Label should be shown when the app is started.\nDefaults to the main Notes View</string>
+    <string name="start_view_hint">Select which View/Label should be shown when the app is
+        started.\nDefaults to the main Notes View</string>
     <string name="stop">Stop</string>
     <string name="strikethrough">Strikethrough</string>
     <string name="take_note">Take note</string>
@@ -336,7 +385,8 @@
     <string name="theme">Theme</string>
     <string name="theme_use_dynamic_colors">Use system\'s wallpaper colors</string>
     <string name="title">Title</string>
-    <string name="to_record_audio">To record audio, allow NotallyX access to your microphone. Tap Settings &gt; Permissions and turn Microphone on</string>
+    <string name="to_record_audio">To record audio, allow NotablyMD access to your microphone. Tap
+        Settings &gt; Permissions and turn Microphone on</string>
     <string name="unarchive">Unarchive</string>
     <plurals name="unarchived_selected_notes">
         <item quantity="one">Unarchived %1$d note</item>
@@ -348,7 +398,9 @@
     <string name="unknown_name">Unknown name</string>
     <string name="unlabeled">Unlabeled</string>
     <string name="unlock">Unlock via Biometric/PIN</string>
-    <string name="unlock_with_biometrics_not_setup">You have previously enabled biometric lock but Biometrics/PIN are not setup for your device anymore.\n\nIf you wish to disable biometric lock press Disable, otherwise setup Biometrics/PIN for your device</string>
+    <string name="unlock_with_biometrics_not_setup">You have previously enabled biometric lock but
+        Biometrics/PIN are not setup for your device anymore.\n\nIf you wish to disable biometric
+        lock press Disable, otherwise setup Biometrics/PIN for your device</string>
     <string name="unpin">Unpin</string>
     <string name="upcoming">Upcoming</string>
     <string name="updated_link">Updated Link</string>

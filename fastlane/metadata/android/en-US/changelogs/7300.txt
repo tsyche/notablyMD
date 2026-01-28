@@ -4,7 +4,7 @@
 
 * JSON Notes Import
 
-* Sharing Images directly to NotallyX
+* Sharing Images directly to NotablyMD
 
 * Convert between Text and List Note
 

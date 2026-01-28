@@ -16,12 +16,12 @@ plugins {
 }
 
 android {
-    namespace = "com.philkes.notallyx"
+    namespace = "com.philkes.notablymd"
     compileSdk = 36
     ndkVersion = "29.0.13113456"
     
     defaultConfig {
-        applicationId = "com.philkes.notallyx"
+        applicationId = "com.philkes.notablymd"
         minSdk = 21
         targetSdk = 36
         versionCode = project.findProperty("app.versionCode").toString().toInt()
@@ -52,7 +52,7 @@ android {
         debug {
             applicationIdSuffix = ".debug"
             versionNameSuffix = "-DEBUG"
-            resValue("string", "app_name", "NotallyX DEBUG")
+            resValue("string", "app_name", "NotablyMD DEBUG")
             ndk {
                 debugSymbolLevel = "NONE"
             }
@@ -74,7 +74,7 @@ android {
             initWith(getByName("release"))
             applicationIdSuffix = ".beta"
             versionNameSuffix = "-BETA"
-            resValue("string", "app_name", "NotallyX BETA")
+            resValue("string", "app_name", "NotablyMD BETA")
         }
     }
     
@@ -87,7 +87,7 @@ android {
         this.outputs
             .map { it as com.android.build.gradle.internal.api.ApkVariantOutputImpl }
             .forEach { output ->
-                output.outputFileName = "NotallyX-$versionName.apk"
+                output.outputFileName = "NotablyMD-$versionName.apk"
             }
 
         if (buildType.isMinifyEnabled) {
