@@ -12,16 +12,15 @@ plugins {
     id("com.google.devtools.ksp")
     id("com.ncorti.ktfmt.gradle") version "0.20.1"
     id("org.jetbrains.kotlin.plugin.serialization") version "2.1.0"
-    id("io.github.philkes.android-translations-converter") version "1.0.5"
 }
 
 android {
-    namespace = "com.philkes.notablymd"
+    namespace = "com.tsyche.notablymd"
     compileSdk = 36
     ndkVersion = "29.0.13113456"
     
     defaultConfig {
-        applicationId = "com.philkes.notablymd"
+        applicationId = "com.tsyche.notablymd"
         minSdk = 21
         targetSdk = 36
         versionCode = project.findProperty("app.versionCode").toString().toInt()
@@ -216,7 +215,7 @@ tasks.register<Copy>("installLocalGitHooks") {
     // chmod +rwx ./.git/hooks/pre-commit*
 }
 
-tasks.preBuild.dependsOn(tasks.named("installLocalGitHooks"), tasks.exportTranslationsToExcel)
+tasks.preBuild.dependsOn(tasks.named("installLocalGitHooks"))
 
 tasks.register("generateChangelogs") {
     doLast {

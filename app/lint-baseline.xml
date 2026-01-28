@@ -7,7 +7,7 @@
         errorLine1="import android.R"
         errorLine2="~~~~~~~~~~~~~~~~">
         <location
-            file="src/main/java/com/philkes/notablymd/presentation/view/misc/TextWithIconAdapter.kt"
+            file="src/main/java/com/tsyche/notablymd/presentation/view/misc/TextWithIconAdapter.kt"
             line="3"
             column="1"/>
     </issue>
@@ -18,7 +18,7 @@
         errorLine1="        preferences.edit().clear().commit()"
         errorLine2="                                   ~~~~~~~~">
         <location
-            file="src/main/java/com/philkes/notablymd/presentation/viewmodel/preference/NotablyMDPreferences.kt"
+            file="src/main/java/com/tsyche/notablymd/presentation/viewmodel/preference/NotablyMDPreferences.kt"
             line="233"
             column="36"/>
     </issue>
@@ -29,7 +29,7 @@
         errorLine1="    val editorField = TextView::class.java.getDeclaredField(&quot;mEditor&quot;)"
         errorLine2="                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="src/main/java/com/philkes/notablymd/presentation/UiExtensions.kt"
+            file="src/main/java/com/tsyche/notablymd/presentation/UiExtensions.kt"
             line="820"
             column="23"/>
     </issue>
@@ -89,7 +89,7 @@
 
     <issue
         id="NewApi"
-        message="`&lt;com.philkes.notablymd.presentation.activity.note.RecordAudioActivity>` requires API level 24 (current min is 21)"
+        message="`&lt;com.tsyche.notablymd.presentation.activity.note.RecordAudioActivity>` requires API level 24 (current min is 21)"
         errorLine1="        &lt;activity"
         errorLine2="        ^">
         <location
@@ -100,7 +100,7 @@
 
     <issue
         id="NewApi"
-        message="`&lt;com.philkes.notablymd.utils.audio.AudioRecordService>` requires API level 24 (current min is 21)"
+        message="`&lt;com.tsyche.notablymd.utils.audio.AudioRecordService>` requires API level 24 (current min is 21)"
         errorLine1="        &lt;service"
         errorLine2="        ^">
         <location
@@ -958,7 +958,7 @@
         errorLine1="            getString(R.string.auto_backups_folder_hint, getString(R.string.documentation)),"
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="src/main/java/com/philkes/notablymd/presentation/activity/main/fragment/settings/SettingsFragment.kt"
+            file="src/main/java/com/tsyche/notablymd/presentation/activity/main/fragment/settings/SettingsFragment.kt"
             line="844"
             column="13"/>
         <location
@@ -974,7 +974,7 @@
         errorLine1="        showToast(getString(R.string.not_exists, logFile.name))"
         errorLine2="                                                 ~~~~~~~~~~~~">
         <location
-            file="src/main/java/com/philkes/notablymd/utils/AndroidExtensions.kt"
+            file="src/main/java/com/tsyche/notablymd/utils/AndroidExtensions.kt"
             line="180"
             column="50"/>
         <location
@@ -990,7 +990,7 @@
         errorLine1="                    note.body.length,"
         errorLine2="                    ~~~~~~~~~~~~~~~~">
         <location
-            file="src/main/java/com/philkes/notablymd/data/dao/BaseNoteDao.kt"
+            file="src/main/java/com/tsyche/notablymd/data/dao/BaseNoteDao.kt"
             line="68"
             column="21"/>
         <location
@@ -1006,7 +1006,7 @@
         errorLine1="                    note.body.length,"
         errorLine2="                    ~~~~~~~~~~~~~~~~">
         <location
-            file="src/main/java/com/philkes/notablymd/data/dao/BaseNoteDao.kt"
+            file="src/main/java/com/tsyche/notablymd/data/dao/BaseNoteDao.kt"
             line="68"
             column="21"/>
         <location
@@ -1022,7 +1022,7 @@
         errorLine1="                    baseNote.body.length,"
         errorLine2="                    ~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="src/main/java/com/philkes/notablymd/data/dao/BaseNoteDao.kt"
+            file="src/main/java/com/tsyche/notablymd/data/dao/BaseNoteDao.kt"
             line="69"
             column="21"/>
         <location
@@ -1038,7 +1038,7 @@
         errorLine1="                    baseNote.body.length,"
         errorLine2="                    ~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="src/main/java/com/philkes/notablymd/data/dao/BaseNoteDao.kt"
+            file="src/main/java/com/tsyche/notablymd/data/dao/BaseNoteDao.kt"
             line="69"
             column="21"/>
         <location
@@ -5102,7 +5102,7 @@
         errorLine1="        notifyDataSetChanged()"
         errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="src/main/java/com/philkes/notablymd/presentation/view/note/audio/AudioAdapter.kt"
+            file="src/main/java/com/tsyche/notablymd/presentation/view/note/audio/AudioAdapter.kt"
             line="19"
             column="9"/>
     </issue>
@@ -5113,7 +5113,7 @@
         errorLine1="            notifyDataSetChanged()"
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="src/main/java/com/philkes/notablymd/presentation/view/main/BaseNoteAdapter.kt"
+            file="src/main/java/com/tsyche/notablymd/presentation/view/main/BaseNoteAdapter.kt"
             line="62"
             column="13"/>
     </issue>
@@ -5124,7 +5124,7 @@
         errorLine1="            notifyDataSetChanged()"
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="src/main/java/com/philkes/notablymd/presentation/view/note/listitem/adapter/CheckedListItemAdapter.kt"
+            file="src/main/java/com/tsyche/notablymd/presentation/view/note/listitem/adapter/CheckedListItemAdapter.kt"
             line="45"
             column="13"/>
     </issue>
@@ -5135,7 +5135,7 @@
         errorLine1="            notifyDataSetChanged()"
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="src/main/java/com/philkes/notablymd/presentation/view/note/listitem/adapter/ListItemAdapter.kt"
+            file="src/main/java/com/tsyche/notablymd/presentation/view/note/listitem/adapter/ListItemAdapter.kt"
             line="44"
             column="13"/>
     </issue>
@@ -5146,7 +5146,7 @@
         errorLine1="        adapter.notifyDataSetChanged()"
         errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="src/main/java/com/philkes/notablymd/presentation/view/note/listitem/adapter/ListItemAdapterBase.kt"
+            file="src/main/java/com/tsyche/notablymd/presentation/view/note/listitem/adapter/ListItemAdapterBase.kt"
             line="67"
             column="9"/>
     </issue>
@@ -5157,7 +5157,7 @@
         errorLine1="        model.actionMode.addListener = { notesAdapter?.notifyDataSetChanged() }"
         errorLine2="                                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="src/main/java/com/philkes/notablymd/presentation/activity/main/fragment/NotablyMDFragment.kt"
+            file="src/main/java/com/tsyche/notablymd/presentation/activity/main/fragment/NotablyMDFragment.kt"
             line="270"
             column="42"/>
     </issue>
@@ -5168,7 +5168,7 @@
         errorLine1="        notifyDataSetChanged()"
         errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="src/main/java/com/philkes/notablymd/presentation/view/note/preview/PreviewFileAdapter.kt"
+            file="src/main/java/com/tsyche/notablymd/presentation/view/note/preview/PreviewFileAdapter.kt"
             line="20"
             column="9"/>
     </issue>
@@ -5179,7 +5179,7 @@
         errorLine1="        notifyDataSetChanged()"
         errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="src/main/java/com/philkes/notablymd/presentation/view/note/TextFormattingAdapter.kt"
+            file="src/main/java/com/tsyche/notablymd/presentation/view/note/TextFormattingAdapter.kt"
             line="116"
             column="9"/>
     </issue>
@@ -5190,7 +5190,7 @@
         errorLine1="        @Volatile private var instance: NotablyMDPreferences? = null"
         errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="src/main/java/com/philkes/notablymd/presentation/viewmodel/preference/NotablyMDPreferences.kt"
+            file="src/main/java/com/tsyche/notablymd/presentation/viewmodel/preference/NotablyMDPreferences.kt"
             line="275"
             column="9"/>
     </issue>
@@ -7005,7 +7005,7 @@
         errorLine1="        binding.DragHandle.setOnTouchListener { _, event ->"
         errorLine2="        ^">
         <location
-            file="src/main/java/com/philkes/notablymd/presentation/view/note/listitem/adapter/ListItemVH.kt"
+            file="src/main/java/com/tsyche/notablymd/presentation/view/note/listitem/adapter/ListItemVH.kt"
             line="67"
             column="9"/>
     </issue>
@@ -7016,7 +7016,7 @@
         errorLine1="        binding.DragHandle.setOnTouchListener { _, event ->"
         errorLine2="                                              ^">
         <location
-            file="src/main/java/com/philkes/notablymd/presentation/view/note/listitem/adapter/ListItemVH.kt"
+            file="src/main/java/com/tsyche/notablymd/presentation/view/note/listitem/adapter/ListItemVH.kt"
             line="67"
             column="47"/>
     </issue>
@@ -7159,7 +7159,7 @@
         errorLine1="                text = (totalItems - displayedItems).toString()"
         errorLine2="                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="src/main/java/com/philkes/notablymd/presentation/view/main/BaseNoteVH.kt"
+            file="src/main/java/com/tsyche/notablymd/presentation/view/main/BaseNoteVH.kt"
             line="245"
             column="24"/>
     </issue>
@@ -7170,7 +7170,7 @@
         errorLine1="                        text = images.size.toString()"
         errorLine2="                               ~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="src/main/java/com/philkes/notablymd/presentation/view/main/BaseNoteVH.kt"
+            file="src/main/java/com/tsyche/notablymd/presentation/view/main/BaseNoteVH.kt"
             line="334"
             column="32"/>
     </issue>
@@ -7181,7 +7181,7 @@
         errorLine1="                        &quot;${positionStart + 1}/${imageAdapter.itemCount}&quot;"
         errorLine2="                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="src/main/java/com/philkes/notablymd/presentation/activity/note/EditActivity.kt"
+            file="src/main/java/com/tsyche/notablymd/presentation/activity/note/EditActivity.kt"
             line="1038"
             column="25"/>
     </issue>
@@ -7192,7 +7192,7 @@
         errorLine1="                        &quot;${positionStart + 1}/${imageAdapter.itemCount}&quot;"
         errorLine2="                           ~~~~~~~~~~~~~~~~~">
         <location
-            file="src/main/java/com/philkes/notablymd/presentation/activity/note/EditActivity.kt"
+            file="src/main/java/com/tsyche/notablymd/presentation/activity/note/EditActivity.kt"
             line="1038"
             column="28"/>
     </issue>
@@ -7203,7 +7203,7 @@
         errorLine1="                                    &quot;${position + 1}/${imageAdapter.itemCount}&quot;"
         errorLine2="                                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="src/main/java/com/philkes/notablymd/presentation/activity/note/EditActivity.kt"
+            file="src/main/java/com/tsyche/notablymd/presentation/activity/note/EditActivity.kt"
             line="1058"
             column="37"/>
     </issue>
@@ -7214,7 +7214,7 @@
         errorLine1="                                    &quot;${position + 1}/${imageAdapter.itemCount}&quot;"
         errorLine2="                                       ~~~~~~~~~~~~">
         <location
-            file="src/main/java/com/philkes/notablymd/presentation/activity/note/EditActivity.kt"
+            file="src/main/java/com/tsyche/notablymd/presentation/activity/note/EditActivity.kt"
             line="1058"
             column="40"/>
     </issue>
@@ -7225,7 +7225,7 @@
         errorLine1="            Reminders.text = value.reminders.size.toString()"
         errorLine2="                             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="src/main/java/com/philkes/notablymd/presentation/view/main/reminder/NoteReminderVH.kt"
+            file="src/main/java/com/tsyche/notablymd/presentation/view/main/reminder/NoteReminderVH.kt"
             line="25"
             column="30"/>
     </issue>
@@ -7236,7 +7236,7 @@
         errorLine1="                    Value.setText(it.value.toString())"
         errorLine2="                                  ~~~~~~~~~~~~~~~~~~~">
         <location
-            file="src/main/java/com/philkes/notablymd/presentation/activity/note/reminders/RemindersActivity.kt"
+            file="src/main/java/com/tsyche/notablymd/presentation/activity/note/reminders/RemindersActivity.kt"
             line="307"
             column="35"/>
     </issue>
@@ -7247,7 +7247,7 @@
         errorLine1="                        &quot;${requireContext().getString(R.string.auto_backup_last)}: ${Date(time).toText()}&quot;"
         errorLine2="                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="src/main/java/com/philkes/notablymd/presentation/activity/main/fragment/settings/SettingsFragment.kt"
+            file="src/main/java/com/tsyche/notablymd/presentation/activity/main/fragment/settings/SettingsFragment.kt"
             line="583"
             column="25"/>
     </issue>
@@ -7258,7 +7258,7 @@
         errorLine1="                VersionText.text = &quot;v$version&quot;"
         errorLine2="                                   ~~~~~~~~~~~">
         <location
-            file="src/main/java/com/philkes/notablymd/presentation/activity/main/fragment/settings/SettingsFragment.kt"
+            file="src/main/java/com/tsyche/notablymd/presentation/activity/main/fragment/settings/SettingsFragment.kt"
             line="837"
             column="36"/>
     </issue>
@@ -7269,7 +7269,7 @@
         errorLine1="            &quot;${prefixResId?.let { getString(it) } ?: &quot;&quot;} ${formatTimestamp(timestamp, dateFormat)}&quot;"
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="src/main/java/com/philkes/notablymd/presentation/UiExtensions.kt"
+            file="src/main/java/com/tsyche/notablymd/presentation/UiExtensions.kt"
             line="284"
             column="13"/>
     </issue>
@@ -7280,7 +7280,7 @@
         errorLine1="            &quot;${context.getString(R.string.count, progress.current, progress.total)} $stageStr&quot;"
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="src/main/java/com/philkes/notablymd/presentation/UiExtensions.kt"
+            file="src/main/java/com/tsyche/notablymd/presentation/UiExtensions.kt"
             line="430"
             column="13"/>
     </issue>

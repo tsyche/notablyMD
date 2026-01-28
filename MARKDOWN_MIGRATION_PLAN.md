@@ -8,7 +8,7 @@ Transform NotablyMD from SQLite-first to **markdown-first storage** leveraging e
 
 ### Primary Objectives
 - ✅ **Markdown-first**: Notes stored as portable .md files
-- ✅ **Cross-device sync**: Compatible with Syncthing/Dropbox  
+- ✅ **Cross-device sync**: Compatible with Syncthing/Dropbox
 - ✅ **Enhanced security**: Leverage existing SQLCipher encryption
 - ✅ **Rich import/export**: Build on existing Evernote/Google Keep importers
 
@@ -158,7 +158,7 @@ New dialog components:
 
 ### 🔄 **Development Acceleration**
 - **50% less work** - Markdown parsing already done
-- **Security ready** - Encryption framework exists  
+- **Security ready** - Encryption framework exists
 - **Import/Export** - Rich format support built-in
 - **UI Foundation** - Settings and preferences mature
 
@@ -180,7 +180,7 @@ New dialog components:
 ## Next Steps
 
 1. **Analyze existing MarkdownUtils.kt** in detail
-2. **Design file watching integration** 
+2. **Design file watching integration**
 3. **Plan sync engine architecture**
 4. **Create enhanced settings screens**
 5. **Implement migration wizard**

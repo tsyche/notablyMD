@@ -5,7 +5,7 @@ import android.content.Context
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.documentfile.provider.DocumentFile
-import com.philkes.notablymd.utils.nameWithoutExtension
+import com.tsyche.notablymd.utils.nameWithoutExtension
 
 /**
  * Needs to be in android.print package to access the package private methods of

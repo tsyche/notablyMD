@@ -102,7 +102,7 @@
     <string name="data_in_public">Salvare i dati nella cartella pubblica</string>
     <string name="data_in_public_message">Attivandolo, il database interno dell’app e i file
         allegati verranno spostati nella cartella pubblica dell’app
-        (Android/media/com.philkes.notablymd). Abbinandolo con un’app di sincronizzazione file
+        (Android/media/com.tsyche.notablymd). Abbinandolo con un’app di sincronizzazione file
         potrai così sincronizzare i dati di NotablyMD tra dispositivi diversi.</string>
     <string name="date">Data</string>
     <string name="date_format">Formato data</string>

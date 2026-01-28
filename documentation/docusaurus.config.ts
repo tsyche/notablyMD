@@ -1,5 +1,5 @@
-import {themes as prismThemes} from 'prism-react-renderer';
-import type {Config} from '@docusaurus/types';
+import { themes as prismThemes } from 'prism-react-renderer';
+import type { Config } from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
@@ -17,7 +17,7 @@ const config: Config = {
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'Crustack', // Usually your GitHub org/user name.
+  organizationName: 'tsyche', // Usually your GitHub org/user name.
   projectName: 'NotablyMD', // Usually your repo name.
   deploymentBranch: 'gh-pages', // Usually your repo name.
 
@@ -41,7 +41,7 @@ const config: Config = {
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/Crustack/NotablyMD/blob/main/documentation',
+            'https://github.com/tsyche/NotablyMD/blob/main/documentation',
         },
         blog: {
           showReadingTime: true,
@@ -88,12 +88,7 @@ const config: Config = {
           position: 'left',
         },
         {
-          href: 'https://ko-fi.com/philkes',
-          position: 'right',
-          className: "header--kofi-link",
-        },
-        {
-          href: 'https://github.com/Crustack/NotablyMD',
+          href: 'https://github.com/tsyche/NotablyMD',
           position: 'right',
           className: "header--github-link",
           "aria-label": "GitHub repository",

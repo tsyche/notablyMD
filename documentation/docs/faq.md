@@ -5,7 +5,7 @@ sidebar_position: 9
 
 # FAQ - Frequently Asked Questions
 
-This page answers common questions about NotablyMD. If you don't find the answer you're looking for, please check the [GitHub issues](https://github.com/Crustack/NotablyMD/issues) or create a new issue.
+This page answers common questions about NotablyMD. If you don't find the answer you're looking for, please check the [GitHub issues](https://github.com/tsyche/NotablyMD/issues) or create a new issue.
 
 ## General Questions
 
@@ -16,7 +16,6 @@ NotablyMD is a minimalistic yet powerful note-taking app for Android. It's an ex
 ### Is NotablyMD free?
 
 Yes, NotablyMD is completely free and open-source. There are no in-app purchases, subscriptions, or advertisements.
-If you still want to donate to support me as a developer, feel free to donate via my [ko-fi link](https://ko-fi.com/philkes), it is greatly appreciated 🙂.
 
 ### What devices does NotablyMD support?
 
@@ -25,10 +24,10 @@ NotablyMD supports Android devices running Lollipop (Android 5.0) and above.
 ### Where can I download NotablyMD?
 
 You can download NotablyMD from:
-- [Google Play Store](https://play.google.com/store/apps/details?id=com.philkes.notablymd)
-- [F-Droid](https://f-droid.org/en/packages/com.philkes.notablymd)
-- [IzzyOnDroid](https://apt.izzysoft.de/fdroid/index/apk/com.philkes.notablymd)
-- [GitHub Releases](https://github.com/Crustack/NotablyMD/releases)
+- [Google Play Store](https://play.google.com/store/apps/details?id=com.tsyche.notablymd)
+- [F-Droid](https://f-droid.org/en/packages/com.tsyche.notablymd)
+- [IzzyOnDroid](https://apt.izzysoft.de/fdroid/index/apk/com.tsyche.notablymd)
+- [GitHub Releases](https://github.com/tsyche/NotablyMD/releases)
 
 ## Data and Privacy
 
@@ -39,7 +38,7 @@ Your notes are stored locally on your device. NotablyMD does not upload your dat
 ### Does NotablyMD collect any data about me?
 
 No, NotablyMD does not collect any personal data or usage statistics. Your notes remain private on your device.
-For the up-to-date privacy policy, see [Privacy-Policy](https://github.com/Crustack/NotablyMD/blob/main/Privacy-Policy.md)
+For the up-to-date privacy policy, see [Privacy-Policy](https://github.com/tsyche/NotablyMD/blob/main/Privacy-Policy.md)
 
 ### What happens to my notes if I uninstall the app?
 
@@ -129,7 +128,7 @@ If you're experiencing performance issues:
 ### How can I try new features before they're released?
 
 You can join the beta program:
-1. Download the most recent BETA release [from GitHub](https://github.com/Crustack/NotablyMD/releases/tag/beta)
+1. Download the most recent BETA release [from GitHub](https://github.com/tsyche/NotablyMD/releases/tag/beta)
 2. Install the BETA version (it will be installed as a separate app called "NotablyMD BETA")
 3. Provide feedback on new features
 
@@ -144,4 +143,4 @@ See our [Contribution Guidelines](contributing.md) for information on how to con
 ### I found a bug. How do I report it?
 
 - From inside the app: Tap "Settings" > In "About" section > "Send Feedback" > "Report Bug" (this will prefill the last crash logs and other useful information)
-- You can also report bugs directly by [creating a new issue](https://github.com/Crustack/NotablyMD/issues/new/choose) on GitHub. Please include as much detail as possible, including steps to reproduce the issue.
+- You can also report bugs directly by [creating a new issue](https://github.com/tsyche/NotablyMD/issues/new/choose) on GitHub. Please include as much detail as possible, including steps to reproduce the issue.

@@ -118,7 +118,7 @@
     <string name="dark">Dark</string>
     <string name="data_in_public">Store data in public folder</string>
     <string name="data_in_public_message">By enabling this, the app’s internal database and attached
-        files will be moved into the app’s public folder (Android/media/com.philkes.notablymd). In
+        files will be moved into the app’s public folder (Android/media/com.tsyche.notablymd). In
         combination with file synchronization apps this can be used to synchronize NotablyMD data
         between multiple devices.</string>
     <string name="date">Date</string>

@@ -197,7 +197,7 @@
             android:name=".utils.backup.CleanupMissingAttachmentsReceiver"
             android:exported="false">
             <intent-filter>
-                <action android:name="com.philkes.notablymd.action.CLEANUP_MISSING_ATTACHMENTS" />
+                <action android:name="com.tsyche.notablymd.action.CLEANUP_MISSING_ATTACHMENTS" />
             </intent-filter>
         </receiver>
 

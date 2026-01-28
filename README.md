@@ -2,11 +2,6 @@
     <img src="fastlane/metadata/android/en-US/images/icon.png" alt="icon" width="90"/>
     <br />
     <b><a href="https://github.com">NotablyMD | A minimalistic markdown-first note taking app</a></b>
-    <p>
-        <center>
-            <a href="https://ko-fi.com/philkes"><img alt='Donate' height='30' src='documentation/static/img/kofi_donate.svg' /></a>
-        </center>
-    </p>
 </h2>
 
 <div style="display: flex; justify-content: space-between; width: 100%;">
@@ -82,7 +77,7 @@ chmod +x gradlew
 ```
 
 ### Build Requirements
-- **Java**: JDK 8+
+- **Java**: JDK 21+
 - **Android Studio**: Latest stable
 - **Target SDK**: 36
 - **Kotlin**: 1.9.0

@@ -29,13 +29,13 @@ function HomepageHeader() {
           </Link>
         </div>
         <div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'center', alignItems: 'center', marginTop: '20px'}}>
-          <a href='https://play.google.com/store/apps/details?id=com.philkes.notablymd&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1' style={{margin: '10px'}}>
+          <a href='https://play.google.com/store/apps/details?id=com.tsyche.notablymd&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1' style={{margin: '10px'}}>
             <img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png' style={{height: '80px'}}/>
           </a>
-          <a href="https://f-droid.org/en/packages/com.philkes.notablymd" style={{margin: '10px'}}>
+          <a href="https://f-droid.org/en/packages/com.tsyche.notablymd" style={{margin: '10px'}}>
             <img alt='Get it on F-Droid' src='https://fdroid.gitlab.io/artwork/badge/get-it-on.png' style={{height: '80px'}} />
           </a>
-          <a href="https://apt.izzysoft.de/fdroid/index/apk/com.philkes.notablymd" style={{margin: '10px'}}>
+          <a href="https://apt.izzysoft.de/fdroid/index/apk/com.tsyche.notablymd" style={{margin: '10px'}}>
             <img alt='Get it on IzzyOnDroid' src='https://gitlab.com/IzzyOnDroid/repo/-/raw/master/assets/IzzyOnDroid.png' style={{height: '80px'}} />
           </a>
         </div>

@@ -4,7 +4,7 @@
 ```bash
 cd NotablyMD
 chmod +x gradlew
-java -version  # Should be JDK 8+ (NotablyMD uses Java 8)
+java -version  # Should be JDK 21+ (NotablyMD uses Java 21)
 ```
 
 ## Daily Commands
@@ -15,7 +15,7 @@ java -version  # Should be JDK 8+ (NotablyMD uses Java 8)
 emulator -avd Pixel_7_API_36 -no-snapshot-load &
 
 # Full development pipeline
-./gradlew clean test connectedAndroidTest lint check assembleDebug installDebug && adb shell am start -n com.philkes.notablymd.debug/com.philkes.notablymd.presentation.activity.main.MainActivity
+./gradlew clean test connectedAndroidTest lint check assembleDebug installDebug && adb shell am start -n com.tsyche.notablymd.debug/com.tsyche.notablymd.presentation.activity.main.MainActivity
 ```
 
 ### Quick Commands
@@ -30,7 +30,7 @@ emulator -avd Pixel_7_API_36 -no-snapshot-load &
 ./gradlew test --tests "*markdown*"
 
 # Launch app
-adb shell am start -n com.philkes.notablymd.debug/com.philkes.notablymd.presentation.activity.main.MainActivity
+adb shell am start -n com.tsyche.notablymd.debug/com.tsyche.notablymd.presentation.activity.main.MainActivity
 
 # Format code (required before commits)
 ./gradlew ktfmtFormat
@@ -65,7 +65,7 @@ adb logcat | grep -E "(FATAL|AndroidRuntime)"
 
 ## File Structure
 ```
-/app/src/main/java/com/philkes/notablymd/
+/app/src/main/java/com/tsyche/notablymd/
 ├── data/                    # Database and models
 ├── presentation/            # UI components
 │   ├── activity/           # Activities
@@ -81,9 +81,9 @@ adb logcat | grep -E "(FATAL|AndroidRuntime)"
     └── google/              # Google Keep importer
 ```
 
-## Key Differences from Original Notally
-- ✅ **Package**: `com.philkes.notablymd` (not `com.omgodse.notally`)
-- ✅ **Target SDK**: 36 (vs 35)
+## Key Diffs
+- ✅ **Package**: `com.tsyche.notablymd`
+- ✅ **Target SDK**: 36
 - ✅ **Security**: SQLCipher encryption + biometrics
 - ✅ **Markdown**: CommonMark + GFM support built-in
 - ✅ **Import**: Evernote, Google Keep, JSON, Plain Text
@@ -93,13 +93,13 @@ adb logcat | grep -E "(FATAL|AndroidRuntime)"
 ## Essential Commands (Copy-Paste)
 ```bash
 # Start emulator + full pipeline
-emulator -avd Pixel_7_API_36 -no-snapshot-load & && ./gradlew clean test connectedAndroidTest lint check assembleDebug installDebug && adb shell am start -n com.philkes.notablymd.debug/com.philkes.notablymd.presentation.activity.main.MainActivity
+emulator -avd Pixel_7_API_36 -no-snapshot-load & && ./gradlew clean test connectedAndroidTest lint check assembleDebug installDebug && adb shell am start -n com.tsyche.notablymd.debug/com.tsyche.notablymd.presentation.activity.main.MainActivity
 
 # Markdown tests only
 ./gradlew test --tests "*markdown*" && ./gradlew connectedAndroidTest --tests "*markdown*"
 
 # Quick build + install + launch
-./gradlew assembleDebug installDebug && adb shell am start -n com.philkes.notablymd.debug/com.philkes.notablymd.presentation.activity.main.MainActivity
+./gradlew assembleDebug installDebug && adb shell am start -n com.tsyche.notablymd.debug/com.tsyche.notablymd.presentation.activity.main.MainActivity
 
 # Format code before commit
 ./gradlew ktfmtFormat
@@ -107,7 +107,7 @@ emulator -avd Pixel_7_API_36 -no-snapshot-load & && ./gradlew clean test connect
 
 ## Development Notes
 - **Pre-commit hooks** automatically run ktfmtFormat
-- **Tests** are more comprehensive than original Notally
+- **Tests** comprehensive
 - **Security features** require additional permissions
 - **Markdown import/export** already implemented
 - **Biometric lock** available for app security

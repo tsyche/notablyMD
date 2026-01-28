@@ -118,7 +118,7 @@
     <string name="data_in_public">Guardar datos en carpeta pública</string>
     <string name="data_in_public_message">Al habilitar esta opción, la base de datos interna de la
         aplicación se moverá al directorio público de la aplicación
-        (Android/media/com.philkes.notablymd).\nEn combinación con aplicaciones de sincronización de
+        (Android/media/com.tsyche.notablymd).\nEn combinación con aplicaciones de sincronización de
         archivos, esta opción se puede utilizar para sincronizar datos de NotablyMD entre varios
         dispositivos.</string>
     <string name="date">Fecha</string>

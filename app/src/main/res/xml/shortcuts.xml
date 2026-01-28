@@ -8,8 +8,8 @@
 
         <intent
             android:action="android.intent.action.VIEW"
-            android:targetClass="com.philkes.notablymd.presentation.activity.note.EditNoteActivity"
-            android:targetPackage="com.philkes.notablymd" />
+            android:targetClass="com.tsyche.notablymd.presentation.activity.note.EditNoteActivity"
+            android:targetPackage="com.tsyche.notablymd" />
 
     </shortcut>
 
@@ -20,8 +20,8 @@
 
         <intent
             android:action="android.intent.action.VIEW"
-            android:targetClass="com.philkes.notablymd.presentation.activity.note.EditListActivity"
-            android:targetPackage="com.philkes.notablymd" />
+            android:targetClass="com.tsyche.notablymd.presentation.activity.note.EditListActivity"
+            android:targetPackage="com.tsyche.notablymd" />
 
     </shortcut>
 
