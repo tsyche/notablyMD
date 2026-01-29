@@ -98,6 +98,11 @@ class NotablyMDPreferences private constructor(private val context: Context) {
             false,
             R.string.always_show_search_bar,
         )
+
+    // Markdown Sync Preferences
+    val markdownSyncEnabled = BooleanPreference("markdownSyncEnabled", preferences, false)
+    val markdownSyncLocation =
+        StringPreference("markdownSyncLocation", preferences, "", R.string.markdown_sync_location)
     val maxLabels =
         IntPreference(
             "maxLabelsInNavigation",

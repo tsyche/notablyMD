@@ -84,6 +84,7 @@ class SettingsFragment : Fragment() {
     private lateinit var disableLockActivityResultLauncher: ActivityResultLauncher<Intent>
     private lateinit var exportSettingsActivityResultLauncher: ActivityResultLauncher<Intent>
     private lateinit var importSettingsActivityResultLauncher: ActivityResultLauncher<Intent>
+    private lateinit var chooseMarkdownSyncLocationLauncher: ActivityResultLauncher<Intent>
 
     private lateinit var selectedImportSource: ImportSource
 
@@ -98,6 +99,7 @@ class SettingsFragment : Fragment() {
             setupContentDensity(binding)
             setupBackup(binding)
             setupAutoBackups(binding)
+            setupMarkdownSync(binding)
             setupSecurity(binding)
             setupSettings(binding)
         }
@@ -220,6 +222,16 @@ class SettingsFragment : Fragment() {
                         ) {
                             showToast(R.string.import_settings_failure)
                         }
+                    }
+                }
+            }
+        chooseMarkdownSyncLocationLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+                if (result.resultCode == RESULT_OK) {
+                    result.data?.data?.let { uri ->
+                        // Store the URI for markdown sync location
+                        model.savePreference(model.preferences.markdownSyncLocation, uri.toString())
+                        showToast(R.string.sync_location_updated)
                     }
                 }
             }
@@ -603,6 +615,44 @@ class SettingsFragment : Fragment() {
             enabled = periodicBackupsEnabled,
         ) { newValue: Int ->
             model.savePreference(preference, preference.value.copy(maxBackups = newValue))
+        }
+    }
+
+    private fun NotablyMDPreferences.setupMarkdownSync(binding: FragmentSettingsBinding) {
+        binding.apply {
+            // Setup enable/disable toggle
+            markdownSyncEnabled.observe(viewLifecycleOwner) { enabled ->
+                MarkdownSyncEnabled.setup(
+                    markdownSyncEnabled,
+                    enabled,
+                    requireContext(),
+                    layoutInflater,
+                    R.string.markdown_sync_enabled_hint,
+                ) { newEnabled ->
+                    model.savePreference(markdownSyncEnabled, newEnabled)
+                }
+            }
+
+            // Setup location picker
+            markdownSyncLocation.observe(viewLifecycleOwner) { location ->
+                val displayLocation =
+                    if (location.isEmpty()) {
+                        "Android/media/com.tsyche.notablymd (Default)"
+                    } else {
+                        location
+                    }
+
+                MarkdownSyncLocation.Title.setText(R.string.markdown_sync_location)
+                MarkdownSyncLocation.Value.text = displayLocation
+                MarkdownSyncLocation.root.setOnClickListener {
+                    // Launch folder picker
+                    val intent =
+                        Intent(ACTION_OPEN_DOCUMENT_TREE).apply {
+                            addCategory(Intent.CATEGORY_DEFAULT)
+                        }
+                    chooseMarkdownSyncLocationLauncher.launch(intent)
+                }
+            }
         }
     }
 

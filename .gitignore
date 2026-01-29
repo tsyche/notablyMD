@@ -63,3 +63,5 @@ lint/tmp/
 # Android Profiling
 *.hprof
 .kotlin
+# Misc
+.DS_Store
