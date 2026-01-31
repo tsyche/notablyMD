@@ -12,6 +12,12 @@
     <string name="always_show_search_bar_hint">By enabling this, the search bar will always be shown
         in the layout instead of using a search icon in the top bar</string>
     <string name="app_name" translatable="false">NotablyMD</string>
+    <string name="voice_note_widget" translatable="false">Voice Note Widget</string>
+    <string name="voice_note_widget_description" translatable="false">Quick voice recording and note
+        creation</string>
+    <string name="voice_widget_configure_description" translatable="false">Add a voice recording
+        widget to your home
+        screen for quick note creation.</string>
     <string name="appearance">Appearance</string>
     <string name="archive">Archive</string>
     <string name="archived">Archived</string>

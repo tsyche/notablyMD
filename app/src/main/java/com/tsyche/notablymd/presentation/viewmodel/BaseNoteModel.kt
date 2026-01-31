@@ -82,6 +82,7 @@ import com.tsyche.notablymd.utils.getCurrentImagesDirectory
 import com.tsyche.notablymd.utils.getExternalMediaDirectory
 import com.tsyche.notablymd.utils.log
 import com.tsyche.notablymd.utils.migrateAllAttachments
+import com.tsyche.notablymd.utils.performance.GlobalPerformanceManager
 import com.tsyche.notablymd.utils.scheduleNoteReminders
 import com.tsyche.notablymd.utils.security.DecryptionException
 import com.tsyche.notablymd.utils.security.EncryptionException
@@ -105,6 +106,8 @@ class BaseNoteModel(private val app: Application) : AndroidViewModel(app) {
     private lateinit var labelDao: LabelDao
     private lateinit var commonDao: CommonDao
     private lateinit var baseNoteDao: BaseNoteDao
+
+    private val performanceManager by lazy { GlobalPerformanceManager.getInstance(baseNoteDao) }
 
     private val labelCache = HashMap<String, Content>()
 
@@ -170,6 +173,9 @@ class BaseNoteModel(private val app: Application) : AndroidViewModel(app) {
         allNotesObserver = Observer { list -> Cache.list = list }
         allNotes = baseNoteDao.getAllAsync()
         allNotes!!.observeForever(allNotesObserver!!)
+
+        // Initialize performance systems
+        performanceManager.initialize()
 
         labelsHiddenObserver?.let { preferences.labelsHidden.removeObserver(it) }
         labelsHiddenObserver = Observer { labelsHidden ->

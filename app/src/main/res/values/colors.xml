@@ -29,6 +29,13 @@
     <color name="md_theme_inverseOnSurface">#F1F0F7</color>
     <color name="md_theme_inversePrimary">#B7C4FF</color>
 
+    <!-- Voice Widget Colors -->
+    <color name="record_button_ready">#FF5722</color>
+    <color name="record_button_recording">#F44336</color>
+    <color name="record_button_stop">#F44336</color>
+    <color name="voice_level_active">#4CAF50</color>
+    <color name="voice_level_inactive">#33FFFFFF</color>
+
     <!-- Conflict severity colors -->
     <color name="conflict_low">#4CAF50</color>
     <color name="conflict_medium">#FF9800</color>

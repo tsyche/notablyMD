@@ -139,6 +139,17 @@
         </activity>
 
         <activity
+            android:name=".presentation.activity.VoiceWidgetConfigureActivity"
+            android:exported="false"
+            android:label="@string/voice_note_widget">
+
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
+            </intent-filter>
+
+        </activity>
+
+        <activity
             android:name=".presentation.activity.note.PickNoteActivity"
             android:exported="false">
         </activity>
@@ -192,6 +203,26 @@
             android:name=".utils.audio.AudioPlayService"
             android:exported="false"
             android:foregroundServiceType="mediaPlayback" />
+
+        <receiver
+            android:name=".presentation.widget.VoiceNoteWidget"
+            android:exported="false"
+            android:label="@string/voice_note_widget">
+
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/voice_note_widget_info" />
+
+        </receiver>
+
+        <service
+            android:name=".presentation.service.VoiceRecordingService"
+            android:exported="false"
+            android:foregroundServiceType="microphone" />
 
         <receiver
             android:name=".utils.backup.CleanupMissingAttachmentsReceiver"

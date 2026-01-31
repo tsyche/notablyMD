@@ -55,6 +55,7 @@ import com.tsyche.notablymd.utils.getCurrentAudioDirectory
 import com.tsyche.notablymd.utils.getCurrentFilesDirectory
 import com.tsyche.notablymd.utils.getCurrentImagesDirectory
 import com.tsyche.notablymd.utils.getTempAudioFile
+import com.tsyche.notablymd.utils.performance.GlobalPerformanceManager
 import com.tsyche.notablymd.utils.scheduleReminder
 import java.io.File
 import kotlinx.coroutines.Dispatchers
@@ -67,6 +68,8 @@ class NotallyModel(private val app: Application) : AndroidViewModel(app) {
 
     private val database = NotallyDatabase.getDatabase(app)
     private lateinit var baseNoteDao: BaseNoteDao
+
+    private val performanceManager by lazy { GlobalPerformanceManager.getInstance(baseNoteDao) }
 
     val preferences = NotablyMDPreferences.getInstance(app)
     val textSize = preferences.textSize.value
@@ -228,10 +231,18 @@ class NotallyModel(private val app: Application) : AndroidViewModel(app) {
         if (id != 0L) {
             isNewNote = false
 
-            val cachedNote = Cache.list.find { baseNote -> baseNote.id == id }
-            val baseNote = cachedNote ?: withContext(Dispatchers.IO) { baseNoteDao.get(id) }
+            // Use performance manager for optimized note retrieval
+            val baseNote =
+                performanceManager.getNote(id)
+                    ?: withContext(Dispatchers.IO) { baseNoteDao.get(id) }
 
             if (baseNote != null) {
+                // Record access for smart preloading
+                com.tsyche.notablymd.utils.performance.GlobalSmartPreloader.recordAccess(
+                    id,
+                    "note_edit",
+                )
+
                 originalNote = baseNote.deepCopy()
 
                 this.id = id
@@ -292,6 +303,10 @@ class NotallyModel(private val app: Application) : AndroidViewModel(app) {
         return withContext(Dispatchers.IO) {
             val note = getBaseNote()
             val id = baseNoteDao.insertSafe(app, note)
+
+            // Update performance systems
+            performanceManager.updateNote(note)
+
             if (checkBackupOnSave) {
                 checkBackupOnSave(note)
             }

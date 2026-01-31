@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/widget_background"
+    android:padding="16dp">
+
+    <!-- Widget Header -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="12dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Voice Note"
+            android:textColor="@android:color/white"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/settingsButton"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_settings"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Settings" />
+
+    </LinearLayout>
+
+    <!-- Voice Level Visualizer -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/voice_visualizer_background">
+
+        <!-- Voice level bars -->
+        <ImageView
+            android:id="@+id/voiceBar1"
+            android:layout_width="4dp"
+            android:layout_height="20dp"
+            android:layout_margin="2dp"
+            android:src="@drawable/voice_level_bar"
+            android:alpha="0.3" />
+
+        <ImageView
+            android:id="@+id/voiceBar2"
+            android:layout_width="4dp"
+            android:layout_height="30dp"
+            android:layout_margin="2dp"
+            android:src="@drawable/voice_level_bar"
+            android:alpha="0.3" />
+
+        <ImageView
+            android:id="@+id/voiceBar3"
+            android:layout_width="4dp"
+            android:layout_height="40dp"
+            android:layout_margin="2dp"
+            android:src="@drawable/voice_level_bar"
+            android:alpha="0.3" />
+
+        <ImageView
+            android:id="@+id/voiceBar4"
+            android:layout_width="4dp"
+            android:layout_height="50dp"
+            android:layout_margin="2dp"
+            android:src="@drawable/voice_level_bar"
+            android:alpha="0.3" />
+
+        <ImageView
+            android:id="@+id/voiceBar5"
+            android:layout_width="4dp"
+            android:layout_height="30dp"
+            android:layout_margin="2dp"
+            android:src="@drawable/voice_level_bar"
+            android:alpha="0.3" />
+
+        <ImageView
+            android:id="@+id/voiceBar6"
+            android:layout_width="4dp"
+            android:layout_height="20dp"
+            android:layout_margin="2dp"
+            android:src="@drawable/voice_level_bar"
+            android:alpha="0.3" />
+
+    </LinearLayout>
+
+    <!-- Status Indicator -->
+    <TextView
+        android:id="@+id/statusText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Tap to start recording"
+        android:textColor="@android:color/white"
+        android:textSize="12sp"
+        android:gravity="center"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Recording Controls -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <!-- Main Record Button -->
+        <FrameLayout
+            android:id="@+id/recordButton"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:background="@drawable/record_button_background">
+
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_mic"
+                android:contentDescription="Record" />
+
+        </FrameLayout>
+
+        <!-- Stop Button (hidden initially) -->
+        <FrameLayout
+            android:id="@+id/stopButton"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@drawable/stop_button_background"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_stop"
+                android:contentDescription="Stop" />
+
+        </FrameLayout>
+
+        <!-- Quick Actions -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <!-- Last Note Preview -->
+            <LinearLayout
+                android:id="@+id/lastNotePreview"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:background="@drawable/last_note_background"
+                android:padding="8dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Last note:"
+                    android:textColor="@android:color/white"
+                    android:textSize="10sp"
+                    android:alpha="0.7" />
+
+                <TextView
+                    android:id="@+id/lastNoteText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="No notes yet"
+                    android:textColor="@android:color/white"
+                    android:textSize="11sp"
+                    android:maxLines="2"
+                    android:ellipsize="end" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -9,13 +9,16 @@ java -version  # Should be JDK 21+ (NotablyMD uses Java 21)
 
 ## Daily Commands
 
-### Start Development
+### Start Development (Without Emulator)
 ```bash
-# Start emulator (API 36 for NotablyMD)
-emulator -avd Pixel_7_API_36 -no-snapshot-load &
+# Run all tests and checks without emulator (fast, reliable)
+./gradlew clean ktfmtFormat test lint check assembleDebug
+```
 
-# Full development pipeline
-./gradlew clean test connectedAndroidTest lint check assembleDebug installDebug && adb shell am start -n com.tsyche.notablymd.debug/com.tsyche.notablymd.presentation.activity.main.MainActivity
+### Start Development (With Emulator)
+```bash
+# Start emulator and run connected Android tests (waits for full boot, shuts down after)
+export ANDROID_EMULATOR_WAIT_TIME_BEFORE_KILL=0 && (emulator -avd Pixel_7_API_33 -no-snapshot-load &) && adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 1; done' && ./gradlew connectedAndroidTest; pkill -9 -f emulator
 ```
 
 ### Quick Commands
@@ -39,9 +42,6 @@ adb shell am start -n com.tsyche.notablymd.debug/com.tsyche.notablymd.presentati
 ### NotablyMD-Specific Commands
 ```bash
 # Build release with obfuscation
-./gradlew assembleRelease
-
-# Generate debug symbols for release builds
 ./gradlew assembleRelease
 
 # Run all checks (matches GitHub Actions CI)
@@ -92,8 +92,11 @@ adb logcat | grep -E "(FATAL|AndroidRuntime)"
 
 ## Essential Commands (Copy-Paste)
 ```bash
-# Start emulator + full pipeline
-emulator -avd Pixel_7_API_36 -no-snapshot-load & && ./gradlew clean test connectedAndroidTest lint check assembleDebug installDebug && adb shell am start -n com.tsyche.notablymd.debug/com.tsyche.notablymd.presentation.activity.main.MainActivity
+# Run tests without emulator (recommended for daily development)
+./gradlew clean ktfmtFormat test lint check assembleDebug
+
+# Start emulator and run connected tests (waits for full boot, shuts down after)
+export ANDROID_EMULATOR_WAIT_TIME_BEFORE_KILL=0 && (emulator -avd Pixel_7_API_33 -no-snapshot-load &) && adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 1; done' && ./gradlew connectedAndroidTest; pkill -9 -f emulator
 
 # Markdown tests only
 ./gradlew test --tests "*markdown*" && ./gradlew connectedAndroidTest --tests "*markdown*"
