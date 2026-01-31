@@ -356,21 +356,96 @@ class ConflictResolver { ✅
 
 ---
 
-## Phase 4: Advanced Features (Week 4)
+## Phase 4: Voice-to-Note Widget (Week 4)
 
-### 4.1 Enhanced Security
+### 4.1 Voice Widget Core Implementation
+
+**Widget Component**
+- Home screen widget with microphone icon
+- One-tap voice recording activation
+- Real-time voice level visualization
+- Recording status indicator (listening, processing, complete)
+
+**Voice Recording System**
+- Immediate recording start on widget tap
+- Automatic silence detection for stop recording
+- Manual stop button option
+- Audio buffer management and temporary storage
+
+**Speech-to-Text Integration**
+- Detect and use user's default voice input app (FUTO Voice Input, Gboard, etc.)
+- First-time setup: Voice app selection dialog with "Always use" option
+- Fallback to Android SpeechRecognizer if no default voice app available
+- Support for third-party voice input apps that expose standard Android intents
+- Multi-language support detection from selected voice app
+
+### 4.2 Note Creation Pipeline
+
+**Transcription Processing**
+- Real-time speech-to-text conversion
+- Punctuation and formatting enhancement
+- Speaker confidence scoring
+- Error handling and retry logic
+
+**Note Generation**
+- Automatic note creation with transcribed text
+- DateTime stamp in note title and metadata
+- Default folder assignment (configurable)
+- Auto-save with validation
+- Configurable save behavior: Auto-save to new note OR prompt for note selection
+- Note selection dialog for adding transcription to existing notes
+- Automatic paragraph breaks (2 line breaks) at end of transcriptions
+- Note title generation options (datetime, custom prefix, first words)
+
+**Widget Integration**
+- Quick access to created note from widget
+- Notification on successful note creation
+- Error feedback through widget updates
+- Battery and permission optimization
+
+### 4.3 Configuration & Settings
+
+**Voice Widget Settings**
+- Widget appearance customization (size, color)
+- Recording quality settings (bitrate, format)
+- Auto-stop silence threshold configuration
+- Default note folder selection
+- Save behavior preference: "Auto-save to new note" vs "Prompt for note selection"
+- Note title format options (datetime stamp, custom prefix, first words of transcription)
+- Automatic paragraph breaks toggle (2 line breaks at end)
+- Quick access to recent notes for easy appending
+
+**Speech Recognition Preferences**
+- Voice app selection and management (change default voice input app)
+- Language selection from chosen voice app capabilities
+- Offline vs online recognition preference (if supported by voice app)
+- Punctuation and capitalization settings
+- Custom vocabulary and shortcuts (if supported by voice app)
+- Voice app compatibility checking and recommendations
+
+**Privacy & Security**
+- Local-only processing option
+- Audio file retention settings
+- Transcription data encryption
+- Permission management and prompts
+
+---
+
+## Phase 5: Advanced Features (Week 5)
+
+### 5.1 Enhanced Security
 
 - Encrypt individual markdown files
 - Secure key management with existing biometrics
 - Protected backup integration
 
-### 4.2 Performance Optimization
+### 5.2 Performance Optimization
 
 - Leverage existing caching systems
 - Incremental indexing
 - Smart preloading
 
-### 4.3 Collaboration Features
+### 5.3 Collaboration Features
 
 - Device attribution in frontmatter
 - Change tracking
