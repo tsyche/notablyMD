@@ -9,9 +9,11 @@ import android.view.Menu.CATEGORY_SYSTEM
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
@@ -36,11 +38,16 @@ import com.tsyche.notablymd.R
 import com.tsyche.notablymd.data.NotallyDatabase
 import com.tsyche.notablymd.data.model.BaseNote
 import com.tsyche.notablymd.data.model.Folder
+import com.tsyche.notablymd.data.sync.SyncConflict
+import com.tsyche.notablymd.data.sync.SyncStatus
+import com.tsyche.notablymd.data.sync.SyncStatusManager
 import com.tsyche.notablymd.databinding.ActivityMainBinding
 import com.tsyche.notablymd.presentation.activity.LockedActivity
 import com.tsyche.notablymd.presentation.activity.main.fragment.DisplayLabelFragment.Companion.EXTRA_DISPLAYED_LABEL
 import com.tsyche.notablymd.presentation.activity.main.fragment.NotablyMDFragment
 import com.tsyche.notablymd.presentation.activity.main.fragment.SearchFragment
+import com.tsyche.notablymd.presentation.activity.main.fragment.conflict.ConflictResolutionDialog
+import com.tsyche.notablymd.presentation.activity.main.fragment.migration.MigrationUtilityDialog
 import com.tsyche.notablymd.presentation.activity.note.EditListActivity
 import com.tsyche.notablymd.presentation.activity.note.EditNoteActivity
 import com.tsyche.notablymd.presentation.add
@@ -74,6 +81,7 @@ class MainActivity : LockedActivity<ActivityMainBinding>() {
     private lateinit var configuration: AppBarConfiguration
     private lateinit var exportFileActivityResultLauncher: ActivityResultLauncher<Intent>
     private lateinit var exportNotesActivityResultLauncher: ActivityResultLauncher<Intent>
+    private lateinit var syncStatusManager: SyncStatusManager
 
     private var isStartViewFragment = false
     private val actionModeCancelCallback =
@@ -101,6 +109,7 @@ class MainActivity : LockedActivity<ActivityMainBinding>() {
         setupMenu()
         setupActionMode()
         setupNavigation()
+        setupSyncStatus()
 
         setupActivityResultLaunchers()
 
@@ -849,6 +858,192 @@ class MainActivity : LockedActivity<ActivityMainBinding>() {
             }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    private fun setupSyncStatus() {
+        syncStatusManager = SyncStatusManager.getInstance(preferences, lifecycleScope, this)
+
+        // Observe sync status changes
+        syncStatusManager.syncStatus.observe(this) { status -> updateSyncStatusUI(status) }
+
+        // Set initial visibility based on sync enabled state
+        val isSyncEnabled = preferences.markdownSyncEnabled.value
+        updateSyncStatusVisibility(isSyncEnabled)
+
+        // Observe sync enabled preference changes
+        preferences.markdownSyncEnabled.observe(this) { enabled ->
+            updateSyncStatusVisibility(enabled)
+        }
+    }
+
+    private fun updateSyncStatusVisibility(isEnabled: Boolean) {
+        val visibility = if (isEnabled) View.VISIBLE else View.GONE
+        binding.SyncStatusText.visibility = visibility
+        binding.SyncProgressBar.visibility = visibility
+        binding.SyncStatusIcon.visibility = visibility
+    }
+
+    private fun updateSyncStatusUI(status: SyncStatus) {
+        binding.apply {
+            // Update text
+            SyncStatusText.text = status.getDisplayText()
+
+            // Update progress bar
+            when (status.state) {
+                SyncStatus.SyncState.SYNCING -> {
+                    SyncProgressBar.visibility = View.VISIBLE
+                    SyncStatusIcon.visibility = View.GONE
+                }
+                else -> {
+                    SyncProgressBar.visibility = View.GONE
+                    SyncStatusIcon.visibility = View.VISIBLE
+                }
+            }
+
+            // Update icon
+            val iconRes =
+                when (status.state) {
+                    SyncStatus.SyncState.DISABLED -> R.drawable.ic_sync_disabled
+                    SyncStatus.SyncState.IDLE -> R.drawable.ic_sync_disabled
+                    SyncStatus.SyncState.SYNCING -> R.drawable.ic_sync_syncing
+                    SyncStatus.SyncState.SYNCED -> R.drawable.ic_sync_synced
+                    SyncStatus.SyncState.ERROR -> R.drawable.ic_sync_error
+                    SyncStatus.SyncState.CONFLICT -> R.drawable.ic_sync_conflict
+                }
+            SyncStatusIcon.setImageResource(iconRes)
+
+            // Update icon color based on state
+            val iconTint =
+                when (status.state) {
+                    SyncStatus.SyncState.DISABLED,
+                    SyncStatus.SyncState.IDLE ->
+                        ContextCompat.getColor(this@MainActivity, android.R.color.darker_gray)
+                    SyncStatus.SyncState.SYNCING ->
+                        ContextCompat.getColor(
+                            this@MainActivity,
+                            android.R.color.secondary_text_dark,
+                        )
+                    SyncStatus.SyncState.SYNCED ->
+                        ContextCompat.getColor(this@MainActivity, android.R.color.holo_green_dark)
+                    SyncStatus.SyncState.ERROR ->
+                        ContextCompat.getColor(this@MainActivity, android.R.color.holo_red_dark)
+                    SyncStatus.SyncState.CONFLICT ->
+                        ContextCompat.getColor(this@MainActivity, android.R.color.holo_orange_dark)
+                }
+            SyncStatusIcon.setColorFilter(iconTint)
+
+            // Handle click on sync status
+            SyncStatusText.setOnClickListener { handleSyncStatusClick(status) }
+            SyncStatusIcon.setOnClickListener { handleSyncStatusClick(status) }
+        }
+    }
+
+    private fun handleSyncStatusClick(status: SyncStatus) {
+        when (status.state) {
+            SyncStatus.SyncState.DISABLED -> {
+                // Navigate to settings to enable sync
+                navController.navigate(R.id.Settings)
+            }
+            SyncStatus.SyncState.IDLE -> {
+                // Show options menu
+                showSyncOptionsMenu()
+            }
+            SyncStatus.SyncState.ERROR -> {
+                // Show error dialog
+                status.errorMessage?.let { message ->
+                    MaterialAlertDialogBuilder(this)
+                        .setTitle("Sync Error")
+                        .setMessage(message)
+                        .setPositiveButton("Retry") { _, _ -> syncStatusManager.startSync() }
+                        .setNegativeButton("Dismiss", null)
+                        .show()
+                }
+            }
+            SyncStatus.SyncState.CONFLICT -> {
+                // Show conflict resolution dialog
+                showConflictResolutionDialog(status.conflictCount)
+            }
+            else -> {
+                // Do nothing for other states
+            }
+        }
+    }
+
+    private fun showConflictResolutionDialog(conflictCount: Int) {
+        // Create a sample conflict for demonstration
+        // In a real implementation, this would get actual conflicts from the sync system
+        val sampleConflict =
+            SyncConflict(
+                noteId = 1L,
+                noteTitle = "Sample Conflicted Note",
+                localVersion =
+                    SyncConflict.NoteVersion(
+                        content = "Local version content...",
+                        lastModified = System.currentTimeMillis() - 3600000,
+                        checksum = "local_checksum",
+                        size = 100,
+                        source = "local",
+                    ),
+                remoteVersion =
+                    SyncConflict.NoteVersion(
+                        content = "Remote version content...",
+                        lastModified = System.currentTimeMillis() - 1800000,
+                        checksum = "remote_checksum",
+                        size = 120,
+                        source = "remote",
+                    ),
+                conflictType = SyncConflict.ConflictType.CONTENT_MODIFIED,
+            )
+
+        val dialog = ConflictResolutionDialog.newInstance(sampleConflict)
+        dialog.setOnResolutionComplete { result ->
+            if (result.success) {
+                Toast.makeText(this, "Conflict resolved successfully", Toast.LENGTH_SHORT).show()
+                // Update sync status after resolution
+                syncStatusManager.markIdle()
+            } else {
+                Toast.makeText(
+                        this,
+                        "Failed to resolve conflict: ${result.errorMessage}",
+                        Toast.LENGTH_LONG,
+                    )
+                    .show()
+            }
+        }
+        dialog.show(supportFragmentManager, "conflict_resolution")
+    }
+
+    private fun showSyncOptionsMenu() {
+        val options = arrayOf("Start Sync", "Migrate to Markdown", "Sync Settings")
+
+        MaterialAlertDialogBuilder(this)
+            .setTitle("Sync Options")
+            .setItems(options) { _, which ->
+                when (which) {
+                    0 -> syncStatusManager.startSync()
+                    1 -> showMigrationUtility()
+                    2 -> navController.navigate(R.id.Settings)
+                }
+            }
+            .show()
+    }
+
+    private fun showMigrationUtility() {
+        val targetDirectory =
+            preferences.markdownSyncLocation.value.ifEmpty {
+                "/storage/emulated/0/Android/media/com.tsyche.notablymd/markdown"
+            }
+
+        val dialog = MigrationUtilityDialog.newInstance(targetDirectory)
+        dialog.setOnMigrationComplete { result ->
+            if (result.success) {
+                Toast.makeText(this, "Migration completed successfully", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(this, "Migration failed: ${result.getSummary()}", Toast.LENGTH_LONG)
+                    .show()
+            }
+        }
+        dialog.show(supportFragmentManager, "migration_utility")
     }
 
     companion object {

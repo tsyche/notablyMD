@@ -627,7 +627,7 @@ class SettingsFragment : Fragment() {
                     enabled,
                     requireContext(),
                     layoutInflater,
-                    R.string.markdown_sync_enabled_hint,
+                    messageResId = R.string.markdown_sync_enabled_hint,
                 ) { newEnabled ->
                     model.savePreference(markdownSyncEnabled, newEnabled)
                 }

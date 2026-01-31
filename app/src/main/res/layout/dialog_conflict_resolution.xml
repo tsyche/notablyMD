@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="24dp">
+
+    <!-- Conflict Header -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="16dp">
+
+        <View
+            android:id="@+id/severityIndicator"
+            android:layout_width="8dp"
+            android:layout_height="8dp"
+            android:layout_marginEnd="12dp"
+            android:background="@drawable/conflict_severity_indicator" />
+
+        <TextView
+            android:id="@+id/conflictTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Note Title"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <!-- Conflict Description -->
+    <TextView
+        android:id="@+id/conflictDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Conflict description"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+        android:layout_marginBottom="8dp" />
+
+    <TextView
+        android:id="@+id/conflictType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Conflict type"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+        android:textColor="?android:attr/textColorSecondary"
+        android:layout_marginBottom="24dp" />
+
+    <!-- Version Comparison -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Version Comparison"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+        android:layout_marginBottom="12dp" />
+
+    <!-- Local Version -->
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        app:cardElevation="2dp"
+        app:cardCornerRadius="8dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="12dp">
+
+            <TextView
+                android:id="@+id/localVersionTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Local Version"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+                android:textColor="?attr/colorPrimary"
+                android:layout_marginBottom="8dp" />
+
+            <TextView
+                android:id="@+id/localVersionModified"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Modified: Date"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+                android:layout_marginBottom="4dp" />
+
+            <TextView
+                android:id="@+id/localVersionSize"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Size: 0 chars"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+                android:layout_marginBottom="8dp" />
+
+            <TextView
+                android:id="@+id/localVersionContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Content preview..."
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+                android:maxLines="3"
+                android:ellipsize="end" />
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- Remote Version -->
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        app:cardElevation="2dp"
+        app:cardCornerRadius="8dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="12dp">
+
+            <TextView
+                android:id="@+id/remoteVersionTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Remote Version"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+                android:textColor="?attr/colorSecondary"
+                android:layout_marginBottom="8dp" />
+
+            <TextView
+                android:id="@+id/remoteVersionModified"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Modified: Date"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+                android:layout_marginBottom="4dp" />
+
+            <TextView
+                android:id="@+id/remoteVersionSize"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Size: 0 chars"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+                android:layout_marginBottom="8dp" />
+
+            <TextView
+                android:id="@+id/remoteVersionContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Content preview..."
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+                android:maxLines="3"
+                android:ellipsize="end" />
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- Resolution Options -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Resolution Action"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+        android:layout_marginBottom="8dp" />
+
+    <Spinner
+        android:id="@+id/resolutionSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Manual Merge Editor -->
+    <LinearLayout
+        android:id="@+id/manualMergeEditorContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Merged Content"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+            android:layout_marginBottom="8dp" />
+
+        <EditText
+            android:id="@+id/manualMergeEditor"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:gravity="top"
+            android:hint="Enter merged content here..."
+            android:inputType="textMultiLine"
+            android:background="@drawable/edit_text_border"
+            android:padding="12dp"
+            android:layout_marginBottom="16dp" />
+
+    </LinearLayout>
+
+    <!-- Options -->
+    <CheckBox
+        android:id="@+id/preserveMetadataCheckbox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Preserve metadata (tags, creation date, etc.)"
+        android:checked="true"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Progress Indicator -->
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone" />
+
+    <!-- Resolve Button (for reference, actual button is in dialog) -->
+    <Button
+        android:id="@+id/resolveButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Resolve Conflict"
+        android:visibility="gone" />
+
+</LinearLayout>

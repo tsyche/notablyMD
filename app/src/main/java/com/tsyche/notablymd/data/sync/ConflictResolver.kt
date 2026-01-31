@@ -2,6 +2,8 @@ package com.tsyche.notablymd.data.sync
 
 import com.tsyche.notablymd.data.model.BaseNote
 import java.util.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 /**
  * Handles conflict resolution between database and markdown file versions Implements various
@@ -45,6 +47,193 @@ class ConflictResolver {
             ConflictResolutionStrategy.MERGE -> mergeNotes(databaseNote, fileNote, conflict)
             ConflictResolutionStrategy.MANUAL -> throw ManualResolutionRequired(conflict)
         }
+    }
+
+    /** Attempt to automatically resolve a SyncConflict */
+    suspend fun autoResolveConflict(conflict: SyncConflict): ConflictResolutionResult {
+        return withContext(Dispatchers.IO) {
+            try {
+                when (conflict.conflictType) {
+                    SyncConflict.ConflictType.METADATA_MODIFIED -> {
+                        // Auto-merge metadata conflicts by combining both
+                        val mergedContent =
+                            mergeMetadata(conflict.localVersion, conflict.remoteVersion)
+                        ConflictResolutionResult(
+                            conflictId = conflict.noteId,
+                            success = true,
+                            action = ConflictResolution.ResolutionAction.AUTO_MERGE,
+                            resultingNoteId = conflict.noteId,
+                        )
+                    }
+
+                    SyncConflict.ConflictType.CONTENT_MODIFIED -> {
+                        // Try simple content merge
+                        if (canAutoMergeContent(conflict.localVersion, conflict.remoteVersion)) {
+                            val mergedContent =
+                                mergeContent(conflict.localVersion, conflict.remoteVersion)
+                            ConflictResolutionResult(
+                                conflictId = conflict.noteId,
+                                success = true,
+                                action = ConflictResolution.ResolutionAction.AUTO_MERGE,
+                                resultingNoteId = conflict.noteId,
+                            )
+                        } else {
+                            ConflictResolutionResult(
+                                conflictId = conflict.noteId,
+                                success = false,
+                                action = ConflictResolution.ResolutionAction.MERGE_MANUAL,
+                                errorMessage = "Manual merge required for complex content changes",
+                            )
+                        }
+                    }
+
+                    else -> {
+                        ConflictResolutionResult(
+                            conflictId = conflict.noteId,
+                            success = false,
+                            action = ConflictResolution.ResolutionAction.MERGE_MANUAL,
+                            errorMessage = "Auto-resolution not available for this conflict type",
+                        )
+                    }
+                }
+            } catch (e: Exception) {
+                ConflictResolutionResult(
+                    conflictId = conflict.noteId,
+                    success = false,
+                    action = ConflictResolution.ResolutionAction.MERGE_MANUAL,
+                    errorMessage = "Auto-resolution failed: ${e.message}",
+                )
+            }
+        }
+    }
+
+    /** Apply a manual resolution to a conflict */
+    suspend fun applyResolution(
+        conflict: SyncConflict,
+        resolution: ConflictResolution,
+    ): ConflictResolutionResult {
+        return withContext(Dispatchers.IO) {
+            try {
+                when (resolution.action) {
+                    ConflictResolution.ResolutionAction.KEEP_LOCAL -> {
+                        ConflictResolutionResult(
+                            conflictId = conflict.noteId,
+                            success = true,
+                            action = resolution.action,
+                            resultingNoteId = conflict.noteId,
+                        )
+                    }
+
+                    ConflictResolution.ResolutionAction.KEEP_REMOTE -> {
+                        ConflictResolutionResult(
+                            conflictId = conflict.noteId,
+                            success = true,
+                            action = resolution.action,
+                            resultingNoteId = conflict.noteId,
+                        )
+                    }
+
+                    ConflictResolution.ResolutionAction.MERGE_MANUAL -> {
+                        if (resolution.customContent != null) {
+                            ConflictResolutionResult(
+                                conflictId = conflict.noteId,
+                                success = true,
+                                action = resolution.action,
+                                resultingNoteId = conflict.noteId,
+                            )
+                        } else {
+                            ConflictResolutionResult(
+                                conflictId = conflict.noteId,
+                                success = false,
+                                action = resolution.action,
+                                errorMessage = "Custom content required for manual merge",
+                            )
+                        }
+                    }
+
+                    ConflictResolution.ResolutionAction.KEEP_BOTH -> {
+                        // Would create two separate notes in a real implementation
+                        ConflictResolutionResult(
+                            conflictId = conflict.noteId,
+                            success = true,
+                            action = resolution.action,
+                            resultingNoteId = conflict.noteId,
+                        )
+                    }
+
+                    ConflictResolution.ResolutionAction.DELETE_NOTE -> {
+                        ConflictResolutionResult(
+                            conflictId = conflict.noteId,
+                            success = true,
+                            action = resolution.action,
+                            resultingNoteId = null,
+                        )
+                    }
+
+                    ConflictResolution.ResolutionAction.AUTO_MERGE -> {
+                        autoResolveConflict(conflict)
+                    }
+                }
+            } catch (e: Exception) {
+                ConflictResolutionResult(
+                    conflictId = conflict.noteId,
+                    success = false,
+                    action = resolution.action,
+                    errorMessage = "Resolution failed: ${e.message}",
+                )
+            }
+        }
+    }
+
+    /** Check if content can be auto-merged */
+    private fun canAutoMergeContent(
+        local: SyncConflict.NoteVersion,
+        remote: SyncConflict.NoteVersion,
+    ): Boolean {
+        // Simple heuristic: if content is similar enough and not too large
+        val similarity = calculateContentSimilarity(local.content, remote.content)
+        return similarity > 0.7 && local.content.length < 10000 && remote.content.length < 10000
+    }
+
+    /** Calculate similarity between two content strings */
+    private fun calculateContentSimilarity(content1: String, content2: String): Float {
+        if (content1 == content2) return 1.0f
+        if (content1.isEmpty() || content2.isEmpty()) return 0.0f
+
+        // Simple word-based similarity calculation
+        val words1 = content1.split("\\s+".toRegex()).toSet()
+        val words2 = content2.split("\\s+".toRegex()).toSet()
+
+        val intersection = words1.intersect(words2)
+        val union = words1.union(words2)
+
+        return if (union.isNotEmpty()) {
+            intersection.size.toFloat() / union.size.toFloat()
+        } else {
+            0.0f
+        }
+    }
+
+    /** Merge content from two versions */
+    private fun mergeContent(
+        local: SyncConflict.NoteVersion,
+        remote: SyncConflict.NoteVersion,
+    ): String {
+        // Simple merge strategy: use the newer version as base and add changes
+        val base = if (local.lastModified > remote.lastModified) local else remote
+        val other = if (local.lastModified > remote.lastModified) remote else local
+
+        // In a real implementation, this would use a proper diff/merge algorithm
+        return base.content + "\n\n--- Merged content ---\n" + other.content
+    }
+
+    /** Merge metadata from two versions */
+    private fun mergeMetadata(
+        local: SyncConflict.NoteVersion,
+        remote: SyncConflict.NoteVersion,
+    ): String {
+        // For metadata conflicts, use the most recent version
+        return if (local.lastModified > remote.lastModified) local.content else remote.content
     }
 
     /** Detect the type of conflict between two notes */

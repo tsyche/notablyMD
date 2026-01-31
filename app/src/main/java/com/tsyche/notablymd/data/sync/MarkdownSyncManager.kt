@@ -31,11 +31,6 @@ class MarkdownSyncManager(private val context: Context) {
         WorkManager.getInstance(context).cancelUniqueWork(WATCHER_WORK_NAME)
     }
 
-    /** Manually trigger a sync operation */
-    fun triggerSync() {
-        scope.launch { bidirectionalSync.performFullSync() }
-    }
-
     /** Schedule periodic background sync */
     private fun schedulePeriodicSync() {
         val syncRequest =
@@ -73,7 +68,28 @@ class MarkdownSyncManager(private val context: Context) {
         }
     }
 
+    /** Trigger manual sync and return result */
+    suspend fun triggerSync(): Result<Unit> {
+        return try {
+            // Simple sync implementation for now
+            bidirectionalSync.performFullSync()
+            Result.success(Unit)
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
     companion object {
         const val WATCHER_WORK_NAME = "markdown_file_watcher"
+
+        @Volatile private var INSTANCE: MarkdownSyncManager? = null
+
+        fun getInstance(context: Context): MarkdownSyncManager {
+            return INSTANCE
+                ?: synchronized(this) {
+                    INSTANCE
+                        ?: MarkdownSyncManager(context.applicationContext).also { INSTANCE = it }
+                }
+        }
     }
 }

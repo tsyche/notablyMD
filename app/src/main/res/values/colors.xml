@@ -28,6 +28,13 @@
     <color name="md_theme_inverseSurface">#2F3036</color>
     <color name="md_theme_inverseOnSurface">#F1F0F7</color>
     <color name="md_theme_inversePrimary">#B7C4FF</color>
+
+    <!-- Conflict severity colors -->
+    <color name="conflict_low">#4CAF50</color>
+    <color name="conflict_medium">#FF9800</color>
+    <color name="conflict_high">#F44336</color>
+    <color name="conflict_critical">#9C27B0</color>
+
     <color name="md_theme_primaryFixed">#DCE1FF</color>
     <color name="md_theme_onPrimaryFixed">#05164B</color>
     <color name="md_theme_primaryFixedDim">#B7C4FF</color>
