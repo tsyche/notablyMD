@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!-- Trigger Summary -->
+    <Preference
+        android:key="trigger_summary"
+        android:title="Active Triggers"
+        android:summary="0 trigger(s) enabled"
+        app:icon="@drawable/ic_info" />
+
+    <!-- Assistant Integration -->
+    <SwitchPreferenceCompat
+        android:key="assistant_trigger"
+        android:title="Voice Assistant"
+        android:summary="Enable voice assistant integration with custom wake phrase"
+        android:defaultValue="false"
+        app:icon="@drawable/ic_mic" />
+
+    <!-- Custom Wake Phrase -->
+    <EditTextPreference
+        android:key="custom_wake_phrase"
+        android:title="Custom Wake Phrase"
+        android:summary="Phrase to activate voice assistant"
+        android:defaultValue="Hey Notably"
+        android:dependency="assistant_trigger"
+        app:icon="@drawable/ic_edit" />
+
+    <!-- Quick Settings Tile -->
+    <SwitchPreferenceCompat
+        android:key="quick_tile_trigger"
+        android:title="Quick Settings Tile"
+        android:summary="Add voice recording tile to quick settings panel"
+        android:defaultValue="true"
+        app:icon="@drawable/ic_tile" />
+
+    <!-- Hardware Button Triggers -->
+    <SwitchPreferenceCompat
+        android:key="accessibility_trigger"
+        android:title="Hardware Button Triggers"
+        android:summary="Use hardware button combinations to trigger recording"
+        android:defaultValue="false"
+        app:icon="@drawable/ic_hardware" />
+
+    <!-- Hardware Button Combo Selection -->
+    <ListPreference
+        android:key="hardware_button_combo"
+        android:title="Button Combination"
+        android:summary="Select hardware button combination"
+        android:defaultValue="power_volume_up"
+        android:dependency="accessibility_trigger"
+        android:entries="@array/hardware_button_combos"
+        android:entryValues="@array/hardware_button_combo_values"
+        app:icon="@drawable/ic_settings" />
+
+    <!-- Device Administrator -->
+    <SwitchPreferenceCompat
+        android:key="device_admin_trigger"
+        android:title="Device Administrator"
+        android:summary="Enable system-level control for enhanced hardware button support"
+        android:defaultValue="false"
+        app:icon="@drawable/ic_admin" />
+
+    <!-- Information Section -->
+    <PreferenceCategory android:title="Information">
+        
+        <Preference
+            android:key="setup_instructions"
+            android:title="Setup Instructions"
+            android:summary="Learn how to configure each trigger method"
+            app:icon="@drawable/ic_help" />
+            
+        <Preference
+            android:key="permissions_info"
+            android:title="Required Permissions"
+            android:summary="View permissions needed for each trigger method"
+            app:icon="@drawable/ic_permission" />
+            
+    </PreferenceCategory>
+
+</PreferenceScreen>

@@ -13,6 +13,7 @@ import android.os.IBinder
 import android.speech.RecognitionListener
 import android.speech.RecognizerIntent
 import android.speech.SpeechRecognizer
+import android.util.Log
 import android.widget.Toast
 import androidx.core.app.NotificationCompat
 import com.tsyche.notablymd.R
@@ -43,6 +44,10 @@ class VoiceRecordingService : Service() {
         const val ACTION_START_RECORDING = "com.tsyche.notablymd.service.START_RECORDING"
         const val ACTION_STOP_RECORDING = "com.tsyche.notablymd.service.STOP_RECORDING"
 
+        // Trigger source tracking
+        const val EXTRA_TRIGGER_SOURCE = "trigger_source"
+        const val EXTRA_BUTTON_COMBINATION = "button_combination"
+
         // Audio recording parameters
         internal const val SAMPLE_RATE = 44100
         internal const val CHANNEL_CONFIG = AudioFormat.CHANNEL_IN_MONO
@@ -71,9 +76,12 @@ class VoiceRecordingService : Service() {
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        val triggerSource = intent?.getStringExtra(EXTRA_TRIGGER_SOURCE) ?: "UNKNOWN"
+        val buttonCombination = intent?.getStringExtra(EXTRA_BUTTON_COMBINATION)
+
         return when (intent?.action) {
             ACTION_START_RECORDING -> {
-                startRecording()
+                startRecording(triggerSource, buttonCombination)
                 START_STICKY
             }
             ACTION_STOP_RECORDING -> {
@@ -103,10 +111,19 @@ class VoiceRecordingService : Service() {
         }
     }
 
-    private fun createRecordingNotification(): Notification {
+    private fun createRecordingNotification(triggerSource: String = "UNKNOWN"): Notification {
+        val contentText =
+            when (triggerSource) {
+                "ASSISTANT" -> "Recording via voice assistant..."
+                "QUICK_TILE" -> "Recording via quick settings..."
+                "ACCESSIBILITY" -> "Recording via hardware button..."
+                "DEVICE_ADMIN" -> "Recording via system shortcut..."
+                else -> "Recording voice note..."
+            }
+
         return NotificationCompat.Builder(this, CHANNEL_ID)
             .setContentTitle("Voice Recording")
-            .setContentText("Recording voice note...")
+            .setContentText(contentText)
             .setSmallIcon(R.drawable.ic_mic)
             .setOngoing(true)
             .setSilent(true)
@@ -125,7 +142,10 @@ class VoiceRecordingService : Service() {
             .build()
     }
 
-    private fun startRecording() {
+    private fun startRecording(
+        triggerSource: String = "UNKNOWN",
+        buttonCombination: String? = null,
+    ) {
         if (isRecording) return
 
         if (!checkAudioPermission()) {
@@ -134,11 +154,16 @@ class VoiceRecordingService : Service() {
             return
         }
 
+        Log.d(
+            "VoiceRecordingService",
+            "Starting recording from trigger: $triggerSource${buttonCombination?.let { " ($it)" } ?: ""}",
+        )
+
         serviceJob =
             CoroutineScope(Dispatchers.IO).launch {
                 try {
                     isRecording = true
-                    startForeground(NOTIFICATION_ID, createRecordingNotification())
+                    startForeground(NOTIFICATION_ID, createRecordingNotification(triggerSource))
 
                     // Update widget UI
                     val intent =
@@ -146,6 +171,7 @@ class VoiceRecordingService : Service() {
                             action = VoiceNoteWidget.ACTION_UPDATE_STATUS
                             putExtra("state", VoiceNoteWidget.STATE_RECORDING)
                             putExtra("status", "Recording...")
+                            putExtra("trigger_source", triggerSource)
                         }
                     sendBroadcast(intent)
 
