@@ -34,11 +34,11 @@ class MarkdownSyncPreferencesTest {
     }
 
     @Test
-    fun markdownSyncEnabledShouldDefaultToFalse() {
-        // Test that markdown sync enabled defaults to false
+    fun markdownSyncEnabledShouldDefaultToTrue() {
+        // Test that markdown sync enabled defaults to true
         val isEnabled = preferences.markdownSyncEnabled.value
 
-        assertEquals("Markdown sync should be disabled by default", false, isEnabled)
+        assertEquals("Markdown sync should be enabled by default", true, isEnabled)
     }
 
     @Test

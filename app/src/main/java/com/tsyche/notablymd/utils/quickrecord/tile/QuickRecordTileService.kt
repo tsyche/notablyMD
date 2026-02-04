@@ -1,7 +1,9 @@
 package com.tsyche.notablymd.utils.quickrecord.tile
 
+import android.Manifest
 import android.annotation.TargetApi
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Build
 import android.service.quicksettings.Tile
 import android.service.quicksettings.TileService
@@ -20,7 +22,7 @@ class QuickRecordTileService : TileService() {
         private const val TAG = "QuickRecordTile"
     }
 
-    private lateinit var triggerManager: QuickRecordTriggerManager
+    private var triggerManager: QuickRecordTriggerManager? = null
 
     override fun onCreate() {
         super.onCreate()
@@ -42,7 +44,14 @@ class QuickRecordTileService : TileService() {
     override fun onClick() {
         super.onClick()
 
-        if (!triggerManager.isQuickTileTriggerEnabled) {
+        val manager = triggerManager
+        if (manager == null) {
+            Log.e(TAG, "Trigger manager not initialized")
+            showToast("Voice recording not available")
+            return
+        }
+
+        if (!manager.isQuickTileTriggerEnabled) {
             Log.d(TAG, "Quick tile trigger disabled")
             showToast("Quick record tile is disabled in settings")
             return
@@ -56,7 +65,18 @@ class QuickRecordTileService : TileService() {
     private fun updateTileState() {
         val tile = qsTile ?: return
 
-        if (triggerManager.isQuickTileTriggerEnabled) {
+        val manager = triggerManager
+        if (manager == null) {
+            tile.state = Tile.STATE_UNAVAILABLE
+            tile.label = "Voice Record"
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                tile.subtitle = "Not available"
+            }
+            tile.updateTile()
+            return
+        }
+
+        if (manager.isQuickTileTriggerEnabled) {
             tile.state = Tile.STATE_ACTIVE
             tile.label = "Voice Record"
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
@@ -75,16 +95,46 @@ class QuickRecordTileService : TileService() {
 
     /** Start voice recording service */
     private fun triggerVoiceRecording() {
+        // Check microphone permission first
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (
+                checkSelfPermission(android.Manifest.permission.RECORD_AUDIO) !=
+                    PackageManager.PERMISSION_GRANTED
+            ) {
+                Log.e(TAG, "Microphone permission not granted")
+                showToast("Microphone permission required")
+                return
+            }
+        }
+
+        // Check notification permission for Android 13+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (
+                checkSelfPermission(android.Manifest.permission.POST_NOTIFICATIONS) !=
+                    PackageManager.PERMISSION_GRANTED
+            ) {
+                Log.e(TAG, "Notification permission not granted")
+                showToast("Notification permission required")
+                return
+            }
+        }
+
         val intent =
             Intent(this, VoiceRecordingService::class.java).apply {
                 action = VoiceRecordingService.ACTION_START_RECORDING
                 putExtra(VoiceRecordingService.EXTRA_TRIGGER_SOURCE, "QUICK_TILE")
             }
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            startForegroundService(intent)
-        } else {
-            startService(intent)
+        try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                startForegroundService(intent)
+            } else {
+                startService(intent)
+            }
+        } catch (e: Exception) {
+            Log.e(TAG, "Failed to start voice recording service", e)
+            showToast("Failed to start recording")
+            return
         }
 
         // Provide haptic feedback

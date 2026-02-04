@@ -144,18 +144,70 @@ class VoiceNoteWidget : AppWidgetProvider() {
         appWidgetId: Int,
         state: Int,
     ) {
-        val views = RemoteViews(context.packageName, R.layout.widget_voice_note)
+        // Use simple layout for 1x1 widget
+        val views = RemoteViews(context.packageName, R.layout.widget_voice_note_simple)
 
         // Setup click handlers
-        setupClickHandlers(context, views)
+        setupSimpleClickHandlers(context, views, appWidgetId)
 
         // Update UI based on state
-        updateWidgetUI(views, state)
-
-        // Update last note preview
-        updateLastNotePreview(context, views)
+        updateSimpleWidgetUI(views, state)
 
         appWidgetManager.updateAppWidget(appWidgetId, views)
+    }
+
+    private fun setupSimpleClickHandlers(context: Context, views: RemoteViews, appWidgetId: Int) {
+        // Record button - toggle between start and stop based on state
+        val recordIntent =
+            Intent(context, VoiceNoteWidget::class.java).apply {
+                action = ACTION_RECORD_START
+                putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId)
+            }
+        val recordPendingIntent =
+            PendingIntent.getBroadcast(
+                context,
+                appWidgetId,
+                recordIntent,
+                PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE,
+            )
+        views.setOnClickPendingIntent(R.id.recordButton, recordPendingIntent)
+    }
+
+    private fun updateSimpleWidgetUI(views: RemoteViews, state: Int) {
+        when (state) {
+            STATE_IDLE -> {
+                views.setInt(
+                    R.id.statusIndicator,
+                    "setImageResource",
+                    R.drawable.status_indicator_idle,
+                )
+                views.setViewVisibility(R.id.statusIndicator, View.GONE)
+            }
+            STATE_RECORDING -> {
+                views.setInt(
+                    R.id.statusIndicator,
+                    "setImageResource",
+                    R.drawable.status_indicator_recording,
+                )
+                views.setViewVisibility(R.id.statusIndicator, View.VISIBLE)
+            }
+            STATE_PROCESSING -> {
+                views.setInt(
+                    R.id.statusIndicator,
+                    "setImageResource",
+                    R.drawable.status_indicator_processing,
+                )
+                views.setViewVisibility(R.id.statusIndicator, View.VISIBLE)
+            }
+            STATE_ERROR -> {
+                views.setInt(
+                    R.id.statusIndicator,
+                    "setImageResource",
+                    R.drawable.status_indicator_error,
+                )
+                views.setViewVisibility(R.id.statusIndicator, View.VISIBLE)
+            }
+        }
     }
 
     private fun setupClickHandlers(context: Context, views: RemoteViews) {

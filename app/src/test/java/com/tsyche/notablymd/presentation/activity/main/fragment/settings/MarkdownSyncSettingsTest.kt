@@ -29,9 +29,9 @@ class MarkdownSyncSettingsTest {
         val locationTitle = context.getString(R.string.markdown_sync_location)
         val locationUpdated = context.getString(R.string.sync_location_updated)
 
-        assertEquals("Markdown Sync", syncTitle)
-        assertEquals("Enable Markdown Sync", enabledTitle)
-        assertEquals("Sync Location", locationTitle)
+        assertEquals("Markdown Files", syncTitle)
+        assertEquals("Save notes as Markdown files", enabledTitle)
+        assertEquals("Markdown folder", locationTitle)
         assertEquals("Sync location updated", locationUpdated)
     }
 

@@ -50,12 +50,12 @@
     <string name="auto_save_after_idle_time">Auto save note after specified idle time</string>
     <string name="auto_sort_by_checked">Sort checked items to the end</string>
     <string name="back">Back</string>
-    <string name="markdown_sync">Markdown Sync</string>
-    <string name="markdown_sync_enabled">Enable Markdown Sync</string>
-    <string name="markdown_sync_location">Sync Location</string>
-    <string name="markdown_sync_enabled_hint">Enable bidirectional synchronization with markdown
-        files</string>
-    <string name="markdown_sync_location_hint">Choose directory for markdown files (default:
+    <string name="markdown_sync">Markdown Files</string>
+    <string name="markdown_sync_enabled">Save notes as Markdown files</string>
+    <string name="markdown_sync_location">Markdown folder</string>
+    <string name="markdown_sync_enabled_hint">Automatically save all notes as markdown files for
+        easy access and backup</string>
+    <string name="markdown_sync_location_hint">Choose where to store your markdown files (default:
         Android/media/com.tsyche.notablymd)</string>
     <string name="choose_sync_location">Choose Sync Directory</string>
     <string name="sync_location_updated">Sync location updated</string>

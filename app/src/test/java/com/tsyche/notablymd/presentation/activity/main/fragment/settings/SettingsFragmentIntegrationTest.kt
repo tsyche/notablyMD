@@ -19,7 +19,38 @@ class SettingsFragmentIntegrationTest {
     @Before
     fun setUp() {
         context = ApplicationProvider.getApplicationContext()
+
+        // Reset the NotablyMDPreferences singleton to ensure fresh state
+        resetNotablyMDPreferencesSingleton()
+
+        // Clear SharedPreferences to ensure fresh state with new defaults
+        val sharedPreferences =
+            androidx.preference.PreferenceManager.getDefaultSharedPreferences(context)
+        sharedPreferences.edit().clear().commit()
+
+        // Also clear encrypted preferences
+        try {
+            val encryptedPrefs =
+                context.getSharedPreferences("secret_shared_prefs", Context.MODE_PRIVATE)
+            encryptedPrefs.edit().clear().commit()
+        } catch (e: Exception) {
+            // Encrypted prefs might not be available in test environment
+        }
+
+        // Force recreation of preferences instance
         preferences = NotablyMDPreferences.getInstance(context)
+    }
+
+    private fun resetNotablyMDPreferencesSingleton() {
+        // Use reflection to reset the singleton instance for test isolation
+        try {
+            val instanceField = NotablyMDPreferences::class.java.getDeclaredField("instance")
+            instanceField.isAccessible = true
+            instanceField.set(null, null)
+        } catch (e: Exception) {
+            // If reflection fails, at least we tried
+            println("Warning: Could not reset NotablyMDPreferences singleton: ${e.message}")
+        }
     }
 
     @Test
@@ -51,10 +82,10 @@ class SettingsFragmentIntegrationTest {
         }
 
         // Verify they're the correct strings
-        assert(enabledTitle == "Enable Markdown Sync") {
+        assert(enabledTitle == "Save notes as Markdown files") {
             "markdownSyncEnabled should have correct title"
         }
-        assert(locationTitle == "Sync Location") {
+        assert(locationTitle == "Markdown folder") {
             "markdownSyncLocation should have correct title"
         }
     }
@@ -69,7 +100,11 @@ class SettingsFragmentIntegrationTest {
         val isEnabled = enabledPref.value
         val location = locationPref.value
 
-        assert(isEnabled == false) { "markdownSyncEnabled should default to false" }
+        println("DEBUG: isEnabled = $isEnabled, location = $location")
+
+        assert(isEnabled == true) {
+            "markdownSyncEnabled should default to true, but was $isEnabled"
+        }
         assert(location == "") { "markdownSyncLocation should default to empty string" }
     }
 

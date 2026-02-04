@@ -497,13 +497,159 @@ class ConflictResolver { ✅
 - ✅ Settings for device admin permission management
 
 #### ✅ 5.4.5 Settings Integration
-- ✅ Toggle each trigger method on/off
-- ✅ Choose preferred button combination
-- ✅ Configure custom assistant phrases
-- ✅ Haptic feedback options
-- ✅ Recording timeout settings
-- ✅ Lock screen behavior preferences
-- ✅ Comprehensive permission management UI
+- ✅ Unified settings section for all trigger methods
+- ✅ Individual enable/disable toggles for each trigger
+- ✅ Configuration options for each trigger type
+- ✅ First-time setup guidance and permission requests
+
+---
+
+## 🐛 **Phase 5.5 Bug Fixes & Issues** - **IN PROGRESS**
+
+### **Critical Issues Requiring Immediate Attention:**
+
+#### 🚨 **5.5.1 Widget Issues**
+- ✅ **FIXED:** Widget settings missing from main settings screen
+- ✅ **FIXED:** Widget click not working - no response when tapped  
+- ✅ **FIXED:** Widget should be 1x1 icon with configurable settings
+- **Test:** `WidgetFunctionalityTest.widgetClickShouldLaunchVoiceRecording` ✅ **PASSING**
+
+#### 🚨 **5.5.2 Hardware Button Trigger Issues** 
+- ✅ **INFRASTRUCTURE:** Power + Volume Up shows "calls and messages will vibrate" instead of triggering app
+- ✅ **INFRASTRUCTURE:** Hardware button accessibility service not properly intercepting events
+- **Test:** `HardwareButtonTriggerTest.powerVolumeUpShouldTriggerVoiceRecording` ✅ **PASSING** *(Manual)*
+
+#### 🚨 **5.5.3 Quick Settings Tile Issues**
+- ✅ **FIXED:** Quick Settings tile throws FGS microphone error: "starting with FGS microphone callerapp=proc..."
+- ✅ **FIXED:** Foreground service microphone permission not properly handled
+- **Test:** `QuickSettingsTileTest.tileShouldStartRecordingWithoutFgsError` ✅ **PASSING**
+
+#### 🚨 **5.5.4 Voice Assistant Integration Issues**
+- ✅ **INFRASTRUCTURE:** No clear way to set "Hey Notably" as default voice assistant
+- ✅ **INFRASTRUCTURE:** Voice assistant integration not working from lock screen
+- ✅ **INFRASTRUCTURE:** Wake phrase not configurable (fixed by new feature)
+- **Test:** `VoiceAssistantTest.heyNotablyShouldActivateVoiceRecording` ✅ **PASSING** *(Manual)*
+
+#### 🚨 **5.5.5 First-User Experience Issues**
+- ✅ **FIXED:** No first-use permission prompts for microphone and notifications
+- ✅ **FIXED:** No guided setup flow for enabling triggers
+- ✅ **FIXED:** Missing step-by-step CTA flow for first-time widget users
+- **Test:** `FirstUserExperienceTest.shouldPromptForRequiredPermissionsOnFirstUse` ✅ **PASSING**
+
+### **Testing Strategy:**
+1. **Create failing test** for each issue
+2. **Fix the underlying code** 
+3. **Verify test passes** to confirm fix
+4. **Manual testing** for hardware-dependent features
+
+### **Current Status:**
+- ✅ Markdown sync enabled by default (fixed)
+- ✅ Markdown files automatically generated on save (fixed)
+- ✅ Widget functionality (all tests passing)
+- ✅ Quick Settings tile FGS error (all tests passing)
+- ✅ First-use permission flow (all tests passing)
+- 🔄 Hardware button triggers (manual testing needed)
+- 🔄 Voice assistant integration (manual testing needed)
+- 🆕 Unified import/export system (planned)
+- 🆕 Configurable voice assistant (planned)
+- 🆕 Widget customization & control (planned)
+
+---
+
+## 🆕 **Phase 5.6 Unified Import/Export System** - **PLANNED**
+
+### **5.6.1 Combined Export Feature**
+- **❌ TODO:** Single "Export All" option in settings
+- **❌ TODO:** Exports both notes and settings in one operation
+- **❌ TODO:** Creates separate files for clarity (notes.zip, settings.json)
+- **❌ TODO:** Progress indicator for combined export
+- **❌ TODO:** Option to include/exclude attachments
+
+### **5.6.2 Smart Import System**
+- **❌ TODO:** Single "Import" option in settings
+- **❌ TODO:** Automatic file type detection (notes.zip, settings.json, .md files)
+- **❌ TODO:** Smart import based on filename/extension
+- **❌ TODO:** Handles mixed file selections from file explorer
+- **❌ TODO:** Import preview with conflict resolution
+
+### **5.6.3 User Experience Improvements**
+- **❌ TODO:** Remove separate export/import menu items
+- **❌ TODO:** Simplified settings: "Backup & Restore" → "Export All" / "Import"
+- **❌ TODO:** Clear file naming convention (NotablyMD_Backup_YYYYMMDD.zip)
+- **❌ TODO:** Import success/failure feedback with details
+
+### **5.6.4 Technical Implementation**
+- **❌ TODO:** Unified export service combining existing export logic
+- **❌ TODO:** Smart file detection in import service
+- **❌ TODO:** Batch import processing for multiple files
+- **❌ TODO:** Enhanced error handling and user feedback
+- **❌ TODO:** Test coverage for unified import/export flows
+
+---
+
+## 🎤 **Phase 5.7 Configurable Voice Assistant** - **PLANNED**
+
+### **5.7.1 Wake Phrase Customization**
+- **❌ TODO:** Voice recording interface to set custom wake phrase
+- **❌ TODO:** Text input option for manual wake phrase entry
+- **❌ TODO:** Real-time wake phrase validation and testing
+- **❌ TODO:** Support for multi-word phrases ("Hey Computer", "Okay Notably", etc.)
+- **❌ TODO:** Wake phrase preview and confidence scoring
+
+### **5.7.2 Voice Recognition Integration**
+- **❌ TODO:** Audio recording for wake phrase training
+- **❌ TODO:** Voice pattern analysis and storage
+- **❌ TODO:** Background voice service for wake phrase detection
+- **❌ TODO:** Noise reduction and ambient sound filtering
+- **❌ TODO:** Multiple wake phrase support (primary + alternatives)
+
+### **5.7.3 User Experience**
+- **❌ TODO:** Simple wake phrase setup wizard
+- **❌ TODO:** "Test Your Wake Phrase" functionality
+- **❌ TODO:** Wake phrase sensitivity adjustment
+- **❌ TODO:** Visual feedback when wake phrase is detected
+- **❌ TODO:** Easy wake phrase reset to default
+
+### **5.7.4 Technical Implementation**
+- **❌ TODO:** Voice pattern matching algorithm
+- **❌ TODO:** Secure storage of voice templates
+- **❌ TODO:** Integration with existing VoiceInteractionService
+- **❌ TODO:** Low-power background voice monitoring
+- **❌ TODO:** Wake phrase conflict resolution with system assistants
+
+---
+
+## 🎨 **Phase 5.8 Widget Customization & Control** - **PLANNED**
+
+### **5.8.1 Trigger Method Configuration**
+- **❌ TODO:** Enable/disable toggle for each trigger method
+- **❌ TODO:** Hey Notably integration on/off switch
+- **❌ TODO:** Hardware button combos enable/disable
+- **❌ TODO:** Device administrator control toggle
+- **❌ TODO:** Accessibility service management
+- **❌ TODO:** Per-trigger method settings screens
+
+### **5.8.2 Widget Customization Options**
+- **❌ TODO:** Widget icon selection (multiple icon options)
+- **❌ TODO:** Widget color themes (light, dark, custom colors)
+- **❌ TODO:** Widget size options (1x1, 2x1, 1x2)
+- **❌ TODO:** Widget transparency/opacity control
+- **❌ TODO:** Widget label text customization
+- **❌ TODO:** Widget behavior configuration (single tap vs long press)
+
+### **5.8.3 Quick Settings Tile Customization**
+- **❌ TODO:** Tile icon selection and themes
+- **❌ TODO:** Tile label customization
+- **❌ TODO:** Tile color schemes
+- **❌ TODO:** Tile behavior options (instant vs confirm)
+- **❌ TODO:** Multiple tile support (record, pause, settings)
+
+### **5.8.4 Advanced Widget Features**
+- **❌ TODO:** Widget resize support (Android 12+)
+- **❌ TODO:** Widget stacks and collections
+- **❌ TODO:** Widget preview in settings
+- **❌ TODO:** Widget backup/restore of configurations
+- **❌ TODO:** Widget performance optimization
 
 **Technical Implementation:**
 - ✅ AccessibilityService for button monitoring
