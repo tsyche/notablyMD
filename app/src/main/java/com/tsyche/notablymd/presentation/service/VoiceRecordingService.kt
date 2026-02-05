@@ -64,6 +64,8 @@ class VoiceRecordingService : Service() {
     private var speechRecognizer: SpeechRecognizer? = null
     private var isRecording = false
     private var audioFile: File? = null
+    private var recordingStartTime: Long = 0
+    private var currentTriggerSource: String = "UNKNOWN"
     private lateinit var voiceNoteCreator: VoiceNoteCreator
 
     private val voiceLevelChannel = Channel<Int>(Channel.UNLIMITED)
@@ -158,6 +160,10 @@ class VoiceRecordingService : Service() {
             "VoiceRecordingService",
             "Starting recording from trigger: $triggerSource${buttonCombination?.let { " ($it)" } ?: ""}",
         )
+
+        // Set recording metadata
+        recordingStartTime = System.currentTimeMillis()
+        currentTriggerSource = triggerSource
 
         serviceJob =
             CoroutineScope(Dispatchers.IO).launch {
@@ -273,79 +279,95 @@ class VoiceRecordingService : Service() {
     }
 
     private fun startSpeechRecognition() {
+        // Check if speech recognition is available
         if (!SpeechRecognizer.isRecognitionAvailable(this)) {
-            handleRecordingError("Speech recognition not available")
+            Log.w("VoiceRecordingService", "Speech recognition not available on this device")
+            // Don't fail the recording, just continue without speech recognition
+            // The audio recording will still work
             return
         }
 
-        speechRecognizer = SpeechRecognizer.createSpeechRecognizer(this)
+        try {
+            speechRecognizer = SpeechRecognizer.createSpeechRecognizer(this)
 
-        val intent =
-            Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
-                putExtra(
-                    RecognizerIntent.EXTRA_LANGUAGE_MODEL,
-                    RecognizerIntent.LANGUAGE_MODEL_FREE_FORM,
-                )
-                putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault())
-                putExtra(RecognizerIntent.EXTRA_PARTIAL_RESULTS, true)
-                putExtra(RecognizerIntent.EXTRA_MAX_RESULTS, 1)
-            }
-
-        speechRecognizer?.setRecognitionListener(
-            object : RecognitionListener {
-                override fun onReadyForSpeech(params: Bundle?) {}
-
-                override fun onBeginningOfSpeech() {}
-
-                override fun onRmsChanged(rmsdB: Float) {
-                    // Send voice level to widget for visualization
-                    val level = (rmsdB + 100).toInt().coerceIn(0, 100)
-                    voiceLevelChannel.trySend(level)
+            val intent =
+                Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
+                    putExtra(
+                        RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+                        RecognizerIntent.LANGUAGE_MODEL_FREE_FORM,
+                    )
+                    putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault())
+                    putExtra(RecognizerIntent.EXTRA_PARTIAL_RESULTS, true)
+                    putExtra(RecognizerIntent.EXTRA_MAX_RESULTS, 1)
                 }
 
-                override fun onBufferReceived(buffer: ByteArray?) {}
+            speechRecognizer?.setRecognitionListener(
+                object : RecognitionListener {
+                    override fun onReadyForSpeech(params: Bundle?) {}
 
-                override fun onEndOfSpeech() {}
+                    override fun onBeginningOfSpeech() {}
 
-                override fun onError(error: Int) {
-                    handleRecordingError("Speech recognition error: $error")
-                }
-
-                override fun onResults(results: Bundle?) {
-                    val matches = results?.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION)
-                    if (matches != null && matches.isNotEmpty()) {
-                        processTranscription(matches[0])
+                    override fun onRmsChanged(rmsdB: Float) {
+                        // Send voice level to widget for visualization
+                        val level = (rmsdB + 100).toInt().coerceIn(0, 100)
+                        voiceLevelChannel.trySend(level)
                     }
-                }
 
-                override fun onPartialResults(partialResults: Bundle?) {
-                    val matches =
-                        partialResults?.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION)
-                    if (matches != null && matches.isNotEmpty()) {
-                        // Update widget with partial transcription
-                        val intent =
-                            Intent(this@VoiceRecordingService, VoiceNoteWidget::class.java).apply {
-                                action = VoiceNoteWidget.ACTION_UPDATE_STATUS
-                                putExtra("state", VoiceNoteWidget.STATE_RECORDING)
-                                putExtra("status", "Recording: ${matches[0].take(50)}...")
-                            }
-                        sendBroadcast(intent)
+                    override fun onBufferReceived(buffer: ByteArray?) {}
+
+                    override fun onEndOfSpeech() {}
+
+                    override fun onError(error: Int) {
+                        Log.w("VoiceRecordingService", "Speech recognition error: $error")
+                        // Don't fail the entire recording, just log the error
                     }
+
+                    override fun onResults(results: Bundle?) {
+                        val matches =
+                            results?.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION)
+                        if (matches != null && matches.isNotEmpty()) {
+                            processTranscription(matches[0])
+                        }
+                    }
+
+                    override fun onPartialResults(partialResults: Bundle?) {
+                        val matches =
+                            partialResults?.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION)
+                        if (matches != null && matches.isNotEmpty()) {
+                            // Update live transcription if needed
+                        }
+                    }
+
+                    override fun onEvent(eventType: Int, params: Bundle?) {}
                 }
+            )
 
-                override fun onEvent(eventType: Int, params: Bundle?) {}
-            }
-        )
-
-        speechRecognizer?.startListening(intent)
+            speechRecognizer?.startListening(intent)
+        } catch (e: Exception) {
+            Log.e("VoiceRecordingService", "Failed to start speech recognition", e)
+            handleRecordingError("Failed to start speech recognition")
+        }
     }
 
-    private fun stopSpeechRecognition() {
-        speechRecognizer?.let { recognizer ->
-            recognizer.stopListening()
-            recognizer.destroy()
-        }
+    private fun handleRecordingError(errorMessage: String) {
+        Log.e("VoiceRecordingService", errorMessage)
+
+        // Update widget with error state
+        val intent =
+            Intent(this, VoiceNoteWidget::class.java).apply {
+                action = VoiceNoteWidget.ACTION_UPDATE_STATUS
+                putExtra("state", VoiceNoteWidget.STATE_ERROR)
+                putExtra("status", "Error: $errorMessage")
+            }
+        sendBroadcast(intent)
+
+        // Clean up
+        isRecording = false
+        speechRecognizer?.destroy()
         speechRecognizer = null
+        stopAudioRecording()
+        stopForeground(true)
+        stopSelf()
     }
 
     private suspend fun monitorVoiceLevels() {
@@ -377,8 +399,39 @@ class VoiceRecordingService : Service() {
                     // Save audio file if needed
                     audioFile?.let { file ->
                         if (file.exists()) {
-                            // Process the audio file or use speech recognition results
-                            // For now, we'll rely on the speech recognition results
+                            // Create a note even without speech recognition
+                            val noteTitle = "Voice Recording ${System.currentTimeMillis()}"
+                            val noteContent = """
+# $noteTitle
+
+Voice recording created at ${java.util.Date()}
+Duration: ${System.currentTimeMillis() - recordingStartTime}ms
+Trigger source: $currentTriggerSource
+
+*Audio file saved for future transcription*
+""".trimIndent()
+                            
+                            // Create note from recording
+                            val noteId = voiceNoteCreator.createNoteFromTranscription(noteContent)
+                            
+                            // Update widget with success
+                            val intent =
+                                Intent(this@VoiceRecordingService, VoiceNoteWidget::class.java).apply {
+                                    action = VoiceNoteWidget.ACTION_UPDATE_STATUS
+                                    putExtra("state", VoiceNoteWidget.STATE_IDLE)
+                                    putExtra("status", "Recording saved")
+                                }
+                            sendBroadcast(intent)
+                            
+                            // Show success toast
+                            CoroutineScope(Dispatchers.Main).launch {
+                                Toast.makeText(
+                                        this@VoiceRecordingService,
+                                        "Voice recording saved as note",
+                                        Toast.LENGTH_LONG,
+                                    )
+                                    .show()
+                            }
                         }
                     }
                 } catch (e: Exception) {
@@ -429,25 +482,6 @@ class VoiceRecordingService : Service() {
             }
     }
 
-    private fun handleRecordingError(error: String) {
-        // Update widget with error state
-        val intent =
-            Intent(this, VoiceNoteWidget::class.java).apply {
-                action = VoiceNoteWidget.ACTION_UPDATE_STATUS
-                putExtra("state", VoiceNoteWidget.STATE_ERROR)
-                putExtra("status", "Error: $error")
-            }
-        sendBroadcast(intent)
-
-        // Show error toast
-        CoroutineScope(Dispatchers.Main).launch {
-            Toast.makeText(applicationContext, error, Toast.LENGTH_LONG).show()
-        }
-
-        // Stop service
-        stopSelf()
-    }
-
     override fun onDestroy() {
         super.onDestroy()
         serviceJob?.cancel()
@@ -455,5 +489,10 @@ class VoiceRecordingService : Service() {
         stopAudioRecording()
         stopSpeechRecognition()
         voiceLevelChannel.close()
+    }
+
+    private fun stopSpeechRecognition() {
+        speechRecognizer?.destroy()
+        speechRecognizer = null
     }
 }

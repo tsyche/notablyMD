@@ -441,4 +441,50 @@
     <string name="yearly">Yearly</string>
     <string name="years">Years</string>
     <string name="your_notes_associated">Your notes attached to this label will not be deleted</string>
+
+    <!-- Widget Customization Strings -->
+    <string name="widget_customization_enabled" translatable="false">Widget Customization</string>
+    <string name="widget_customization_enabled_hint" translatable="false">Enable advanced widget
+        customization options</string>
+    <string name="widget_icon_style" translatable="false">Widget Icon Style</string>
+    <string name="widget_icon_style_hint" translatable="false">Choose the icon style for the widget</string>
+    <string name="widget_color_scheme" translatable="false">Widget Color Scheme</string>
+    <string name="widget_color_scheme_hint" translatable="false">Choose the color scheme for the
+        widget</string>
+    <string name="widget_show_status_indicator" translatable="false">Show Status Indicator</string>
+    <string name="widget_show_status_indicator_hint" translatable="false">Show recording status
+        indicator on widget</string>
+    <string name="widget_behavior_on_tap" translatable="false">Widget Behavior on Tap</string>
+    <string name="widget_behavior_on_tap_hint" translatable="false">Choose what happens when you tap
+        the widget</string>
+
+    <!-- Trigger Method Configuration Strings -->
+    <string name="quick_tile_trigger_enabled" translatable="false">Quick Settings Tile</string>
+    <string name="quick_tile_trigger_enabled_hint" translatable="false">Enable voice recording from
+        Quick Settings tile</string>
+    <string name="hardware_button_trigger_enabled" translatable="false">Hardware Button Trigger</string>
+    <string name="hardware_button_trigger_enabled_hint" translatable="false">Enable Power + Volume
+        Up trigger</string>
+    <string name="voice_assistant_trigger_enabled" translatable="false">Voice Assistant Trigger</string>
+    <string name="voice_assistant_trigger_enabled_hint" translatable="false">Enable "Hey Notably"
+        wake phrase</string>
+    <string name="device_admin_trigger_enabled" translatable="false">Device Administrator</string>
+    <string name="device_admin_trigger_enabled_hint" translatable="false">Enable enhanced
+        system-level control</string>
+    <string name="accessibility_service_preference" translatable="false">Accessibility Service</string>
+    <string name="accessibility_service_preference_hint" translatable="false">Enable accessibility
+        service for hardware
+        buttons</string>
+
+    <!-- Quick Settings Tile Customization Strings -->
+    <string name="quick_tile_icon_style" translatable="false">Quick Tile Icon Style</string>
+    <string name="quick_tile_icon_style_hint" translatable="false">Choose the icon style for the
+        Quick Settings tile</string>
+    <string name="quick_tile_color_scheme" translatable="false">Quick Tile Color Scheme</string>
+    <string name="quick_tile_color_scheme_hint" translatable="false">Choose the color scheme for the
+        Quick Settings tile</string>
+    <string name="quick_tile_show_status" translatable="false">Show Quick Tile Status</string>
+    <string name="quick_tile_show_status_hint" translatable="false">Show recording status in Quick
+        Settings tile</string>
+
 </resources>

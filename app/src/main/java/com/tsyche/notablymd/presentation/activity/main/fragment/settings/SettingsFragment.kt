@@ -100,6 +100,9 @@ class SettingsFragment : Fragment() {
             setupBackup(binding)
             setupAutoBackups(binding)
             setupMarkdownSync(binding)
+            setupWidgetCustomization(binding)
+            setupTriggerMethods(binding)
+            setupQuickTileCustomization(binding)
             setupSecurity(binding)
             setupSettings(binding)
         }
@@ -635,22 +638,207 @@ class SettingsFragment : Fragment() {
 
             // Setup location picker
             markdownSyncLocation.observe(viewLifecycleOwner) { location ->
-                val displayLocation =
-                    if (location.isEmpty()) {
-                        "Android/media/com.tsyche.notablymd (Default)"
-                    } else {
-                        location
-                    }
+                MarkdownSyncLocation.setupMarkdownSyncLocation(
+                    markdownSyncLocation,
+                    location,
+                    requireContext(),
+                    layoutInflater,
+                    messageResId = R.string.markdown_sync_location_hint,
+                    chooseLocation = {
+                        // TODO: Launch folder picker for markdown sync location
+                        // This should open a folder picker dialog
+                    },
+                )
+            }
+        }
+    }
 
-                MarkdownSyncLocation.Title.setText(R.string.markdown_sync_location)
-                MarkdownSyncLocation.Value.text = displayLocation
-                MarkdownSyncLocation.root.setOnClickListener {
-                    // Launch folder picker
-                    val intent =
-                        Intent(ACTION_OPEN_DOCUMENT_TREE).apply {
-                            addCategory(Intent.CATEGORY_DEFAULT)
-                        }
-                    chooseMarkdownSyncLocationLauncher.launch(intent)
+    private fun NotablyMDPreferences.setupWidgetCustomization(binding: FragmentSettingsBinding) {
+        binding.apply {
+            // Widget customization master toggle
+            widgetCustomizationEnabled.observe(viewLifecycleOwner) { enabled ->
+                WidgetCustomizationEnabled.setup(
+                    widgetCustomizationEnabled,
+                    enabled,
+                    requireContext(),
+                    layoutInflater,
+                    messageResId = R.string.widget_customization_enabled_hint,
+                ) { newEnabled: Boolean ->
+                    model.savePreference(widgetCustomizationEnabled, newEnabled)
+                }
+            }
+
+            // Widget icon style
+            widgetIconStyle.observe(viewLifecycleOwner) { iconStyle ->
+                WidgetIconStyle.setupDropdown(
+                    widgetIconStyle,
+                    iconStyle,
+                    requireContext(),
+                    layoutInflater,
+                    messageResId = R.string.widget_icon_style_hint,
+                    entries = arrayOf("Default", "Minimal", "Bold", "Outline"),
+                    entryValues = arrayOf("default", "minimal", "bold", "outline"),
+                ) { newIconStyle: String ->
+                    model.savePreference(widgetIconStyle, newIconStyle)
+                }
+            }
+
+            // Widget color scheme
+            widgetColorScheme.observe(viewLifecycleOwner) { colorScheme ->
+                WidgetColorScheme.setupDropdown(
+                    widgetColorScheme,
+                    colorScheme,
+                    requireContext(),
+                    layoutInflater,
+                    messageResId = R.string.widget_color_scheme_hint,
+                    entries = arrayOf("Blue", "Green", "Red", "Purple", "Orange"),
+                    entryValues = arrayOf("blue", "green", "red", "purple", "orange"),
+                ) { newColorScheme: String ->
+                    model.savePreference(widgetColorScheme, newColorScheme)
+                }
+            }
+
+            // Show status indicator
+            widgetShowStatusIndicator.observe(viewLifecycleOwner) { enabled ->
+                WidgetShowStatusIndicator.setup(
+                    widgetShowStatusIndicator,
+                    enabled,
+                    requireContext(),
+                    layoutInflater,
+                    messageResId = R.string.widget_show_status_indicator_hint,
+                ) { newEnabled: Boolean ->
+                    model.savePreference(widgetShowStatusIndicator, newEnabled)
+                }
+            }
+
+            // Widget behavior on tap
+            widgetBehaviorOnTap.observe(viewLifecycleOwner) { behavior ->
+                WidgetBehaviorOnTap.setupDropdown(
+                    widgetBehaviorOnTap,
+                    behavior,
+                    requireContext(),
+                    layoutInflater,
+                    messageResId = R.string.widget_behavior_on_tap_hint,
+                    entries = arrayOf("Start Recording", "Open App", "Last Note"),
+                    entryValues = arrayOf("record", "open", "last"),
+                ) { newBehavior: String ->
+                    model.savePreference(widgetBehaviorOnTap, newBehavior)
+                }
+            }
+        }
+    }
+
+    private fun NotablyMDPreferences.setupTriggerMethods(binding: FragmentSettingsBinding) {
+        binding.apply {
+            // Quick Settings tile trigger
+            quickTileTriggerEnabled.observe(viewLifecycleOwner) { enabled ->
+                QuickTileTriggerEnabled.setup(
+                    quickTileTriggerEnabled,
+                    enabled,
+                    requireContext(),
+                    layoutInflater,
+                    messageResId = R.string.quick_tile_trigger_enabled_hint,
+                ) { newEnabled: Boolean ->
+                    model.savePreference(quickTileTriggerEnabled, newEnabled)
+                }
+            }
+
+            // Hardware button trigger
+            hardwareButtonTriggerEnabled.observe(viewLifecycleOwner) { enabled ->
+                HardwareButtonTriggerEnabled.setup(
+                    hardwareButtonTriggerEnabled,
+                    enabled,
+                    requireContext(),
+                    layoutInflater,
+                    messageResId = R.string.hardware_button_trigger_enabled_hint,
+                ) { newEnabled: Boolean ->
+                    model.savePreference(hardwareButtonTriggerEnabled, newEnabled)
+                }
+            }
+
+            // Voice assistant trigger
+            voiceAssistantTriggerEnabled.observe(viewLifecycleOwner) { enabled ->
+                VoiceAssistantTriggerEnabled.setup(
+                    voiceAssistantTriggerEnabled,
+                    enabled,
+                    requireContext(),
+                    layoutInflater,
+                    messageResId = R.string.voice_assistant_trigger_enabled_hint,
+                ) { newEnabled: Boolean ->
+                    model.savePreference(voiceAssistantTriggerEnabled, newEnabled)
+                }
+            }
+
+            // Device administrator trigger
+            deviceAdminTriggerEnabled.observe(viewLifecycleOwner) { enabled ->
+                DeviceAdminTriggerEnabled.setup(
+                    deviceAdminTriggerEnabled,
+                    enabled,
+                    requireContext(),
+                    layoutInflater,
+                    messageResId = R.string.device_admin_trigger_enabled_hint,
+                ) { newEnabled: Boolean ->
+                    model.savePreference(deviceAdminTriggerEnabled, newEnabled)
+                }
+            }
+
+            // Accessibility service
+            accessibilityServiceEnabled.observe(viewLifecycleOwner) { enabled ->
+                AccessibilityServiceEnabled.setup(
+                    accessibilityServiceEnabled,
+                    enabled,
+                    requireContext(),
+                    layoutInflater,
+                    messageResId = R.string.accessibility_service_preference_hint,
+                ) { newEnabled: Boolean ->
+                    model.savePreference(accessibilityServiceEnabled, newEnabled)
+                }
+            }
+        }
+    }
+
+    private fun NotablyMDPreferences.setupQuickTileCustomization(binding: FragmentSettingsBinding) {
+        binding.apply {
+            // Quick tile icon style
+            quickTileIconStyle.observe(viewLifecycleOwner) { iconStyle ->
+                QuickTileIconStyle.setupDropdown(
+                    quickTileIconStyle,
+                    iconStyle,
+                    requireContext(),
+                    layoutInflater,
+                    messageResId = R.string.quick_tile_icon_style_hint,
+                    entries = arrayOf("Default", "Minimal", "Bold", "Outline"),
+                    entryValues = arrayOf("default", "minimal", "bold", "outline"),
+                ) { newIconStyle: String ->
+                    model.savePreference(quickTileIconStyle, newIconStyle)
+                }
+            }
+
+            // Quick tile color scheme
+            quickTileColorScheme.observe(viewLifecycleOwner) { colorScheme ->
+                QuickTileColorScheme.setupDropdown(
+                    quickTileColorScheme,
+                    colorScheme,
+                    requireContext(),
+                    layoutInflater,
+                    messageResId = R.string.quick_tile_color_scheme_hint,
+                    entries = arrayOf("Blue", "Green", "Red", "Purple", "Orange"),
+                    entryValues = arrayOf("blue", "green", "red", "purple", "orange"),
+                ) { newColorScheme: String ->
+                    model.savePreference(quickTileColorScheme, newColorScheme)
+                }
+            }
+
+            // Show quick tile status
+            quickTileShowStatus.observe(viewLifecycleOwner) { enabled ->
+                QuickTileShowStatus.setup(
+                    quickTileShowStatus,
+                    enabled,
+                    requireContext(),
+                    layoutInflater,
+                    messageResId = R.string.quick_tile_show_status_hint,
+                ) { newEnabled: Boolean ->
+                    model.savePreference(quickTileShowStatus, newEnabled)
                 }
             }
         }

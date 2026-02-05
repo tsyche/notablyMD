@@ -21,8 +21,7 @@
             android:layout_height="24dp"
             android:layout_gravity="center"
             android:src="@drawable/ic_mic"
-            android:contentDescription="Voice Record"
-            app:tint="@android:color/white" />
+            android:contentDescription="Voice Record" />
 
         <!-- Status indicator (small dot) -->
         <ImageView

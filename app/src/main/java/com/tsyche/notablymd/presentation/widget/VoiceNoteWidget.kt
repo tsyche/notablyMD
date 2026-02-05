@@ -6,12 +6,15 @@ import android.appwidget.AppWidgetProvider
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Build
 import android.view.View
 import android.widget.RemoteViews
+import androidx.core.content.ContextCompat
 import com.tsyche.notablymd.R
 import com.tsyche.notablymd.presentation.activity.main.MainActivity
 import com.tsyche.notablymd.presentation.service.VoiceRecordingService
+import com.tsyche.notablymd.presentation.viewmodel.preference.NotablyMDPreferences
 
 /**
  * Voice Note Widget Provider
@@ -91,19 +94,49 @@ class VoiceNoteWidget : AppWidgetProvider() {
         appWidgetManager: AppWidgetManager,
         appWidgetIds: IntArray,
     ) {
-        // Update UI to recording state
-        updateWidgetStatus(context, appWidgetManager, appWidgetIds, STATE_RECORDING, "Recording...")
+        try {
+            // Update UI to recording state
+            updateWidgetStatus(
+                context,
+                appWidgetManager,
+                appWidgetIds,
+                STATE_RECORDING,
+                "Recording...",
+            )
 
-        // Start recording service
-        val serviceIntent =
-            Intent(context, VoiceRecordingService::class.java).apply {
-                action = VoiceRecordingService.ACTION_START_RECORDING
+            // Check permissions first
+            if (!hasRecordAudioPermission(context)) {
+                updateWidgetStatus(
+                    context,
+                    appWidgetManager,
+                    appWidgetIds,
+                    STATE_ERROR,
+                    "Permission required",
+                )
+                return
             }
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            context.startForegroundService(serviceIntent)
-        } else {
-            context.startService(serviceIntent)
+            // Start recording service
+            val serviceIntent =
+                Intent(context, VoiceRecordingService::class.java).apply {
+                    action = VoiceRecordingService.ACTION_START_RECORDING
+                    putExtra(VoiceRecordingService.EXTRA_TRIGGER_SOURCE, "WIDGET")
+                }
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                context.startForegroundService(serviceIntent)
+            } else {
+                context.startService(serviceIntent)
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            updateWidgetStatus(
+                context,
+                appWidgetManager,
+                appWidgetIds,
+                STATE_ERROR,
+                "Failed to start",
+            )
         }
     }
 
@@ -144,68 +177,178 @@ class VoiceNoteWidget : AppWidgetProvider() {
         appWidgetId: Int,
         state: Int,
     ) {
+        val preferences = NotablyMDPreferences.getInstance(context)
+
         // Use simple layout for 1x1 widget
         val views = RemoteViews(context.packageName, R.layout.widget_voice_note_simple)
 
+        // Apply customization settings
+        applyCustomizationSettings(context, views, preferences)
+
         // Setup click handlers
-        setupSimpleClickHandlers(context, views, appWidgetId)
+        setupSimpleClickHandlers(context, views, appWidgetId, preferences)
 
         // Update UI based on state
-        updateSimpleWidgetUI(views, state)
+        updateSimpleWidgetUI(views, state, preferences)
 
         appWidgetManager.updateAppWidget(appWidgetId, views)
     }
 
-    private fun setupSimpleClickHandlers(context: Context, views: RemoteViews, appWidgetId: Int) {
-        // Record button - toggle between start and stop based on state
-        val recordIntent =
-            Intent(context, VoiceNoteWidget::class.java).apply {
-                action = ACTION_RECORD_START
-                putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId)
+    private fun applyCustomizationSettings(
+        context: Context,
+        views: RemoteViews,
+        preferences: NotablyMDPreferences,
+    ) {
+        // Apply icon style customization
+        val iconStyle = preferences.widgetIconStyle.value
+        val iconResId =
+            when (iconStyle) {
+                "minimal" -> R.drawable.ic_mic_minimal
+                "bold" -> R.drawable.ic_mic_bold
+                "outline" -> R.drawable.ic_mic_outline
+                else -> R.drawable.ic_mic
             }
-        val recordPendingIntent =
-            PendingIntent.getBroadcast(
-                context,
-                appWidgetId,
-                recordIntent,
-                PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE,
-            )
-        views.setOnClickPendingIntent(R.id.recordButton, recordPendingIntent)
+        views.setImageViewResource(R.id.micIcon, iconResId)
+
+        // Apply color scheme customization
+        val colorScheme = preferences.widgetColorScheme.value
+        val iconTint =
+            when (colorScheme) {
+                "green" -> android.graphics.Color.GREEN
+                "red" -> android.graphics.Color.RED
+                "purple" -> android.graphics.Color.parseColor("#9C27B0")
+                "orange" -> android.graphics.Color.parseColor("#FF9800")
+                else ->
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        context.getColor(R.color.md_theme_primary)
+                    } else {
+                        @Suppress("DEPRECATION")
+                        context.resources.getColor(R.color.md_theme_primary)
+                    }
+            }
+        views.setInt(R.id.micIcon, "setColorFilter", iconTint)
+
+        // Apply background customization
+        val backgroundResId =
+            when (colorScheme) {
+                "green" -> R.drawable.widget_background_green
+                "red" -> R.drawable.widget_background_red
+                "purple" -> R.drawable.widget_background_purple
+                "orange" -> R.drawable.widget_background_orange
+                else -> R.drawable.widget_background_simple
+            }
+        views.setInt(R.id.recordButton, "setBackgroundResource", backgroundResId)
     }
 
-    private fun updateSimpleWidgetUI(views: RemoteViews, state: Int) {
+    private fun setupSimpleClickHandlers(
+        context: Context,
+        views: RemoteViews,
+        appWidgetId: Int,
+        preferences: NotablyMDPreferences,
+    ) {
+        val widgetBehavior = preferences.widgetBehaviorOnTap.value
+
+        when (widgetBehavior) {
+            "record" -> {
+                // Record button - toggle between start and stop based on state
+                val recordIntent =
+                    Intent(context, VoiceNoteWidget::class.java).apply {
+                        action = ACTION_RECORD_START
+                        putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId)
+                    }
+                val recordPendingIntent =
+                    PendingIntent.getBroadcast(
+                        context,
+                        appWidgetId,
+                        recordIntent,
+                        PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE,
+                    )
+                views.setOnClickPendingIntent(R.id.recordButton, recordPendingIntent)
+            }
+            "open" -> {
+                // Open app behavior
+                val openIntent =
+                    context.packageManager.getLaunchIntentForPackage(context.packageName)
+                val openPendingIntent =
+                    PendingIntent.getActivity(
+                        context,
+                        appWidgetId,
+                        openIntent,
+                        PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE,
+                    )
+                views.setOnClickPendingIntent(R.id.recordButton, openPendingIntent)
+            }
+            "last" -> {
+                // Last note behavior - open app (simplified for now)
+                val openIntent =
+                    context.packageManager.getLaunchIntentForPackage(context.packageName)
+                val openPendingIntent =
+                    PendingIntent.getActivity(
+                        context,
+                        appWidgetId,
+                        openIntent,
+                        PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE,
+                    )
+                views.setOnClickPendingIntent(R.id.recordButton, openPendingIntent)
+            }
+        }
+    }
+
+    private fun updateSimpleWidgetUI(
+        views: RemoteViews,
+        state: Int,
+        preferences: NotablyMDPreferences,
+    ) {
+        val showStatusIndicator = preferences.widgetShowStatusIndicator.value
+
         when (state) {
             STATE_IDLE -> {
-                views.setInt(
-                    R.id.statusIndicator,
-                    "setImageResource",
-                    R.drawable.status_indicator_idle,
-                )
-                views.setViewVisibility(R.id.statusIndicator, View.GONE)
+                if (showStatusIndicator) {
+                    views.setInt(
+                        R.id.statusIndicator,
+                        "setImageResource",
+                        R.drawable.status_indicator_idle,
+                    )
+                    views.setViewVisibility(R.id.statusIndicator, View.GONE)
+                } else {
+                    views.setViewVisibility(R.id.statusIndicator, View.GONE)
+                }
             }
             STATE_RECORDING -> {
-                views.setInt(
-                    R.id.statusIndicator,
-                    "setImageResource",
-                    R.drawable.status_indicator_recording,
-                )
-                views.setViewVisibility(R.id.statusIndicator, View.VISIBLE)
+                if (showStatusIndicator) {
+                    views.setInt(
+                        R.id.statusIndicator,
+                        "setImageResource",
+                        R.drawable.status_indicator_recording,
+                    )
+                    views.setViewVisibility(R.id.statusIndicator, View.VISIBLE)
+                } else {
+                    views.setViewVisibility(R.id.statusIndicator, View.GONE)
+                }
             }
             STATE_PROCESSING -> {
-                views.setInt(
-                    R.id.statusIndicator,
-                    "setImageResource",
-                    R.drawable.status_indicator_processing,
-                )
-                views.setViewVisibility(R.id.statusIndicator, View.VISIBLE)
+                if (showStatusIndicator) {
+                    views.setInt(
+                        R.id.statusIndicator,
+                        "setImageResource",
+                        R.drawable.status_indicator_processing,
+                    )
+                    views.setViewVisibility(R.id.statusIndicator, View.VISIBLE)
+                } else {
+                    views.setViewVisibility(R.id.statusIndicator, View.GONE)
+                }
             }
             STATE_ERROR -> {
-                views.setInt(
-                    R.id.statusIndicator,
-                    "setImageResource",
-                    R.drawable.status_indicator_error,
-                )
-                views.setViewVisibility(R.id.statusIndicator, View.VISIBLE)
+                if (showStatusIndicator) {
+                    views.setInt(
+                        R.id.statusIndicator,
+                        "setImageResource",
+                        R.drawable.status_indicator_error,
+                    )
+                    views.setViewVisibility(R.id.statusIndicator, View.VISIBLE)
+                } else {
+                    views.setViewVisibility(R.id.statusIndicator, View.GONE)
+                }
             }
         }
     }
@@ -311,6 +454,13 @@ class VoiceNoteWidget : AppWidgetProvider() {
         }
     }
 
+    private fun hasRecordAudioPermission(context: Context): Boolean {
+        return ContextCompat.checkSelfPermission(
+            context,
+            android.Manifest.permission.RECORD_AUDIO,
+        ) == PackageManager.PERMISSION_GRANTED
+    }
+
     private fun updateWidgetStatus(
         context: Context,
         appWidgetManager: AppWidgetManager,
@@ -319,8 +469,28 @@ class VoiceNoteWidget : AppWidgetProvider() {
         status: String,
     ) {
         for (appWidgetId in appWidgetIds) {
-            val views = RemoteViews(context.packageName, R.layout.widget_voice_note)
-            views.setTextViewText(R.id.statusText, status)
+            // Use the simple widget layout
+            val views = RemoteViews(context.packageName, R.layout.widget_voice_note_simple)
+            
+            // Update the icon tint based on state for visual feedback
+            when (state) {
+                STATE_RECORDING -> {
+                    // Change icon color to red when recording
+                    views.setImageViewResource(R.id.micIcon, R.drawable.ic_mic_recording)
+                }
+                STATE_ERROR -> {
+                    // Change icon color to indicate error
+                    views.setInt(R.id.micIcon, "setColorFilter", android.graphics.Color.RED)
+                }
+                else -> {
+                    // Reset to normal
+                    views.setImageViewResource(R.id.micIcon, R.drawable.ic_mic)
+                }
+            }
+            
+            // Show/hide status indicator based on state
+            views.setViewVisibility(R.id.statusIndicator, if (state == STATE_RECORDING) View.VISIBLE else View.GONE)
+            
             updateWidgetUI(views, state)
             appWidgetManager.updateAppWidget(appWidgetId, views)
         }

@@ -26,7 +26,6 @@ import com.tsyche.notablymd.presentation.select
 import com.tsyche.notablymd.presentation.setCancelButton
 import com.tsyche.notablymd.presentation.showAndFocus
 import com.tsyche.notablymd.presentation.showToast
-import com.tsyche.notablymd.presentation.view.misc.MenuDialog
 import com.tsyche.notablymd.presentation.viewmodel.BaseNoteModel
 import com.tsyche.notablymd.presentation.viewmodel.preference.BiometricLock
 import com.tsyche.notablymd.presentation.viewmodel.preference.BooleanPreference
@@ -45,7 +44,6 @@ import com.tsyche.notablymd.presentation.viewmodel.preference.StringPreference
 import com.tsyche.notablymd.presentation.viewmodel.preference.TextProvider
 import com.tsyche.notablymd.presentation.viewmodel.preference.Theme
 import com.tsyche.notablymd.utils.canAuthenticateWithBiometrics
-import com.tsyche.notablymd.utils.toReadablePath
 
 inline fun <reified T> PreferenceBinding.setup(
     enumPreference: EnumPreference<T>,
@@ -420,6 +418,56 @@ fun PreferenceBinding.setupBackupPassword(
     }
 }
 
+fun PreferenceBinding.setupDropdown(
+    preference: StringPreference,
+    value: String,
+    context: Context,
+    layoutInflater: LayoutInflater,
+    messageResId: Int? = null,
+    entries: Array<String>,
+    entryValues: Array<String>,
+    onSave: (newValue: String) -> Unit,
+) {
+    Title.setText(preference.titleResId!!)
+
+    // Find current index
+    val currentIndex = entryValues.indexOf(value)
+    Value.text = if (currentIndex >= 0) entries[currentIndex] else value
+
+    root.setOnClickListener {
+        val layout = DialogSelectionBoxBinding.inflate(layoutInflater, null, false)
+        layout.Message.apply {
+            if (messageResId != null) {
+                setText(messageResId)
+                visibility = View.VISIBLE
+            } else {
+                visibility = View.GONE
+            }
+        }
+
+        var selected = currentIndex
+        layout.SelectionBox.apply {
+            setSimpleItems(entries)
+            select(value)
+            setOnItemClickListener { _, _, position, _ -> selected = position }
+        }
+
+        MaterialAlertDialogBuilder(context)
+            .setTitle(preference.titleResId)
+            .setView(layout.root)
+            .setPositiveButton(R.string.save) { dialog, _ ->
+                dialog.cancel()
+                // Only save if a valid selection was made
+                if (selected >= 0 && selected < entryValues.size) {
+                    val newValue = entryValues[selected]
+                    onSave(newValue)
+                }
+            }
+            .setNegativeButton(android.R.string.cancel, null)
+            .show()
+    }
+}
+
 fun PreferenceBinding.setupBackupsFolder(
     value: String,
     context: Context,
@@ -440,16 +488,40 @@ fun PreferenceBinding.setupBackupsFolder(
                 { "Folder with uri: '$uri' does not exist" },
             )
         if (folder.exists()) {
-            val path = context.toReadablePath(uri)
-            Value.text = path
-        } else Value.setText(R.string.cant_find_folder)
-
-        root.setOnClickListener {
-            MenuDialog(context)
-                .add(R.string.clear) { onDisable() }
-                .add(R.string.choose_another_folder) { chooseBackupFolder() }
-                .show()
+            Value.setText(folder.name)
+        } else {
+            Value.setText("Folder not found")
         }
+        root.setOnClickListener { chooseBackupFolder() }
+    }
+}
+
+fun PreferenceBinding.setupMarkdownSyncLocation(
+    preference: StringPreference,
+    value: String,
+    context: Context,
+    layoutInflater: LayoutInflater,
+    messageResId: Int,
+    chooseLocation: () -> Unit,
+) {
+    Title.setText(preference.titleResId!!)
+
+    if (value.isEmpty()) {
+        Value.setText(R.string.tap_to_set_up)
+        root.setOnClickListener { chooseLocation() }
+    } else {
+        try {
+            val uri = Uri.parse(value)
+            val folder = DocumentFile.fromTreeUri(context, uri)
+            if (folder != null && folder.exists()) {
+                Value.setText(folder.name)
+            } else {
+                Value.setText("Folder not found")
+            }
+        } catch (e: Exception) {
+            Value.setText("Folder not found")
+        }
+        root.setOnClickListener { chooseLocation() }
     }
 }
 
