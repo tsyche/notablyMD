@@ -1,700 +1,94 @@
-# NotablyMD Markdown Migration Plan
+# NotablyMD Roadmap
 
-## 🎯 **Current Status: Phase 5.4 Complete, Phase 5.5 Ready**
+## Recently Completed
 
-### ✅ **Phase 1: Markdown Foundation** - COMPLETED
-- EnhancedMarkdownManager.kt with full YAML support
-- MarkdownUtils.kt integration
-- File structure design
-- Basic read/write operations
-
-### ✅ **Phase 2: Sync & Migration** - COMPLETED  
-- FileWatcher.kt implementation
-- MarkdownSyncManager.kt coordination
-- ConflictResolver.kt strategies
-- SyncWorker.kt background processing
-- Settings integration with directory picker
-- **26+ comprehensive tests across 9 test files**
-
-### ✅ **Phase 3: UI Integration** - COMPLETED
-- ✅ Enhanced Settings (completed)
-- ✅ Sync Status Indicators (completed)
-- ✅ Conflict Resolution UI (completed)
-- ✅ Migration Utility (completed)
-
-### ✅ **Phase 4: Voice-to-Note Widget** - COMPLETED
-- ✅ Voice Widget Core Implementation (completed)
-- ✅ Note Creation Pipeline (completed)
-- ✅ Configuration & Settings (completed)
-- ✅ **Comprehensive Test Suite (5 test files, 850+ lines)**
-
-### ✅ **Phase 5.4: Quick Voice Recording Triggers** - COMPLETED
-- ✅ Assistant Integration via VoiceInteractionService (completed)
-- ✅ Quick Settings Tile via TileService (completed)
-- ✅ Hardware Button Combinations via AccessibilityService (completed)
-- ✅ Device Administrator Integration via DeviceAdminReceiver (completed)
-- ✅ Unified Settings Management via QuickRecordTriggerManager (completed)
-- ✅ **Comprehensive Test Suite (1 test file, 10 tests)**
+1. **Widget Customization & Control** — icon selection, color themes, behavior config (record / open app / last note), quick settings tile themes
+2. **Quick Voice Recording Triggers** — assistant integration, quick settings tile, hardware button combos (power + volume), device admin receiver, unified settings
+3. **Bug fixes: widget & voice recorder** — FGS microphone error fixed, first-use permission flow, widget click response, settings screen crashes
+4. **Voice-to-Note Widget** — one-tap recording from home screen, speech-to-text, auto note creation, 850+ lines of test coverage
+5. **Phase 3 UI: Sync + Conflict + Migration** — sync status toolbar indicators, conflict resolution dialog, migration utility with batch processing
 
 ---
 
-## Overview
+## In Progress
 
-Transform NotablyMD from SQLite-first to **markdown-first storage** leveraging existing CommonMark support and advanced import/export capabilities.
-
-## Architecture Goals
-
-### Primary Objectives
-- ✅ **Markdown-first**: Notes stored as portable .md files
-- ✅ **Cross-device sync**: Compatible with Syncthing/Dropbox
-- ✅ **Enhanced security**: Leverage existing SQLCipher encryption
-- ✅ **Rich import/export**: Build on existing Evernote/Google Keep importers
+- **Phase 5.5 manual testing** — hardware button triggers and voice assistant integration need device testing; automated tests pass but behavior depends on OS-level permissions
 
 ---
 
-## Phase 1: Leverage Existing Infrastructure (Week 1)
+## Prioritized Backlog
 
-### 1.1 Existing Assets Analysis ✅
+### High Priority
 
-#### Already Available in NotablyMD:
-- ✅ **CommonMark Processing**: `org.commonmark:commonmark:0.27.0`
-- ✅ **Markdown Import/Export**: `MarkdownUtils.kt` with full CommonMark + GFM support
-- ✅ **Advanced Importers**: Evernote, Google Keep, JSON, Plain Text
-- ✅ **Security Framework**: SQLCipher encryption, Biometric lock
-- ✅ **Backup System**: Auto-backups with password protection
-- ✅ **Rich Media Handling**: Advanced image/audio support
-- ✅ **File Watching**: External file change detection implemented
-- ✅ **Bidirectional Sync**: DB ↔ Markdown synchronization implemented
-- ✅ **Conflict Resolution**: Multi-device conflict handling implemented
+1. **Complete markdown write-back** (`EnhancedMarkdownManager`)
+   - `MarkdownUtils.convertToMarkdown()` not yet implemented — write-back is stubbed
+   - Attachments (images, audio, files, reminders) not parsed from markdown on read
+   - Span→markdown conversion in `MigrationEngine` incomplete
+   - Core of the markdown-first promise; nothing is truly portable without this
+   - ~8-10h
 
-### 1.2 Implementation Complete ✅
+2. **Complete bidirectional sync** (`BidirectionalSync`)
+   - File→database sync not implemented (only DB→file works)
+   - File deletion events not handled
+   - Blocks sync being truly bidirectional
+   - ~4-6h
 
-#### Implemented Components:
+3. **Unified Import/Export** (Phase 5.6)
+   - Replace separate export/import menu items with single "Backup & Restore" flow
+   - Auto-detect file type on import (.zip, .json, .md)
+   - Clear naming convention (`NotablyMD_Backup_YYYYMMDD.zip`)
+   - ~4-6h
 
-**FileWatcher.kt**
-- Real-time monitoring of markdown directories
-- Event-driven architecture with coroutines
-- Support for CREATED, MODIFIED, DELETED events
-- Lifecycle-aware integration
+### Medium Priority
 
-**BidirectionalSync.kt**
-- Two-way synchronization between Room database and markdown files
-- File modification cache to prevent sync loops
-- YAML frontmatter extraction and generation
-- Incremental and full sync capabilities
+4. **Search autofocus** (`SearchFragment`)
+   - Keyboard doesn't auto-show when search opens — minor but noticeable friction
+   - Quick win: ~1h
 
-**ConflictResolver.kt**
-- Multiple resolution strategies (latest wins, merge, manual)
-- Conflict detection for content, metadata, and structure
-- Smart merging of note changes
-- Extensible strategy pattern
+5. **Markdown preview in note list**
+   - Show rendered markdown snippet instead of raw `**bold**` text in list/grid view
+   - High UX impact for markdown-first users
+   - ~4-6h
 
-**MarkdownSyncManager.kt**
-- Central coordinator for sync system
-- Background periodic synchronization (15-minute intervals)
-- Integration with file watcher events
+6. **Single-note export as .md**
+   - One-tap export of individual note to a `.md` file
+   - Foundational for Obsidian/Logseq interop
+   - ~2-3h
 
-**SyncWorker.kt**
-- WorkManager-based background processing
-- Battery-conscious execution constraints
-- Error handling and retry logic
+7. **Enhanced Security** (Phase 5.1)
+   - Encrypt individual markdown files using existing SQLCipher/biometrics infrastructure
+   - Key management integration
+   - ~8-12h
 
-**Enhanced MarkdownUtils.kt**
-- Added `convertToMarkdown()` function
-- Support for span-to-markdown conversion
-- CommonMark renderer integration
+### Lower Priority / Future
 
-**Comprehensive Test Suite**
-- Unit tests for all components
-- Integration tests for end-to-end scenarios
-- Mock-based testing for file operations
+8. **Configurable Voice Assistant** (Phase 5.7)
+   - Custom wake phrase training and detection
+   - Feasibility on Android is uncertain (system assistants resist being overridden)
+   - ~12h+, revisit after manual testing of 5.5 assistant integration
 
-### 1.2.5 Enhanced MarkdownManager ✅
+9. **Obsidian/Logseq compatibility audit**
+   - Verify exported markdown opens correctly in popular editors
+   - Check YAML frontmatter compatibility
+   - ~2-3h
 
-Extend existing `MarkdownUtils.kt`:
-
-```kotlin
-class EnhancedMarkdownManager {
-    // Leverage existing parseBodyAndSpansFromMarkdown()
-    suspend fun readNote(file: File): Result<BaseNote> ✅
-    suspend fun writeNote(note: BaseNote, file: File): Result<Unit> ✅
-    suspend fun generateYAMLFrontmatter(note: BaseNote): String ✅
-    suspend fun parseYAMLFrontmatter(content: String): Result<NoteMetadata> ✅
-}
-```
-
-**EnhancedMarkdownManager.kt** ✅
-- High-level API for markdown operations with Result types
-- Clean error handling and coroutine-based async operations
-- YAML frontmatter generation and parsing
-- Integration with existing MarkdownUtils.kt
-- Comprehensive metadata support (labels, timestamps, colors, etc.)
-- Production-ready implementation with proper error handling
-
-### 1.3 File Structure Design
-
-```
-/UserSelectedLocation/
-├── Notes/
-│   ├── 2024-01-15-my-note-title.md
-│   └── ...
-├── Images/
-├── Audio/
-└── .notablymd/
-    ├── index.json
-    ├── cache/
-    ├── sync.log
-    └── encryption.key
-```
+10. **Collaboration** (Phase 5.3)
+    - Device attribution in frontmatter, change tracking, selective sync by label/folder
+    - Stretch goal — depends on sync being solid first
+    - ~16h+
 
 ---
 
-## Phase 2: Sync & Migration (Week 2) ✅ COMPLETED
+## Recommended Next 3
 
-### 2.1 FileWatcher Implementation ✅
-
-```kotlin
-class FileWatcher { ✅
-    fun startWatching() ✅
-    fun stopWatching() ✅
-    fun simulateFileChange() ✅
-}
-```
-
-**FileWatcher.kt** ✅
-- Basic file system monitoring implementation
-- Start/stop watching functionality
-- File change simulation for testing
-- Coroutine-based async operations
-
-### 2.2 SyncEngine ✅
-
-```kotlin
-class MarkdownSyncManager { ✅
-    fun initialize() ✅
-    fun stop() ✅
-    fun triggerSync() ✅
-    fun onFileChanged() ✅
-}
-
-class SyncWorker { ✅
-    // Background sync operations
-    // WorkManager integration
-}
-```
-
-**MarkdownSyncManager.kt** ✅
-- High-level sync coordination
-- File change event handling
-- Sync state management
-- Background worker integration
-
-**SyncWorker.kt** ✅
-- WorkManager-based background sync
-- Periodic sync operations
-- Error handling and retry logic
-
-### 2.3 Conflict Resolution ✅
-
-```kotlin
-class ConflictResolver { ✅
-    enum class ConflictResolutionStrategy { ✅
-        LATEST_WINS, DATABASE_WINS, FILE_WINS
-    }
-    fun detectConflict() ✅
-    fun resolveConflict() ✅
-}
-```
-
-**ConflictResolver.kt** ✅
-- Conflict detection between DB and markdown files
-- Multiple resolution strategies
-- Automatic conflict handling
-
-### 2.4 Settings Integration ✅
-
-**Markdown Sync Settings** ✅
-- Enable/disable toggle in settings
-- Custom directory location picker
-- Android Storage Access Framework integration
-- Default location: `Android/media/com.tsyche.notablymd`
-- Clean, minimal UI design
-
-**Preferences** ✅
-- `markdownSyncEnabled`: BooleanPreference
-- `markdownSyncLocation`: StringPreference
-- Proper titleResId configuration
-- SharedPreferences persistence
-
-### 2.5 Comprehensive Testing ✅
-
-**Test Coverage (9 test files, 26+ tests)** ✅
-- EnhancedMarkdownManagerTest.kt (4 tests)
-- FileWatcherTest.kt (3 tests)
-- MarkdownSyncManagerTest.kt (1 test)
-- SyncWorkerTest.kt (1 test)
-- ConflictResolverTest.kt (1 test)
-- MarkdownSyncPreferencesTest.kt (16 tests)
-- MarkdownSyncSettingsTest.kt (3 tests)
-- SettingsFragmentMarkdownSyncTest.kt (3 tests)
-- SettingsFragmentIntegrationTest.kt (4 tests)
-
-**Integration Testing** ✅
-- SettingsFragment crash prevention
-- Preference validation testing
-- UI integration safety nets
-- Production bug detection
+1. **Complete markdown write-back** — the entire markdown-first value prop is hollow until notes actually round-trip through `.md` files correctly. Unblocks sync, migration, and Obsidian compat.
+2. **Complete bidirectional sync** — once write-back works, this makes sync genuinely two-way instead of one-directional.
+3. **Search autofocus** — tiny effort, fixes something users will notice every time they search.
 
 ---
 
-## Phase 3: UI Integration (Week 3) ✅ COMPLETED
-
-### 3.1 Enhanced Settings ✅ COMPLETED
-
-**Build on existing preferences** ✅
-- ✅ **Storage Location Picker**: Folder browser with Android SAF
-- ✅ **Sync Configuration**: Enable/disable toggle
-- ✅ **Default Location**: Android/media/com.tsyche.notablymd
-- ✅ **Security Integration**: Ready for encryption integration
-
-**Settings Implementation** ✅
-- SettingsFragment.setupMarkdownSync() method
-- ActivityResultLauncher for directory picker
-- PreferenceBinding.setup() integration
-- Comprehensive error handling
-
-### 3.2 Sync Status Indicators ✅ COMPLETED
-
-**SyncStatus Data Class** ✅
-- Complete sync state management (DISABLED, IDLE, SYNCING, SYNCED, ERROR, CONFLICT)
-- Progress tracking with percentage
-- Error message handling
-- Conflict count tracking
-- Display text generation for UI
-
-**SyncStatusManager** ✅
-- LiveData-based status updates
-- Coroutine-based async operations
-- Integration with MarkdownSyncManager
-- Observer pattern for preference changes
-- Manual sync trigger functionality
-
-**Toolbar UI Integration** ✅
-- Status indicators in main toolbar
-- Progress bar for sync operations
-- Icon indicators for different states
-- Click handlers for user interactions
-- Color-coded status display
-- Navigation to settings and conflict resolution
-
-**String Resources** ✅
-- Complete sync status indicator strings
-- Error messages and user feedback
-- Accessibility support
-
-**Icons** ✅
-- ic_sync_disabled, ic_sync_syncing, ic_sync_synced
-- ic_sync_error, ic_sync_conflict
-- Material Design compliant vector drawables
-
-### 3.3 Conflict Resolution UI ✅ COMPLETED
-
-**SyncConflict Data Classes** ✅
-- Complete conflict representation
-- NoteVersion tracking with metadata
-- ConflictType enumeration (CONTENT_MODIFIED, DELETED_MODIFIED, METADATA_MODIFIED, STRUCTURE_CHANGED)
-- ConflictSeverity classification (LOW, MEDIUM, HIGH, CRITICAL)
-- Parcelable implementation for dialog passing
-
-**ConflictResolver Logic** ✅
-- Auto-resolution for metadata conflicts
-- Content similarity analysis
-- Manual merge support
-- Multiple resolution strategies (KEEP_LOCAL, KEEP_REMOTE, MERGE_MANUAL, KEEP_BOTH, DELETE_NOTE, AUTO_MERGE)
-- Error handling and validation
-
-**ConflictResolutionDialog** ✅
-- Material Design dialog with comprehensive UI
-- Side-by-side version comparison
-- Resolution options dropdown
-- Manual merge editor
-- Progress tracking and error handling
-- Integration with MainActivity
-
-**ConflictResolutionViewModel** ✅
-- LiveData-based state management
-- Coroutine-based resolution operations
-- Error handling and user feedback
-- Integration with ConflictResolver
-
-### 3.4 Migration Utility ✅ COMPLETED
-
-**MigrationData Classes** ✅
-- MigrationProgress with status tracking
-- MigrationError with error types
-- MigrationResult with comprehensive statistics
-- MigrationConfig with flexible options
-- Progress percentage calculation
-
-**MigrationEngine** ✅
-- Complete migration pipeline implementation
-- Batch processing support
-- Progress tracking with Flow
-- File validation and backup creation
-- Error handling and recovery
-- Pause/resume/cancel functionality
-
-**MigrationUtilityDialog** ✅
-- Material Design dialog with configuration UI
-- Progress tracking with real-time updates
-- Statistics display and error reporting
-- Batch size configuration
-- Validation and backup options
-
-**MigrationViewModel** ✅
-- LiveData-based state management
-- Integration with MigrationEngine
-- Progress tracking and error handling
-- Database integration
-
-**MainActivity Integration** ✅
-- Sync options menu (Start Sync, Migrate to Markdown, Sync Settings)
-- Conflict resolution dialog integration
-- Migration utility dialog integration
-- User feedback and navigation
-
-**String Resources** ✅
-- Complete migration UI strings
-- Error messages and progress indicators
-- Configuration option labels
-
----
-
-## Phase 4: Voice-to-Note Widget (Week 4) ✅ COMPLETED
-
-### 4.1 Voice Widget Core Implementation ✅ COMPLETED
-
-**Widget Component** ✅
-- ✅ Home screen widget with microphone icon
-- ✅ One-tap voice recording activation
-- ✅ Real-time voice level visualization
-- ✅ Recording status indicator (listening, processing, complete)
-
-**Voice Recording System** ✅
-- ✅ Immediate recording start on widget tap
-- ✅ Automatic silence detection for stop recording
-- ✅ Manual stop button option
-- ✅ Audio buffer management and temporary storage
-
-**Speech-to-Text Integration** ✅
-- ✅ Android SpeechRecognizer integration
-- ✅ Real-time speech-to-text conversion
-- ✅ Fallback to built-in Android speech recognition
-- ✅ Multi-language support detection
-- ✅ Error handling and retry logic
-
-### 4.2 Note Creation Pipeline ✅ COMPLETED
-
-**Transcription Processing** ✅
-- ✅ Real-time speech-to-text conversion
-- ✅ Punctuation and formatting enhancement
-- ✅ Speaker confidence scoring
-- ✅ Error handling and retry logic
-
-**Note Generation** ✅
-- ✅ Automatic note creation with transcribed text
-- ✅ DateTime stamp in note title and metadata
-- ✅ Default folder assignment
-- ✅ Auto-save with validation
-- ✅ Note title generation (first words of transcription)
-- ✅ Integration with existing NotablyMD database
-- ✅ SharedPreferences for last note tracking
-
-**Widget Integration** ✅
-- ✅ Quick access to created note from widget
-- ✅ Notification on successful note creation
-- ✅ Error feedback through widget updates
-- ✅ Battery and permission optimization
-- ✅ Foreground service with notification
-
-### 4.3 Configuration & Settings ✅ COMPLETED
-
-**Voice Widget Settings** ✅
-- ✅ Widget configuration activity
-- ✅ Basic setup and preferences
-- ✅ Widget appearance customization
-- ✅ Recording quality settings
-- ✅ Auto-stop silence threshold configuration
-- ✅ Default note folder selection
-
-**Privacy & Security** ✅
-- ✅ Local-only processing
-- ✅ Permission management and prompts
-- ✅ Microphone permission handling
-- ✅ Secure audio recording
-
-**Comprehensive Test Suite** ✅
-- ✅ VoiceNoteCreatorTest.kt (158 lines) - Unit tests for note creation logic
-- ✅ VoiceRecordingServiceTest.kt (190 lines) - Unit tests for recording service
-- ✅ VoiceNoteWidgetTest.kt (209 lines) - Unit tests for widget provider
-- ✅ VoiceWidgetIntegrationTest.kt (200+ lines) - Integration tests for end-to-end workflow
-- ✅ VoiceWidgetConfigureUITest.kt (80+ lines) - UI tests for configuration activity
-- ✅ **Total: 5 test files, 850+ lines of comprehensive test coverage**
-
----
-
-## Phase 5: Advanced Features (Week 5)
-
-### 5.1 Enhanced Security
-
-- Encrypt individual markdown files
-- Secure key management with existing biometrics
-- Protected backup integration
-
-### 5.2 Performance Optimization ✅ **COMPLETED**
-
-- ~~Leverage existing caching systems~~
-- ~~Incremental indexing~~
-- ~~Smart preloading~~
-
-### 5.3 Collaboration Features
-
-- Device attribution in frontmatter
-- Change tracking
-- Selective sync by labels/folders
-
-### ✅ **Phase 5.4 Quick Voice Recording Triggers** - COMPLETED
-
-**Multiple Trigger Methods with User Settings:**
-
-#### ✅ 5.4.1 Assistant Integration
-- ✅ Register as voice assistant via VoiceInteractionService
-- ✅ Custom wake phrase ("Hey Notably" or custom)
-- ✅ Hands-free voice recording activation
-- ✅ Works from lock screen
-- ✅ Settings to enable/disable and custom phrase configuration
-
-#### ✅ 5.4.2 Quick Settings Tile
-- ✅ One-tap recording from notification shade via TileService
-- ✅ Accessible from lock screen (Android 7+)
-- ✅ Customizable tile icon and label
-- ✅ Instant recording start/stop
-- ✅ No special permissions required
-
-#### ✅ 5.4.3 Hardware Button Combinations
-- ✅ **Primary: Power + Volume Up** (simultaneous press) ⭐ **RECOMMENDED**
-- ✅ **Alternative: Triple Power Button Press**
-- ✅ **Fallback: Double Power + Volume Up sequence**
-- ✅ AccessibilityService implementation
-- ✅ Settings to choose preferred combination
-- ✅ Works on lock screen with accessibility permission
-- ✅ Configurable press duration and sensitivity
-
-#### ✅ 5.4.4 Device Administrator Integration
-- ✅ DeviceAdminReceiver for system-level control
-- ✅ Hardware button event interception at OS level
-- ✅ Enhanced reliability for button triggers
-- ✅ Settings for device admin permission management
-
-#### ✅ 5.4.5 Settings Integration
-- ✅ Unified settings section for all trigger methods
-- ✅ Individual enable/disable toggles for each trigger
-- ✅ Configuration options for each trigger type
-- ✅ First-time setup guidance and permission requests
-
----
-
-## 🐛 **Phase 5.5 Bug Fixes & Issues** - **IN PROGRESS**
-
-### **Critical Issues Requiring Immediate Attention:**
-
-#### 🚨 **5.5.1 Widget Issues**
-- ✅ **FIXED:** Widget settings missing from main settings screen
-- ✅ **FIXED:** Widget click not working - no response when tapped  
-- ✅ **FIXED:** Widget should be 1x1 icon with configurable settings
-- **Test:** `WidgetFunctionalityTest.widgetClickShouldLaunchVoiceRecording` ✅ **PASSING**
-
-#### 🚨 **5.5.2 Hardware Button Trigger Issues** 
-- ✅ **INFRASTRUCTURE:** Power + Volume Up shows "calls and messages will vibrate" instead of triggering app
-- ✅ **INFRASTRUCTURE:** Hardware button accessibility service not properly intercepting events
-- **Test:** `HardwareButtonTriggerTest.powerVolumeUpShouldTriggerVoiceRecording` ✅ **PASSING** *(Manual)*
-
-#### 🚨 **5.5.3 Quick Settings Tile Issues**
-- ✅ **FIXED:** Quick Settings tile throws FGS microphone error: "starting with FGS microphone callerapp=proc..."
-- ✅ **FIXED:** Foreground service microphone permission not properly handled
-- **Test:** `QuickSettingsTileTest.tileShouldStartRecordingWithoutFgsError` ✅ **PASSING**
-
-#### 🚨 **5.5.4 Voice Assistant Integration Issues**
-- ✅ **INFRASTRUCTURE:** No clear way to set "Hey Notably" as default voice assistant
-- ✅ **INFRASTRUCTURE:** Voice assistant integration not working from lock screen
-- ✅ **INFRASTRUCTURE:** Wake phrase not configurable (fixed by new feature)
-- **Test:** `VoiceAssistantTest.heyNotablyShouldActivateVoiceRecording` ✅ **PASSING** *(Manual)*
-
-#### 🚨 **5.5.5 First-User Experience Issues**
-- ✅ **FIXED:** No first-use permission prompts for microphone and notifications
-- ✅ **FIXED:** No guided setup flow for enabling triggers
-- ✅ **FIXED:** Missing step-by-step CTA flow for first-time widget users
-- **Test:** `FirstUserExperienceTest.shouldPromptForRequiredPermissionsOnFirstUse` ✅ **PASSING**
-
-### **Testing Strategy:**
-1. **Create failing test** for each issue
-2. **Fix the underlying code** 
-3. **Verify test passes** to confirm fix
-4. **Manual testing** for hardware-dependent features
-
-### **Current Status:**
-- ✅ Markdown sync enabled by default (fixed)
-- ✅ Markdown files automatically generated on save (fixed)
-- ✅ Widget functionality (all tests passing)
-- ✅ Quick Settings tile FGS error (all tests passing)
-- ✅ First-use permission flow (all tests passing)
-- 🔄 Hardware button triggers (manual testing needed)
-- 🔄 Voice assistant integration (manual testing needed)
-- 🆕 Unified import/export system (planned)
-- 🆕 Configurable voice assistant (planned)
-- 🆕 Widget customization & control (planned)
-
----
-
-## 🆕 **Phase 5.6 Unified Import/Export System** - **PLANNED**
-
-### **5.6.1 Combined Export Feature**
-- **❌ TODO:** Single "Export All" option in settings
-- **❌ TODO:** Exports both notes and settings in one operation
-- **❌ TODO:** Creates separate files for clarity (notes.zip, settings.json)
-- **❌ TODO:** Progress indicator for combined export
-- **❌ TODO:** Option to include/exclude attachments
-
-### **5.6.2 Smart Import System**
-- **❌ TODO:** Single "Import" option in settings
-- **❌ TODO:** Automatic file type detection (notes.zip, settings.json, .md files)
-- **❌ TODO:** Smart import based on filename/extension
-- **❌ TODO:** Handles mixed file selections from file explorer
-- **❌ TODO:** Import preview with conflict resolution
-
-### **5.6.3 User Experience Improvements**
-- **❌ TODO:** Remove separate export/import menu items
-- **❌ TODO:** Simplified settings: "Backup & Restore" → "Export All" / "Import"
-- **❌ TODO:** Clear file naming convention (NotablyMD_Backup_YYYYMMDD.zip)
-- **❌ TODO:** Import success/failure feedback with details
-
-### **5.6.4 Technical Implementation**
-- **❌ TODO:** Unified export service combining existing export logic
-- **❌ TODO:** Smart file detection in import service
-- **❌ TODO:** Batch import processing for multiple files
-- **❌ TODO:** Enhanced error handling and user feedback
-- **❌ TODO:** Test coverage for unified import/export flows
-
----
-
-## 🎤 **Phase 5.7 Configurable Voice Assistant** - **PLANNED**
-
-### **5.7.1 Wake Phrase Customization**
-- **❌ TODO:** Voice recording interface to set custom wake phrase
-- **❌ TODO:** Text input option for manual wake phrase entry
-- **❌ TODO:** Real-time wake phrase validation and testing
-- **❌ TODO:** Support for multi-word phrases ("Hey Computer", "Okay Notably", etc.)
-- **❌ TODO:** Wake phrase preview and confidence scoring
-
-### **5.7.2 Voice Recognition Integration**
-- **❌ TODO:** Audio recording for wake phrase training
-- **❌ TODO:** Voice pattern analysis and storage
-- **❌ TODO:** Background voice service for wake phrase detection
-- **❌ TODO:** Noise reduction and ambient sound filtering
-- **❌ TODO:** Multiple wake phrase support (primary + alternatives)
-
-### **5.7.3 User Experience**
-- **❌ TODO:** Simple wake phrase setup wizard
-- **❌ TODO:** "Test Your Wake Phrase" functionality
-- **❌ TODO:** Wake phrase sensitivity adjustment
-- **❌ TODO:** Visual feedback when wake phrase is detected
-- **❌ TODO:** Easy wake phrase reset to default
-
-### **5.7.4 Technical Implementation**
-- **❌ TODO:** Voice pattern matching algorithm
-- **❌ TODO:** Secure storage of voice templates
-- **❌ TODO:** Integration with existing VoiceInteractionService
-- **❌ TODO:** Low-power background voice monitoring
-- **❌ TODO:** Wake phrase conflict resolution with system assistants
-
----
-
-## 🎨 **Phase 5.8 Widget Customization & Control** - **✅ COMPLETED**
-
-### **5.8.1 Trigger Method Configuration**
-- ✅ Enable/disable toggle for each trigger method
-- ✅ Hey Notably integration on/off switch
-- ✅ Hardware button combos enable/disable
-- ✅ Device administrator control toggle
-- ✅ Accessibility service management
-- ✅ Per-trigger method settings screens
-
-### **5.8.2 Widget Customization Options**
-- ✅ Widget icon selection (Default, Minimal, Bold, Outline)
-- ✅ Widget color themes (Blue, Green, Red, Purple, Orange)
-- ✅ Widget status indicator visibility control
-- ✅ Widget behavior configuration (Record, Open App, Last Note)
-- ✅ Widget background customization with color schemes
-
-### **5.8.3 Quick Settings Tile Customization**
-- ✅ Tile icon selection and themes
-- ✅ Tile color schemes matching widget themes
-- ✅ Tile status display options
-- ✅ Tile behavior configuration
-
-### **5.8.4 Advanced Widget Features**
-- ✅ Widget provider respects customization settings
-- ✅ Dynamic icon and color application
-- ✅ Comprehensive test suite for widget customization
-- ✅ Settings UI infrastructure with dropdown selections
-- ✅ Preference persistence and validation
-
-**Technical Implementation:**
-- ✅ Added 13 new customization preferences to NotablyMDPreferences
-- ✅ Enhanced VoiceNoteWidget with customization support
-- ✅ Created setupDropdown() method for StringPreference selections
-- ✅ Added 25+ new string resources for customization UI
-- ✅ Created 8 new drawable resources (icons & backgrounds)
-- ✅ Comprehensive test suite with 15+ test cases
-- ✅ Settings UI sections with proper headers and organization
-- ✅ Widget behavior customization (record, open app, last note)
-- ✅ Status indicator visibility control
-- ✅ **All build issues resolved and tests passing**
-
----
-
-### 5.5 Enhanced Security
-
-- Encrypt individual markdown files
-- Secure key management with existing biometrics
-- Protected backup integration
-
----
-
-## Updated Timeline
-
-| Week | Phase | Key Deliverables |
-|------|-------|------------------|
-| 1 | Phase 1 | Enhanced MarkdownManager, file structure |
-| 2 | Phase 2 | FileWatcher, SyncEngine, migration utility |
-| 3 | Phase 3 | Settings UI, sync indicators, conflict UI |
-| 4 | Phase 4 | Voice-to-Note Widget with comprehensive tests |
-| 5 | Phase 5 | Security integration, performance optimization ✅ |
-| 6 | Phase 5.4 | Quick voice recording triggers ✅ **COMPLETED** |
-| 7 | Phase 5.8 | Widget Customization & Control ✅ **COMPLETED** |
-
-**Total: 7 weeks with enhanced voice recording capabilities and full widget customization**
-
----
-
-## Next Steps
-
-1. **Analyze existing MarkdownUtils.kt** in detail
-2. **Design file watching integration**
-3. **Plan sync engine architecture**
-4. **Create enhanced settings screens**
-5. **Implement migration wizard**
-
----
-
-*This updated plan leverages NotablyMD's significant existing infrastructure to accelerate markdown-first development by 50% while adding enterprise-grade security and import capabilities.*
+## Strategic Notes
+
+- The markdown infrastructure (sync engine, conflict resolution, migration) is largely built — the gap is in the actual markdown serialization/deserialization being complete. Close that gap before adding more features on top of a shaky foundation.
+- Voice recording features are feature-complete; focus should shift to core note fidelity.
+- Hardware button and voice assistant triggers depend on OS-level permissions that vary by device — keep expectations realistic and document the limitations clearly.

@@ -3,7 +3,7 @@
 ## Prerequisites
 
 ### Environment Setup
-- [ ] **Java**: JDK 17+ (currently using Java 22)
+- [ ] **Java**: JDK 21+ (Temurin 21.0.2 via SDKMAN)
 - [ ] **Android Studio**: Latest stable version
 - [ ] **Gradle**: 8.11.1 (handled by wrapper)
 - [ ] **Android SDK**: API 36+ (Pixel 7 API 36 emulator available)
@@ -516,7 +516,7 @@ emulator -avd Pixel_7_API_36 -wipe-data &
 ## Notes
 
 - **Emulator**: Pixel 7 API 36 is recommended for testing
-- **Java Version**: Currently using Java 22 with target 17
+- **Java Version**: Java 21 (Temurin 21.0.2 via SDKMAN)
 - **Gradle**: Version 8.11.1 (handled by wrapper)
 - **Code Formatting**: ktfmt with pre-commit hooks (required)
 - **Tests**: Comprehensive test coverage for existing components
