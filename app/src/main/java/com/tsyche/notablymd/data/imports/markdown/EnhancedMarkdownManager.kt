@@ -3,7 +3,9 @@ package com.tsyche.notablymd.data.imports.markdown
 import android.content.Context
 import com.tsyche.notablymd.data.model.BaseNote
 import com.tsyche.notablymd.data.model.Folder
+import com.tsyche.notablymd.data.model.ListItem
 import com.tsyche.notablymd.data.model.NoteViewMode
+import com.tsyche.notablymd.data.model.SpanRepresentation
 import com.tsyche.notablymd.data.model.Type
 import java.io.File
 import java.io.IOException
@@ -141,17 +143,29 @@ class EnhancedMarkdownManager(private val context: Context) {
                 content
             }
 
-        // Parse body and spans using existing MarkdownUtils
-        // TODO: Re-enable when MarkdownUtils.convertToMarkdown is available
-        val parseResult =
-            Pair(bodyContent, emptyList<com.tsyche.notablymd.data.model.SpanRepresentation>())
-        // val parseResult = MarkdownUtils.parseBodyAndSpansFromMarkdown(bodyContent)
-        val body = parseResult.first
-        val spans = parseResult.second
+        val type = metadata.type ?: Type.NOTE
+        val body: String
+        val spans: List<SpanRepresentation>
+        val items: List<ListItem>
+
+        when (type) {
+            Type.LIST -> {
+                // Body is a GFM task list; parse it back into ListItem objects
+                body = ""
+                spans = emptyList()
+                items = parseItemsFromMarkdown(bodyContent)
+            }
+            else -> {
+                val parseResult = parseBodyAndSpansFromMarkdown(bodyContent)
+                body = parseResult.first
+                spans = parseResult.second
+                items = emptyList()
+            }
+        }
 
         return BaseNote(
             id = metadata.id ?: file.nameWithoutExtension.toLongOrNull() ?: 0L,
-            type = metadata.type ?: Type.NOTE,
+            type = type,
             folder = metadata.folder ?: Folder.NOTES,
             color = metadata.color ?: BaseNote.COLOR_DEFAULT,
             title = metadata.title ?: file.nameWithoutExtension,
@@ -161,11 +175,11 @@ class EnhancedMarkdownManager(private val context: Context) {
             labels = metadata.labels ?: emptyList(),
             body = body,
             spans = spans,
-            items = emptyList(), // TODO: Parse from markdown if needed
-            images = emptyList(), // TODO: Parse from markdown if needed
-            files = emptyList(), // TODO: Parse from markdown if needed
-            audios = emptyList(), // TODO: Parse from markdown if needed
-            reminders = emptyList(), // TODO: Parse from markdown if needed
+            items = items,
+            images = emptyList(),
+            files = emptyList(),
+            audios = emptyList(),
+            reminders = emptyList(),
             viewMode = metadata.viewMode ?: NoteViewMode.EDIT,
         )
     }
@@ -173,10 +187,56 @@ class EnhancedMarkdownManager(private val context: Context) {
     /** Convert BaseNote to markdown (internal implementation) */
     private suspend fun convertNoteToMarkdown(note: BaseNote): String {
         val frontMatter = generateYAMLFrontmatter(note)
-        // TODO: Re-enable when MarkdownUtils.convertToMarkdown is available
-        val bodyContent = note.body // MarkdownUtils.convertToMarkdown(note.body, note.spans)
-
+        val bodyContent =
+            when (note.type) {
+                Type.LIST -> serializeItemsToMarkdown(note.items)
+                else -> convertToMarkdown(note.body, note.spans)
+            }
         return "$frontMatter\n$bodyContent"
+    }
+
+    /** Serialize a list of ListItems into GFM task list markdown */
+    private fun serializeItemsToMarkdown(items: List<ListItem>): String {
+        if (items.isEmpty()) return ""
+        val sb = StringBuilder()
+        for (item in items) {
+            if (!item.isChild) {
+                val marker = if (item.checked) "- [x]" else "- [ ]"
+                sb.appendLine("$marker ${item.body}")
+                for (child in item.children) {
+                    val childMarker = if (child.checked) "  - [x]" else "  - [ ]"
+                    sb.appendLine("$childMarker ${child.body}")
+                }
+            }
+        }
+        return sb.toString().trimEnd('\n')
+    }
+
+    /** Parse GFM task list markdown back into ListItem objects */
+    private fun parseItemsFromMarkdown(body: String): List<ListItem> {
+        val items = mutableListOf<ListItem>()
+        var order = 0
+        val childPattern = Regex("""^ {2,}- \[([ x])\] (.+)$""")
+        val parentPattern = Regex("""^- \[([ x])\] (.+)$""")
+
+        for (line in body.lines()) {
+            val childMatch = childPattern.find(line)
+            if (childMatch != null) {
+                val checked = childMatch.groupValues[1] == "x"
+                val text = childMatch.groupValues[2]
+                if (items.isNotEmpty()) {
+                    items.last().children.add(ListItem(text, checked, true, null, mutableListOf()))
+                }
+                continue
+            }
+            val parentMatch = parentPattern.find(line)
+            if (parentMatch != null) {
+                val checked = parentMatch.groupValues[1] == "x"
+                val text = parentMatch.groupValues[2]
+                items.add(ListItem(text, checked, false, order++, mutableListOf()))
+            }
+        }
+        return items
     }
 
     /** Parse individual frontmatter lines */
