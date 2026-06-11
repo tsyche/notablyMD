@@ -101,7 +101,7 @@ class NotablyMDPreferences private constructor(private val context: Context) {
 
     // Markdown Sync Preferences
     val markdownSyncEnabled =
-        BooleanPreference("markdownSyncEnabled", preferences, false, R.string.markdown_sync_enabled)
+        BooleanPreference("markdownSyncEnabled", preferences, true, R.string.markdown_sync_enabled)
     val markdownSyncLocation =
         StringPreference("markdownSyncLocation", preferences, "", R.string.markdown_sync_location)
     val maxLabels =
@@ -130,6 +130,96 @@ class NotablyMDPreferences private constructor(private val context: Context) {
             R.string.backup_password,
         )
     }
+
+    // Widget Customization Preferences
+    val widgetCustomizationEnabled =
+        BooleanPreference(
+            "widgetCustomizationEnabled",
+            preferences,
+            true,
+            R.string.widget_customization_enabled,
+        )
+    val widgetIconStyle =
+        StringPreference("widgetIconStyle", preferences, "default", R.string.widget_icon_style)
+    val widgetColorScheme =
+        StringPreference("widgetColorScheme", preferences, "blue", R.string.widget_color_scheme)
+    val widgetShowStatusIndicator =
+        BooleanPreference(
+            "widgetShowStatusIndicator",
+            preferences,
+            true,
+            R.string.widget_show_status_indicator,
+        )
+    val widgetBehaviorOnTap =
+        StringPreference(
+            "widgetBehaviorOnTap",
+            preferences,
+            "record",
+            R.string.widget_behavior_on_tap,
+        )
+
+    // Trigger Method Configuration Preferences
+    val quickTileTriggerEnabled =
+        BooleanPreference(
+            "quickTileTriggerEnabled",
+            preferences,
+            true,
+            R.string.quick_tile_trigger_enabled,
+        )
+    val hardwareButtonTriggerEnabled =
+        BooleanPreference(
+            "hardwareButtonTriggerEnabled",
+            preferences,
+            true,
+            R.string.hardware_button_trigger_enabled,
+        )
+    val voiceAssistantTriggerEnabled =
+        BooleanPreference(
+            "voiceAssistantTriggerEnabled",
+            preferences,
+            true,
+            R.string.voice_assistant_trigger_enabled,
+        )
+    val deviceAdminTriggerEnabled =
+        BooleanPreference(
+            "deviceAdminTriggerEnabled",
+            preferences,
+            false,
+            R.string.device_admin_trigger_enabled,
+        )
+    val accessibilityServiceEnabled =
+        BooleanPreference(
+            "accessibilityServiceEnabled",
+            preferences,
+            true,
+            R.string.accessibility_service_preference,
+        )
+
+    // Quick Settings Tile Customization
+    val quickTileIconStyle =
+        StringPreference(
+            "quickTileIconStyle",
+            preferences,
+            "default",
+            R.string.quick_tile_icon_style,
+        )
+    val quickTileColorScheme =
+        StringPreference(
+            "quickTileColorScheme",
+            preferences,
+            "blue",
+            R.string.quick_tile_color_scheme,
+        )
+    val quickTileShowStatus =
+        BooleanPreference("quickTileShowStatus", preferences, true, R.string.quick_tile_show_status)
+
+    val transcriptionService =
+        StringPreference(
+            "transcriptionService",
+            preferences,
+            "system_default",
+            R.string.transcription_service,
+        )
 
     val autoSaveAfterIdleTime =
         IntPreference(

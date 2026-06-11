@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Hardware Button Combination Options -->
+    <string-array name="hardware_button_combos">
+        <item>Power + Volume Up (simultaneous)</item>
+        <item>Triple Power Button Press</item>
+        <item>Double Power + Volume Up</item>
+    </string-array>
+
+    <string-array name="hardware_button_combo_values">
+        <item>power_volume_up</item>
+        <item>triple_power</item>
+        <item>double_power_volume_up</item>
+    </string-array>
+
+    <!-- Quick Record Triggers -->
+    <string name="quick_record_triggers_title" translatable="false">Quick Record Triggers</string>
+    <string name="quick_record_triggers_summary" translatable="false">Configure voice recording
+        shortcuts</string>
+
+    <!-- Assistant Integration -->
+    <string name="assistant_trigger_title" translatable="false">Voice Assistant</string>
+    <string name="assistant_trigger_summary" translatable="false">Enable voice assistant integration
+        with custom wake
+        phrase</string>
+    <string name="custom_wake_phrase_title" translatable="false">Custom Wake Phrase</string>
+    <string name="custom_wake_phrase_summary" translatable="false">Phrase to activate voice
+        assistant</string>
+    <string name="custom_wake_phrase_default" translatable="false">Hey Notably</string>
+
+    <!-- Quick Settings Tile -->
+    <string name="quick_tile_trigger_title" translatable="false">Quick Settings Tile</string>
+    <string name="quick_tile_trigger_summary" translatable="false">Add voice recording tile to quick
+        settings panel</string>
+
+    <!-- Hardware Button Triggers -->
+    <string name="accessibility_trigger_title" translatable="false">Hardware Button Triggers</string>
+    <string name="accessibility_trigger_summary" translatable="false">Use hardware button
+        combinations to trigger
+        recording</string>
+    <string name="hardware_button_combo_title" translatable="false">Button Combination</string>
+    <string name="hardware_button_combo_summary" translatable="false">Select hardware button
+        combination</string>
+
+    <!-- Device Administrator -->
+    <string name="device_admin_trigger_title" translatable="false">Device Administrator</string>
+    <string name="device_admin_trigger_summary" translatable="false">Enable system-level control for
+        enhanced hardware
+        button support</string>
+
+    <!-- Button Combination Names -->
+    <string name="combo_power_volume_up" translatable="false">Power + Volume Up</string>
+    <string name="combo_triple_power" translatable="false">Triple Power Button</string>
+    <string name="combo_double_power_volume_up" translatable="false">Double Power + Volume Up</string>
+
+    <!-- Status Messages -->
+    <string name="trigger_enabled" translatable="false">%s enabled</string>
+    <string name="trigger_disabled" translatable="false">%s disabled</string>
+    <string name="accessibility_service_enabled" translatable="false">Accessibility service enabled</string>
+    <string name="accessibility_service_disabled" translatable="false">Accessibility service
+        disabled</string>
+    <string name="device_admin_enabled" translatable="false">Device administrator enabled</string>
+    <string name="device_admin_disabled" translatable="false">Device administrator disabled</string>
+
+    <!-- Setup Instructions -->
+    <string name="setup_instructions_title" translatable="false">Setup Instructions</string>
+    <string name="setup_instructions_summary" translatable="false">Learn how to configure each
+        trigger method</string>
+    <string name="permissions_info_title" translatable="false">Required Permissions</string>
+    <string name="permissions_info_summary" translatable="false">View permissions needed for each
+        trigger method</string>
+
+    <!-- Error Messages -->
+    <string name="error_empty_wake_phrase" translatable="false">Wake phrase cannot be empty</string>
+    <string name="error_accessibility_permission" translatable="false">Accessibility permission
+        required</string>
+    <string name="error_device_admin_permission" translatable="false">Device administrator
+        permission required</string>
+
+    <!-- Success Messages -->
+    <string name="voice_recording_started" translatable="false">Voice recording started via %s</string>
+    <string name="quick_tile_disabled" translatable="false">Quick record tile is disabled in
+        settings</string>
+
+    <!-- Accessibility Service Description -->
+    <string name="accessibility_service_description" translatable="false">NotablyMD Quick Record -
+        Capture hardware
+        button combinations to trigger voice recording. This service monitors button presses and
+        does not collect personal data.</string>
+
+    <!-- Device Admin Description -->
+    <string name="device_admin_description" translatable="false">NotablyMD Quick Record -
+        System-level integration for
+        enhanced hardware button support. Allows voice recording from lock screen and system
+        shortcuts.</string>
+
+</resources>

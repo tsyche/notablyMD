@@ -17,6 +17,9 @@
     <uses-permission android:name="android.permission.USE_BIOMETRIC" />
     <uses-permission android:name="android.permission.USE_FINGERPRINT" />
 
+    <!-- Quick Record Trigger Permissions -->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+
     <application
         android:name=".NotablyMDApplication"
         android:allowBackup="true"
@@ -230,6 +233,65 @@
             <intent-filter>
                 <action android:name="com.tsyche.notablymd.action.CLEANUP_MISSING_ATTACHMENTS" />
             </intent-filter>
+        </receiver>
+
+        <!-- Quick Record Trigger Services -->
+
+        <!-- Voice Interaction Service -->
+        <service
+            android:name=".utils.quickrecord.assistant.NotablyVoiceInteractionService"
+            android:exported="true"
+            android:permission="android.permission.BIND_VOICE_INTERACTION">
+            <meta-data
+                android:name="android.voice_interaction"
+                android:resource="@xml/voice_interaction_service" />
+            <intent-filter>
+                <action android:name="android.service.voice.VoiceInteractionService" />
+            </intent-filter>
+        </service>
+
+        <service
+            android:name=".utils.quickrecord.assistant.NotablyVoiceInteractionSessionService"
+            android:exported="true"
+            android:permission="android.permission.BIND_VOICE_INTERACTION">
+            <intent-filter>
+                <action android:name="android.service.voice.VoiceInteractionSessionService" />
+            </intent-filter>
+        </service>
+
+        <!-- Quick Settings Tile -->
+        <service
+            android:name=".utils.quickrecord.tile.QuickRecordTileService"
+            android:exported="true"
+            android:icon="@drawable/ic_mic"
+            android:label="Voice Record"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
+        </service>
+
+        <!-- Accessibility Service -->
+        <service
+            android:name=".utils.quickrecord.accessibility.QuickRecordAccessibilityService"
+            android:exported="true"
+            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
+            <intent-filter>
+                <action android:name="android.accessibilityservice.AccessibilityService" />
+            </intent-filter>
+            <meta-data
+                android:name="android.accessibilityservice"
+                android:resource="@xml/accessibility_service_config" />
+        </service>
+
+        <!-- Device Administrator -->
+        <receiver
+            android:name=".utils.quickrecord.deviceadmin.QuickRecordDeviceAdmin"
+            android:exported="true"
+            android:permission="android.permission.BIND_DEVICE_ADMIN">
+            <meta-data
+                android:name="android.app.device_admin"
+                android:resource="@xml/device_admin_receiver" />
         </receiver>
 
     </application>

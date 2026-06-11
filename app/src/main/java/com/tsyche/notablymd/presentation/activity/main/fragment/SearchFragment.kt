@@ -8,11 +8,11 @@ import androidx.core.view.isVisible
 import com.tsyche.notablymd.R
 import com.tsyche.notablymd.data.model.BaseNote
 import com.tsyche.notablymd.data.model.Folder
+import com.tsyche.notablymd.presentation.showKeyboard
 
 class SearchFragment : NotablyMDFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        // TODO: autofocus and show keyboard
         val initialFolder =
             arguments?.let {
                 BundleCompat.getSerializable(it, EXTRA_INITIAL_FOLDER, Folder::class.java)
@@ -47,6 +47,13 @@ class SearchFragment : NotablyMDFragment() {
         } else binding?.ChipGroup?.isVisible = false
         getObservable().observe(viewLifecycleOwner) { items ->
             model.actionMode.updateSelected(items?.filterIsInstance<BaseNote>()?.map { it.id })
+        }
+
+        // post ensures the view is window-attached before the keyboard is requested;
+        // the setupSearch() listener misses the initial navigation event on first fragment creation
+        binding?.EnterSearchKeyword?.post {
+            requestFocus()
+            activity?.showKeyboard(this)
         }
     }
 

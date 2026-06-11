@@ -307,11 +307,48 @@ class NotallyModel(private val app: Application) : AndroidViewModel(app) {
             // Update performance systems
             performanceManager.updateNote(note)
 
+            // Auto-sync to markdown file if enabled
+            if (preferences.markdownSyncEnabled.value) {
+                syncToMarkdownFile(note)
+            }
+
             if (checkBackupOnSave) {
                 checkBackupOnSave(note)
             }
             originalNote = note.deepCopy()
             return@withContext id
+        }
+    }
+
+    private suspend fun syncToMarkdownFile(note: BaseNote) {
+        try {
+            val markdownManager =
+                com.tsyche.notablymd.data.imports.markdown.EnhancedMarkdownManager(app)
+            val syncLocation =
+                preferences.markdownSyncLocation.value.ifEmpty {
+                    "/storage/emulated/0/Android/media/com.tsyche.notablymd/markdown"
+                }
+
+            // Generate filename
+            val fileName = "${note.title.replace(" ", "_")}_${note.id}.md"
+            val markdownFile = java.io.File(syncLocation, fileName)
+
+            // Write note to markdown file
+            val result = markdownManager.writeNote(note, markdownFile)
+            if (result.isSuccess) {
+                android.util.Log.d(
+                    "NotallyModel",
+                    "Successfully synced note ${note.id} to ${markdownFile.absolutePath}",
+                )
+            } else {
+                android.util.Log.e(
+                    "NotallyModel",
+                    "Failed to sync note ${note.id} to markdown",
+                    result.exceptionOrNull(),
+                )
+            }
+        } catch (e: Exception) {
+            android.util.Log.e("NotallyModel", "Error syncing note to markdown file", e)
         }
     }
 

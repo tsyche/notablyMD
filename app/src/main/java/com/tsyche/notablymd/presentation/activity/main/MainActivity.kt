@@ -52,6 +52,8 @@ import com.tsyche.notablymd.presentation.activity.note.EditListActivity
 import com.tsyche.notablymd.presentation.activity.note.EditNoteActivity
 import com.tsyche.notablymd.presentation.add
 import com.tsyche.notablymd.presentation.dp
+import com.tsyche.notablymd.presentation.firstuse.FirstUsePermissionManager
+import com.tsyche.notablymd.presentation.firstuse.PermissionDialogHelper
 import com.tsyche.notablymd.presentation.getQuantityString
 import com.tsyche.notablymd.presentation.movedToResId
 import com.tsyche.notablymd.presentation.setCancelButton
@@ -82,6 +84,8 @@ class MainActivity : LockedActivity<ActivityMainBinding>() {
     private lateinit var exportFileActivityResultLauncher: ActivityResultLauncher<Intent>
     private lateinit var exportNotesActivityResultLauncher: ActivityResultLauncher<Intent>
     private lateinit var syncStatusManager: SyncStatusManager
+    private lateinit var permissionManager: FirstUsePermissionManager
+    private lateinit var permissionDialogHelper: PermissionDialogHelper
 
     private var isStartViewFragment = false
     private val actionModeCancelCallback =
@@ -105,6 +109,10 @@ class MainActivity : LockedActivity<ActivityMainBinding>() {
         setSupportActionBar(binding.Toolbar)
         configureEdgeToEdgeInsets()
 
+        // Initialize permission manager
+        permissionManager = FirstUsePermissionManager(this)
+        permissionDialogHelper = PermissionDialogHelper(this)
+
         setupFAB()
         setupMenu()
         setupActionMode()
@@ -114,6 +122,9 @@ class MainActivity : LockedActivity<ActivityMainBinding>() {
         setupActivityResultLaunchers()
 
         preferences.alwaysShowSearchBar.observe(this) { invalidateOptionsMenu() }
+
+        // Handle first-use permissions and setup
+        handleFirstUseExperience()
 
         checkForMigrations(savedInstanceState)
 
@@ -138,6 +149,63 @@ class MainActivity : LockedActivity<ActivityMainBinding>() {
         onBackPressedDispatcher.addCallback(this, actionModeCancelCallback)
 
         baseModel.progress.setupProgressDialog(this)
+    }
+
+    private fun handleFirstUseExperience() {
+        // Setup permission dialog launcher
+        permissionDialogHelper.setupPermissionLauncher()
+
+        // Check if we need to show permission prompts
+        if (permissionManager.shouldShowPermissionPrompts()) {
+            if (permissionManager.isFirstLaunch()) {
+                // First time user - show welcome dialog
+                permissionDialogHelper.showFirstTimeWelcomeDialog { shouldContinue ->
+                    if (shouldContinue) {
+                        permissionManager.markFirstLaunchCompleted()
+                        checkAndRequestPermissions()
+                    }
+                }
+            } else {
+                // Returning user with missing permissions
+                checkAndRequestPermissions()
+            }
+        }
+    }
+
+    private fun checkAndRequestPermissions() {
+        val missingPermissions = permissionManager.getMissingPermissions()
+
+        if (missingPermissions.isEmpty()) {
+            // All permissions granted
+            permissionManager.markPermissionsRequested()
+            permissionManager.savePermissionStatus(
+                microphoneGranted = true,
+                notificationsGranted = true,
+            )
+
+            // Optionally show widget setup guide
+            if (permissionManager.isFirstLaunch()) {
+                permissionDialogHelper.showWidgetSetupGuide { _ ->
+                    // User can choose to see widget guide or skip
+                }
+            }
+        } else {
+            // Request missing permissions
+            permissionDialogHelper.showPermissionRationaleDialog(missingPermissions) { granted ->
+                permissionManager.markPermissionsRequested()
+                permissionManager.savePermissionStatus(
+                    microphoneGranted = permissionManager.hasMicrophonePermission(),
+                    notificationsGranted = permissionManager.hasNotificationPermission(),
+                )
+
+                if (!granted) {
+                    // Permissions denied - show settings dialog
+                    permissionDialogHelper.showSettingsDialog { _ ->
+                        // User can choose to go to settings or skip
+                    }
+                }
+            }
+        }
     }
 
     private fun checkForMigrations(savedInstanceState: Bundle?) {

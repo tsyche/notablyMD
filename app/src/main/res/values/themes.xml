@@ -59,6 +59,11 @@
         <item name="cursorColor">?attr/colorOnSurface</item>
 
         <item name="android:windowBackground">?attr/colorSurface</item>
+
+        <item name="selectableItemBackground">?android:attr/selectableItemBackground</item>
+        <item name="textAppearanceBodyLarge">@style/TextAppearance.Material3.BodyLarge</item>
+        <item name="textAppearanceBodyMedium">@style/TextAppearance.Material3.BodyMedium</item>
+        <item name="colorControlNormal">?attr/colorOnSurface</item>
     </style>
 
     <style name="NavigationView" parent="Widget.Material3.NavigationView">

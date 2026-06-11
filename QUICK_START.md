@@ -83,7 +83,7 @@ adb logcat | grep -E "(FATAL|AndroidRuntime)"
 
 ## Key Diffs
 - ✅ **Package**: `com.tsyche.notablymd`
-- ✅ **Target SDK**: 36
+- ✅ **Target SDK**: 35
 - ✅ **Security**: SQLCipher encryption + biometrics
 - ✅ **Markdown**: CommonMark + GFM support built-in
 - ✅ **Import**: Evernote, Google Keep, JSON, Plain Text

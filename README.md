@@ -79,8 +79,9 @@ chmod +x gradlew
 ### Build Requirements
 - **Java**: JDK 21+
 - **Android Studio**: Latest stable
-- **Target SDK**: 36
-- **Kotlin**: 1.9.0
+- **Target SDK**: 35
+- **Kotlin**: 2.1.0
+- **Gradle**: 8.12
 
 ### Code Style
 This project uses **ktfmt** for code formatting with pre-commit hooks:
@@ -95,7 +96,6 @@ This project uses **ktfmt** for code formatting with pre-commit hooks:
 
 - **[QUICK_START.md](./QUICK_START.md)** - Development setup guide
 - **[DEVELOPMENT_CHECKLIST.md](./DEVELOPMENT_CHECKLIST.md)** - Comprehensive development workflow
-- **[MARKDOWN_MIGRATION_PLAN.md](./MARKDOWN_MIGRATION_PLAN.md)** - Markdown-first architecture roadmap
 - **[TRANSLATIONS.md](./TRANSLATIONS.md)** - Translation guidelines
 
 ---

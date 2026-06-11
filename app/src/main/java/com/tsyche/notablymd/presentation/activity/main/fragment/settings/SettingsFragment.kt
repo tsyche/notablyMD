@@ -16,6 +16,7 @@ import android.text.method.PasswordTransformationMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity.RESULT_OK
@@ -51,6 +52,7 @@ import com.tsyche.notablymd.presentation.viewmodel.preference.PeriodicBackup
 import com.tsyche.notablymd.presentation.viewmodel.preference.PeriodicBackup.Companion.BACKUP_MAX_MIN
 import com.tsyche.notablymd.presentation.viewmodel.preference.PeriodicBackup.Companion.BACKUP_PERIOD_DAYS_MIN
 import com.tsyche.notablymd.presentation.viewmodel.preference.PeriodicBackupsPreference
+import com.tsyche.notablymd.presentation.viewmodel.preference.StringPreference
 import com.tsyche.notablymd.utils.MIME_TYPE_JSON
 import com.tsyche.notablymd.utils.MIME_TYPE_ZIP
 import com.tsyche.notablymd.utils.backup.exportPreferences
@@ -80,6 +82,7 @@ class SettingsFragment : Fragment() {
     private lateinit var importOtherActivityResultLauncher: ActivityResultLauncher<Intent>
     private lateinit var exportBackupActivityResultLauncher: ActivityResultLauncher<Intent>
     private lateinit var chooseBackupFolderActivityResultLauncher: ActivityResultLauncher<Intent>
+    private lateinit var chooseMarkdownFolderActivityResultLauncher: ActivityResultLauncher<Intent>
     private lateinit var setupLockActivityResultLauncher: ActivityResultLauncher<Intent>
     private lateinit var disableLockActivityResultLauncher: ActivityResultLauncher<Intent>
     private lateinit var exportSettingsActivityResultLauncher: ActivityResultLauncher<Intent>
@@ -100,6 +103,10 @@ class SettingsFragment : Fragment() {
             setupBackup(binding)
             setupAutoBackups(binding)
             setupMarkdownSync(binding)
+            setupTranscriptionService(binding)
+            setupWidgetCustomization(binding)
+            setupTriggerMethods(binding)
+            setupQuickTileCustomization(binding)
             setupSecurity(binding)
             setupSettings(binding)
         }
@@ -175,15 +182,27 @@ class SettingsFragment : Fragment() {
                                     it.checkSelfPermission(permission) !=
                                         PackageManager.PERMISSION_GRANTED
                                 ) {
-                                    MaterialAlertDialogBuilder(it)
-                                        .setMessage(
-                                            R.string.please_grant_notably_notification_auto_backup
-                                        )
-                                        .setNegativeButton(R.string.skip, null)
-                                        .setPositiveButton(R.string.continue_) { _, _ ->
-                                            it.requestPermissions(arrayOf(permission), 0)
-                                        }
-                                        .show()
+                                    it.requestPermissions(arrayOf(permission), 0)
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+        chooseMarkdownFolderActivityResultLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+                if (result.resultCode == RESULT_OK) {
+                    result.data?.data?.let { uri ->
+                        model.setupMarkdownSyncLocation(uri)
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                            activity?.let {
+                                val permission = Manifest.permission.POST_NOTIFICATIONS
+                                if (
+                                    it.checkSelfPermission(permission) !=
+                                        PackageManager.PERMISSION_GRANTED
+                                ) {
+                                    it.requestPermissions(arrayOf(permission), 0)
                                 }
                             }
                         }
@@ -635,22 +654,246 @@ class SettingsFragment : Fragment() {
 
             // Setup location picker
             markdownSyncLocation.observe(viewLifecycleOwner) { location ->
-                val displayLocation =
-                    if (location.isEmpty()) {
-                        "Android/media/com.tsyche.notablymd (Default)"
-                    } else {
-                        location
-                    }
+                MarkdownSyncLocation.setupMarkdownSyncLocation(
+                    markdownSyncLocation,
+                    location,
+                    requireContext(),
+                    layoutInflater,
+                    messageResId = R.string.markdown_sync_location_hint,
+                    chooseLocation = {
+                        // Launch folder picker for markdown sync location
+                        val intent =
+                            Intent(ACTION_OPEN_DOCUMENT_TREE).wrapWithChooser(requireContext())
+                        chooseMarkdownFolderActivityResultLauncher.launch(intent)
+                    },
+                )
+            }
+        }
+    }
 
-                MarkdownSyncLocation.Title.setText(R.string.markdown_sync_location)
-                MarkdownSyncLocation.Value.text = displayLocation
-                MarkdownSyncLocation.root.setOnClickListener {
-                    // Launch folder picker
-                    val intent =
-                        Intent(ACTION_OPEN_DOCUMENT_TREE).apply {
-                            addCategory(Intent.CATEGORY_DEFAULT)
-                        }
-                    chooseMarkdownSyncLocationLauncher.launch(intent)
+    private fun NotablyMDPreferences.setupTranscriptionService(binding: FragmentSettingsBinding) {
+        binding.TranscriptionService.setupTranscriptionService(
+            transcriptionService,
+            transcriptionService.value,
+            requireContext(),
+            layoutInflater,
+            messageResId = R.string.transcription_service_hint,
+            chooseService = { selectedService ->
+                showTranscriptionServiceDialog(selectedService, transcriptionService)
+            },
+        )
+    }
+
+    private fun showTranscriptionServiceDialog(
+        currentService: String,
+        transcriptionService: StringPreference,
+    ) {
+        val services = arrayOf("FUTO Voice", "Heliboard", "System Default")
+        val currentIndex = services.indexOf(currentService).takeIf { it >= 0 } ?: 0
+
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle(R.string.transcription_service)
+            .setSingleChoiceItems(services, currentIndex) { dialog, which ->
+                val selectedService = services[which]
+                model.savePreference(transcriptionService, selectedService)
+
+                Toast.makeText(
+                        requireContext(),
+                        "Transcription service set to: $selectedService",
+                        Toast.LENGTH_SHORT,
+                    )
+                    .show()
+            }
+            .setPositiveButton(android.R.string.ok, null)
+            .show()
+    }
+
+    private fun NotablyMDPreferences.setupWidgetCustomization(binding: FragmentSettingsBinding) {
+        binding.apply {
+            // Widget customization master toggle
+            widgetCustomizationEnabled.observe(viewLifecycleOwner) { enabled ->
+                WidgetCustomizationEnabled.setup(
+                    widgetCustomizationEnabled,
+                    enabled,
+                    requireContext(),
+                    layoutInflater,
+                    messageResId = R.string.widget_customization_enabled_hint,
+                ) { newEnabled: Boolean ->
+                    model.savePreference(widgetCustomizationEnabled, newEnabled)
+                }
+            }
+
+            // Widget icon style
+            widgetIconStyle.observe(viewLifecycleOwner) { iconStyle ->
+                WidgetIconStyle.setupDropdown(
+                    widgetIconStyle,
+                    iconStyle,
+                    requireContext(),
+                    layoutInflater,
+                    messageResId = R.string.widget_icon_style_hint,
+                    entries = arrayOf("Default", "Minimal", "Bold", "Outline"),
+                    entryValues = arrayOf("default", "minimal", "bold", "outline"),
+                ) { newIconStyle: String ->
+                    model.savePreference(widgetIconStyle, newIconStyle)
+                }
+            }
+
+            // Widget color scheme
+            widgetColorScheme.observe(viewLifecycleOwner) { colorScheme ->
+                WidgetColorScheme.setupDropdown(
+                    widgetColorScheme,
+                    colorScheme,
+                    requireContext(),
+                    layoutInflater,
+                    messageResId = R.string.widget_color_scheme_hint,
+                    entries = arrayOf("Blue", "Green", "Red", "Purple", "Orange"),
+                    entryValues = arrayOf("blue", "green", "red", "purple", "orange"),
+                ) { newColorScheme: String ->
+                    model.savePreference(widgetColorScheme, newColorScheme)
+                }
+            }
+
+            // Show status indicator
+            widgetShowStatusIndicator.observe(viewLifecycleOwner) { enabled ->
+                WidgetShowStatusIndicator.setup(
+                    widgetShowStatusIndicator,
+                    enabled,
+                    requireContext(),
+                    layoutInflater,
+                    messageResId = R.string.widget_show_status_indicator_hint,
+                ) { newEnabled: Boolean ->
+                    model.savePreference(widgetShowStatusIndicator, newEnabled)
+                }
+            }
+
+            // Widget behavior on tap
+            widgetBehaviorOnTap.observe(viewLifecycleOwner) { behavior ->
+                WidgetBehaviorOnTap.setupDropdown(
+                    widgetBehaviorOnTap,
+                    behavior,
+                    requireContext(),
+                    layoutInflater,
+                    messageResId = R.string.widget_behavior_on_tap_hint,
+                    entries = arrayOf("Start Recording", "Open App", "Last Note"),
+                    entryValues = arrayOf("record", "open", "last"),
+                ) { newBehavior: String ->
+                    model.savePreference(widgetBehaviorOnTap, newBehavior)
+                }
+            }
+        }
+    }
+
+    private fun NotablyMDPreferences.setupTriggerMethods(binding: FragmentSettingsBinding) {
+        binding.apply {
+            // Quick Settings tile trigger
+            quickTileTriggerEnabled.observe(viewLifecycleOwner) { enabled ->
+                QuickTileTriggerEnabled.setup(
+                    quickTileTriggerEnabled,
+                    enabled,
+                    requireContext(),
+                    layoutInflater,
+                    messageResId = R.string.quick_tile_trigger_enabled_hint,
+                ) { newEnabled: Boolean ->
+                    model.savePreference(quickTileTriggerEnabled, newEnabled)
+                }
+            }
+
+            // Hardware button trigger
+            hardwareButtonTriggerEnabled.observe(viewLifecycleOwner) { enabled ->
+                HardwareButtonTriggerEnabled.setup(
+                    hardwareButtonTriggerEnabled,
+                    enabled,
+                    requireContext(),
+                    layoutInflater,
+                    messageResId = R.string.hardware_button_trigger_enabled_hint,
+                ) { newEnabled: Boolean ->
+                    model.savePreference(hardwareButtonTriggerEnabled, newEnabled)
+                }
+            }
+
+            // Voice assistant trigger
+            voiceAssistantTriggerEnabled.observe(viewLifecycleOwner) { enabled ->
+                VoiceAssistantTriggerEnabled.setup(
+                    voiceAssistantTriggerEnabled,
+                    enabled,
+                    requireContext(),
+                    layoutInflater,
+                    messageResId = R.string.voice_assistant_trigger_enabled_hint,
+                ) { newEnabled: Boolean ->
+                    model.savePreference(voiceAssistantTriggerEnabled, newEnabled)
+                }
+            }
+
+            // Device administrator trigger
+            deviceAdminTriggerEnabled.observe(viewLifecycleOwner) { enabled ->
+                DeviceAdminTriggerEnabled.setup(
+                    deviceAdminTriggerEnabled,
+                    enabled,
+                    requireContext(),
+                    layoutInflater,
+                    messageResId = R.string.device_admin_trigger_enabled_hint,
+                ) { newEnabled: Boolean ->
+                    model.savePreference(deviceAdminTriggerEnabled, newEnabled)
+                }
+            }
+
+            // Accessibility service
+            accessibilityServiceEnabled.observe(viewLifecycleOwner) { enabled ->
+                AccessibilityServiceEnabled.setup(
+                    accessibilityServiceEnabled,
+                    enabled,
+                    requireContext(),
+                    layoutInflater,
+                    messageResId = R.string.accessibility_service_preference_hint,
+                ) { newEnabled: Boolean ->
+                    model.savePreference(accessibilityServiceEnabled, newEnabled)
+                }
+            }
+        }
+    }
+
+    private fun NotablyMDPreferences.setupQuickTileCustomization(binding: FragmentSettingsBinding) {
+        binding.apply {
+            // Quick tile icon style
+            quickTileIconStyle.observe(viewLifecycleOwner) { iconStyle ->
+                QuickTileIconStyle.setupDropdown(
+                    quickTileIconStyle,
+                    iconStyle,
+                    requireContext(),
+                    layoutInflater,
+                    messageResId = R.string.quick_tile_icon_style_hint,
+                    entries = arrayOf("Default", "Minimal", "Bold", "Outline"),
+                    entryValues = arrayOf("default", "minimal", "bold", "outline"),
+                ) { newIconStyle: String ->
+                    model.savePreference(quickTileIconStyle, newIconStyle)
+                }
+            }
+
+            // Quick tile color scheme
+            quickTileColorScheme.observe(viewLifecycleOwner) { colorScheme ->
+                QuickTileColorScheme.setupDropdown(
+                    quickTileColorScheme,
+                    colorScheme,
+                    requireContext(),
+                    layoutInflater,
+                    messageResId = R.string.quick_tile_color_scheme_hint,
+                    entries = arrayOf("Blue", "Green", "Red", "Purple", "Orange"),
+                    entryValues = arrayOf("blue", "green", "red", "purple", "orange"),
+                ) { newColorScheme: String ->
+                    model.savePreference(quickTileColorScheme, newColorScheme)
+                }
+            }
+
+            // Show quick tile status
+            quickTileShowStatus.observe(viewLifecycleOwner) { enabled ->
+                QuickTileShowStatus.setup(
+                    quickTileShowStatus,
+                    enabled,
+                    requireContext(),
+                    layoutInflater,
+                    messageResId = R.string.quick_tile_show_status_hint,
+                ) { newEnabled: Boolean ->
+                    model.savePreference(quickTileShowStatus, newEnabled)
                 }
             }
         }
