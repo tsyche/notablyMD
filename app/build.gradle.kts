@@ -16,13 +16,13 @@ plugins {
 
 android {
     namespace = "com.tsyche.notablymd"
-    compileSdk = 36
+    compileSdk = 35
     ndkVersion = "29.0.13113456"
     
     defaultConfig {
         applicationId = "com.tsyche.notablymd"
         minSdk = 21
-        targetSdk = 36
+        targetSdk = 35
         versionCode = project.findProperty("app.versionCode").toString().toInt()
         versionName = project.findProperty("app.versionName").toString()
         resourceConfigurations += listOf(
@@ -181,9 +181,9 @@ android {
         )
         // Handle native libraries that can't be stripped
         jniLibs {
-            pickFirsts += listOf("**/libc++_shared.so")
+            pickFirsts += listOf("**/libc++_shared.so", "**/libsqlcipher.so")
             // These libraries can't be stripped and will be packaged as-is
-            useLegacyPackaging = false
+            useLegacyPackaging = true
         }
     }
 
