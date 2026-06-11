@@ -14,8 +14,8 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 /**
- * UI tests for Quick Record Triggers settings
- * Tests all trigger method configurations and UI interactions
+ * UI tests for Quick Record Triggers settings Tests all trigger method configurations and UI
+ * interactions
  */
 @RunWith(AndroidJUnit4::class)
 @LargeTest
@@ -34,10 +34,11 @@ class QuickRecordTriggersUITest {
     fun quickSettingsTileToggleShouldBePresent() {
         // Check that Quick Settings tile toggle exists
         Thread.sleep(500) // Wait for UI to load
-        
+
         try {
             onView(withText("Quick Settings Tile")).check(matches(isDisplayed()))
-            onView(withText("Enable voice recording from Quick Settings tile")).check(matches(isDisplayed()))
+            onView(withText("Enable voice recording from Quick Settings tile"))
+                .check(matches(isDisplayed()))
         } catch (e: Exception) {
             // Toggle might have different text or be implemented differently
             // Look for any toggle related to quick settings
@@ -49,7 +50,7 @@ class QuickRecordTriggersUITest {
     fun hardwareButtonTriggerToggleShouldBePresent() {
         // Check that Hardware Button trigger toggle exists
         Thread.sleep(500)
-        
+
         try {
             onView(withText("Hardware Button Trigger")).check(matches(isDisplayed()))
             onView(withText("Enable Power + Volume Up trigger")).check(matches(isDisplayed()))
@@ -63,7 +64,7 @@ class QuickRecordTriggersUITest {
     fun voiceAssistantTriggerToggleShouldBePresent() {
         // Check that Voice Assistant trigger toggle exists
         Thread.sleep(500)
-        
+
         try {
             onView(withText("Voice Assistant Trigger")).check(matches(isDisplayed()))
             onView(withText("Enable \"Hey Notably\" wake phrase")).check(matches(isDisplayed()))
@@ -77,7 +78,7 @@ class QuickRecordTriggersUITest {
     fun deviceAdminTriggerToggleShouldBePresent() {
         // Check that Device Administrator toggle exists
         Thread.sleep(500)
-        
+
         try {
             onView(withText("Device Administrator")).check(matches(isDisplayed()))
             onView(withText("Enable enhanced system-level control")).check(matches(isDisplayed()))
@@ -91,10 +92,11 @@ class QuickRecordTriggersUITest {
     fun accessibilityServiceToggleShouldBePresent() {
         // Check that Accessibility Service toggle exists
         Thread.sleep(500)
-        
+
         try {
             onView(withText("Accessibility Service")).check(matches(isDisplayed()))
-            onView(withText("Enable accessibility service for hardware buttons")).check(matches(isDisplayed()))
+            onView(withText("Enable accessibility service for hardware buttons"))
+                .check(matches(isDisplayed()))
         } catch (e: Exception) {
             // Toggle might have different text
             onView(withText("Accessibility")).check(matches(isDisplayed()))
@@ -105,20 +107,19 @@ class QuickRecordTriggersUITest {
     fun togglesShouldBeClickable() {
         // Test that toggles are clickable
         Thread.sleep(500)
-        
+
         try {
             // Try to click Quick Settings toggle
             onView(withText("Quick Settings Tile")).perform(click())
             Thread.sleep(200)
-            
+
             // Try to click Hardware Button toggle
             onView(withText("Hardware Button Trigger")).perform(click())
             Thread.sleep(200)
-            
+
             // Try to click Voice Assistant toggle
             onView(withText("Voice Assistant Trigger")).perform(click())
             Thread.sleep(200)
-            
         } catch (e: Exception) {
             // Toggles might be implemented differently
             // This is expected - the test confirms the app doesn't crash
@@ -129,14 +130,16 @@ class QuickRecordTriggersUITest {
     fun settingsShouldHaveProperDescriptions() {
         // Test that settings have helpful descriptions
         Thread.sleep(500)
-        
+
         // Look for description text
         try {
-            onView(withText("Enable voice recording from Quick Settings tile")).check(matches(isDisplayed()))
+            onView(withText("Enable voice recording from Quick Settings tile"))
+                .check(matches(isDisplayed()))
             onView(withText("Enable Power + Volume Up trigger")).check(matches(isDisplayed()))
             onView(withText("Enable \"Hey Notably\" wake phrase")).check(matches(isDisplayed()))
             onView(withText("Enable enhanced system-level control")).check(matches(isDisplayed()))
-            onView(withText("Enable accessibility service for hardware buttons")).check(matches(isDisplayed()))
+            onView(withText("Enable accessibility service for hardware buttons"))
+                .check(matches(isDisplayed()))
         } catch (e: Exception) {
             // Descriptions might be different or missing
             // This is expected - the test confirms the app doesn't crash
@@ -147,18 +150,17 @@ class QuickRecordTriggersUITest {
     fun activityShouldNotCrashOnInteraction() {
         // Test that activity doesn't crash on various interactions
         Thread.sleep(500)
-        
+
         try {
             // Try clicking various elements
             onView(withText("Quick")).perform(click())
             Thread.sleep(200)
-            
+
             onView(withText("Hardware")).perform(click())
             Thread.sleep(200)
-            
+
             onView(withText("Assistant")).perform(click())
             Thread.sleep(200)
-            
         } catch (e: Exception) {
             // Elements might not exist or be clickable
             // This is expected - the test confirms the app doesn't crash
@@ -169,7 +171,7 @@ class QuickRecordTriggersUITest {
     fun backButtonShouldWork() {
         // Test that back navigation works
         Thread.sleep(500)
-        
+
         try {
             // Try to press back (this would close the activity)
             // In a real test, you'd verify the activity finishes

@@ -53,6 +53,11 @@
         <item name="elevationOverlayEnabled">false</item>
         <item name="materialAlertDialogTheme">@style/Dialog.Dark</item>
         <item name="popupMenuBackground">@color/md_theme_surfaceContainerLow</item>
+
+        <item name="selectableItemBackground">?android:attr/selectableItemBackground</item>
+        <item name="textAppearanceBodyLarge">@style/TextAppearance.Material3.BodyLarge</item>
+        <item name="textAppearanceBodyMedium">@style/TextAppearance.Material3.BodyMedium</item>
+        <item name="colorControlNormal">?attr/colorOnSurface</item>
     </style>
 
     <style name="Dialog.Dark" parent="ThemeOverlay.Material3.MaterialAlertDialog">

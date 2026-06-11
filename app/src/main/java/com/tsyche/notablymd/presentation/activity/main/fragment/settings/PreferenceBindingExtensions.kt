@@ -496,6 +496,31 @@ fun PreferenceBinding.setupBackupsFolder(
     }
 }
 
+fun PreferenceBinding.setupTranscriptionService(
+    preference: StringPreference,
+    value: String,
+    context: Context,
+    layoutInflater: LayoutInflater,
+    messageResId: Int,
+    chooseService: (String) -> Unit,
+) {
+    Title.setText(preference.titleResId!!)
+
+    if (value.isEmpty()) {
+        Value.setText(R.string.tap_to_set_up)
+        root.setOnClickListener { chooseService("system_default") }
+    } else {
+        // Display current service
+        when (value) {
+            "futo_voice" -> Value.setText(R.string.transcription_service_futo)
+            "heliboard" -> Value.setText(R.string.transcription_service_whisper)
+            "system_default" -> Value.setText(R.string.transcription_service_builtin)
+            else -> Value.setText(value)
+        }
+        root.setOnClickListener { chooseService(value) }
+    }
+}
+
 fun PreferenceBinding.setupMarkdownSyncLocation(
     preference: StringPreference,
     value: String,

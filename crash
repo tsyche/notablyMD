@@ -1,5 +1,5 @@
-android.view.InflateException: Binary XML file line #188 in com.tsyche.notablymd:layout/fragment_settings: Binary XML file line #188 in com.tsyche.notablymd:layout/fragment_settings: Error inflating class <unknown>
-Caused by: android.view.InflateException: Binary XML file line #188 in com.tsyche.notablymd:layout/fragment_settings: Error inflating class <unknown>
+android.view.InflateException: Binary XML file line #220 in com.tsyche.notablymd:layout/fragment_settings: Binary XML file line #220 in com.tsyche.notablymd:layout/fragment_settings: Error inflating class <unknown>
+Caused by: android.view.InflateException: Binary XML file line #220 in com.tsyche.notablymd:layout/fragment_settings: Error inflating class <unknown>
 Caused by: java.lang.reflect.InvocationTargetException
 	at java.lang.reflect.Constructor.newInstance0(Native Method)
 	at java.lang.reflect.Constructor.newInstance(Constructor.java:343)

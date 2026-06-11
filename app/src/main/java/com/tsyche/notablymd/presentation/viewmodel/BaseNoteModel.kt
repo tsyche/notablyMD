@@ -268,6 +268,20 @@ class BaseNoteModel(private val app: Application) : AndroidViewModel(app) {
         showRefreshBackupsFolderAfterThemeChange = false
     }
 
+    fun setupMarkdownSyncLocation(uri: Uri) {
+        val oldMarkdownSyncLocation = preferences.markdownSyncLocation.value
+        val newMarkdownSyncLocation = uri.toString()
+        if (newMarkdownSyncLocation != oldMarkdownSyncLocation) {
+            val flags =
+                Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION
+            app.contentResolver.takePersistableUriPermission(uri, flags)
+            if (oldMarkdownSyncLocation != EMPTY_PATH) {
+                clearPersistedUriPermissions(oldMarkdownSyncLocation)
+            }
+            savePreference(preferences.markdownSyncLocation, newMarkdownSyncLocation)
+        }
+    }
+
     fun enableDataInPublic(callback: (() -> Unit)? = null) {
         viewModelScope.launch {
             withContext(Dispatchers.IO) {

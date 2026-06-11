@@ -467,7 +467,13 @@
         Up trigger</string>
     <string name="voice_assistant_trigger_enabled" translatable="false">Voice Assistant Trigger</string>
     <string name="voice_assistant_trigger_enabled_hint" translatable="false">Enable "Hey Notably"
-        wake phrase</string>
+        voice assistant trigger</string>
+    <string name="transcription_service" translatable="false">Transcription Service</string>
+    <string name="transcription_service_hint" translatable="false">Choose the speech-to-text service</string>
+    <string name="transcription_service_builtin" translatable="false">Built-in Android</string>
+    <string name="transcription_service_futo" translatable="false">FUTO Voice</string>
+    <string name="transcription_service_whisper" translatable="false">OpenAI Whisper</string>
+    <string name="transcription_service_custom" translatable="false">Custom Service</string>
     <string name="device_admin_trigger_enabled" translatable="false">Device Administrator</string>
     <string name="device_admin_trigger_enabled_hint" translatable="false">Enable enhanced
         system-level control</string>

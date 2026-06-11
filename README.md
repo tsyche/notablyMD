@@ -80,7 +80,8 @@ chmod +x gradlew
 - **Java**: JDK 21+
 - **Android Studio**: Latest stable
 - **Target SDK**: 36
-- **Kotlin**: 1.9.0
+- **Kotlin**: 2.1.0
+- **Gradle**: 8.12
 
 ### Code Style
 This project uses **ktfmt** for code formatting with pre-commit hooks:

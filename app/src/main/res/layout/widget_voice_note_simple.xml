@@ -4,9 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/widget_background_simple"
-    android:padding="8dp">
+    android:padding="4dp">
 
-    <!-- Simple 1x1 widget with just a microphone button -->
+    <!-- Simple 1x1 widget with proper sized button -->
     <FrameLayout
         android:id="@+id/recordButton"
         android:layout_width="match_parent"
@@ -15,10 +15,21 @@
         android:clickable="true"
         android:focusable="true">
 
+        <!-- Recording state: Show STOP button -->
+        <ImageView
+            android:id="@+id/stopIcon"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_stop_square"
+            android:contentDescription="Stop Recording"
+            android:visibility="gone" />
+
+        <!-- Idle state: Show mic icon -->
         <ImageView
             android:id="@+id/micIcon"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
             android:layout_gravity="center"
             android:src="@drawable/ic_mic"
             android:contentDescription="Voice Record" />

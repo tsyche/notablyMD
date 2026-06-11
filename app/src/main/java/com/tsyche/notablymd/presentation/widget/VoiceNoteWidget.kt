@@ -199,6 +199,14 @@ class VoiceNoteWidget : AppWidgetProvider() {
         views: RemoteViews,
         preferences: NotablyMDPreferences,
     ) {
+        // Check if widget customization is enabled
+        if (!preferences.widgetCustomizationEnabled.value) {
+            // Apply default settings when customization is disabled
+            views.setImageViewResource(R.id.micIcon, R.drawable.ic_mic)
+            views.setInt(R.id.micIcon, "setColorFilter", android.graphics.Color.GRAY)
+            return
+        }
+
         // Apply icon style customization
         val iconStyle = preferences.widgetIconStyle.value
         val iconResId =
@@ -471,26 +479,31 @@ class VoiceNoteWidget : AppWidgetProvider() {
         for (appWidgetId in appWidgetIds) {
             // Use the simple widget layout
             val views = RemoteViews(context.packageName, R.layout.widget_voice_note_simple)
-            
-            // Update the icon tint based on state for visual feedback
+
+            // Update the UI based on state
             when (state) {
                 STATE_RECORDING -> {
-                    // Change icon color to red when recording
-                    views.setImageViewResource(R.id.micIcon, R.drawable.ic_mic_recording)
+                    // Show STOP button, hide mic icon
+                    views.setViewVisibility(R.id.micIcon, View.GONE)
+                    views.setViewVisibility(R.id.stopIcon, View.VISIBLE)
+                    views.setViewVisibility(R.id.statusIndicator, View.VISIBLE)
                 }
                 STATE_ERROR -> {
-                    // Change icon color to indicate error
+                    // Show mic icon with error tint
+                    views.setViewVisibility(R.id.micIcon, View.VISIBLE)
+                    views.setViewVisibility(R.id.stopIcon, View.GONE)
+                    views.setViewVisibility(R.id.statusIndicator, View.GONE)
                     views.setInt(R.id.micIcon, "setColorFilter", android.graphics.Color.RED)
                 }
                 else -> {
-                    // Reset to normal
+                    // Show normal mic icon
+                    views.setViewVisibility(R.id.micIcon, View.VISIBLE)
+                    views.setViewVisibility(R.id.stopIcon, View.GONE)
+                    views.setViewVisibility(R.id.statusIndicator, View.GONE)
                     views.setImageViewResource(R.id.micIcon, R.drawable.ic_mic)
                 }
             }
-            
-            // Show/hide status indicator based on state
-            views.setViewVisibility(R.id.statusIndicator, if (state == STATE_RECORDING) View.VISIBLE else View.GONE)
-            
+
             updateWidgetUI(views, state)
             appWidgetManager.updateAppWidget(appWidgetId, views)
         }

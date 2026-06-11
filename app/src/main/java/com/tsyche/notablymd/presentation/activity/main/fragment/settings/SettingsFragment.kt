@@ -16,6 +16,7 @@ import android.text.method.PasswordTransformationMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity.RESULT_OK
@@ -51,6 +52,7 @@ import com.tsyche.notablymd.presentation.viewmodel.preference.PeriodicBackup
 import com.tsyche.notablymd.presentation.viewmodel.preference.PeriodicBackup.Companion.BACKUP_MAX_MIN
 import com.tsyche.notablymd.presentation.viewmodel.preference.PeriodicBackup.Companion.BACKUP_PERIOD_DAYS_MIN
 import com.tsyche.notablymd.presentation.viewmodel.preference.PeriodicBackupsPreference
+import com.tsyche.notablymd.presentation.viewmodel.preference.StringPreference
 import com.tsyche.notablymd.utils.MIME_TYPE_JSON
 import com.tsyche.notablymd.utils.MIME_TYPE_ZIP
 import com.tsyche.notablymd.utils.backup.exportPreferences
@@ -80,6 +82,7 @@ class SettingsFragment : Fragment() {
     private lateinit var importOtherActivityResultLauncher: ActivityResultLauncher<Intent>
     private lateinit var exportBackupActivityResultLauncher: ActivityResultLauncher<Intent>
     private lateinit var chooseBackupFolderActivityResultLauncher: ActivityResultLauncher<Intent>
+    private lateinit var chooseMarkdownFolderActivityResultLauncher: ActivityResultLauncher<Intent>
     private lateinit var setupLockActivityResultLauncher: ActivityResultLauncher<Intent>
     private lateinit var disableLockActivityResultLauncher: ActivityResultLauncher<Intent>
     private lateinit var exportSettingsActivityResultLauncher: ActivityResultLauncher<Intent>
@@ -100,6 +103,7 @@ class SettingsFragment : Fragment() {
             setupBackup(binding)
             setupAutoBackups(binding)
             setupMarkdownSync(binding)
+            setupTranscriptionService(binding)
             setupWidgetCustomization(binding)
             setupTriggerMethods(binding)
             setupQuickTileCustomization(binding)
@@ -178,15 +182,27 @@ class SettingsFragment : Fragment() {
                                     it.checkSelfPermission(permission) !=
                                         PackageManager.PERMISSION_GRANTED
                                 ) {
-                                    MaterialAlertDialogBuilder(it)
-                                        .setMessage(
-                                            R.string.please_grant_notably_notification_auto_backup
-                                        )
-                                        .setNegativeButton(R.string.skip, null)
-                                        .setPositiveButton(R.string.continue_) { _, _ ->
-                                            it.requestPermissions(arrayOf(permission), 0)
-                                        }
-                                        .show()
+                                    it.requestPermissions(arrayOf(permission), 0)
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+        chooseMarkdownFolderActivityResultLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+                if (result.resultCode == RESULT_OK) {
+                    result.data?.data?.let { uri ->
+                        model.setupMarkdownSyncLocation(uri)
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                            activity?.let {
+                                val permission = Manifest.permission.POST_NOTIFICATIONS
+                                if (
+                                    it.checkSelfPermission(permission) !=
+                                        PackageManager.PERMISSION_GRANTED
+                                ) {
+                                    it.requestPermissions(arrayOf(permission), 0)
                                 }
                             }
                         }
@@ -645,12 +661,51 @@ class SettingsFragment : Fragment() {
                     layoutInflater,
                     messageResId = R.string.markdown_sync_location_hint,
                     chooseLocation = {
-                        // TODO: Launch folder picker for markdown sync location
-                        // This should open a folder picker dialog
+                        // Launch folder picker for markdown sync location
+                        val intent =
+                            Intent(ACTION_OPEN_DOCUMENT_TREE).wrapWithChooser(requireContext())
+                        chooseMarkdownFolderActivityResultLauncher.launch(intent)
                     },
                 )
             }
         }
+    }
+
+    private fun NotablyMDPreferences.setupTranscriptionService(binding: FragmentSettingsBinding) {
+        binding.TranscriptionService.setupTranscriptionService(
+            transcriptionService,
+            transcriptionService.value,
+            requireContext(),
+            layoutInflater,
+            messageResId = R.string.transcription_service_hint,
+            chooseService = { selectedService ->
+                showTranscriptionServiceDialog(selectedService, transcriptionService)
+            },
+        )
+    }
+
+    private fun showTranscriptionServiceDialog(
+        currentService: String,
+        transcriptionService: StringPreference,
+    ) {
+        val services = arrayOf("FUTO Voice", "Heliboard", "System Default")
+        val currentIndex = services.indexOf(currentService).takeIf { it >= 0 } ?: 0
+
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle(R.string.transcription_service)
+            .setSingleChoiceItems(services, currentIndex) { dialog, which ->
+                val selectedService = services[which]
+                model.savePreference(transcriptionService, selectedService)
+
+                Toast.makeText(
+                        requireContext(),
+                        "Transcription service set to: $selectedService",
+                        Toast.LENGTH_SHORT,
+                    )
+                    .show()
+            }
+            .setPositiveButton(android.R.string.ok, null)
+            .show()
     }
 
     private fun NotablyMDPreferences.setupWidgetCustomization(binding: FragmentSettingsBinding) {

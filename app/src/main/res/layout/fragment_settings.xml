@@ -148,7 +148,7 @@
 
     <TextView
       android:id="@+id/PeriodicBackupLastExecution"
-      android:textAppearance="?attr/textAppearanceBodySmall"
+      android:textAppearance="@android:style/TextAppearance.Material.Body2"
       android:paddingStart="16dp"
       android:paddingEnd="16dp"
       android:layout_width="match_parent"
@@ -217,7 +217,23 @@
       android:layout_width="match_parent"
       android:layout_height="1dp"
       android:layout_marginVertical="8dp"
-      android:background="?attr/divider" />
+      android:background="@android:color/darker_gray" />
+
+    <TextView
+      style="@style/PreferenceHeader"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="@string/transcription_service" />
+
+    <include
+      android:id="@+id/TranscriptionService"
+      layout="@layout/preference" />
+
+    <View
+      android:layout_width="match_parent"
+      android:layout_height="1dp"
+      android:layout_marginVertical="8dp"
+      android:background="@android:color/darker_gray" />
 
     <TextView
       style="@style/PreferenceHeader"
@@ -249,7 +265,7 @@
       android:layout_width="match_parent"
       android:layout_height="1dp"
       android:layout_marginVertical="8dp"
-      android:background="?attr/divider" />
+      android:background="@android:color/darker_gray" />
 
     <TextView
       style="@style/PreferenceHeader"
@@ -400,7 +416,7 @@
       android:id="@+id/VersionText"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:textAppearance="?attr/textAppearanceBodySmall"
+      android:textAppearance="@android:style/TextAppearance.Material.Body2"
       android:gravity="start"
       android:padding="16dp" />
 

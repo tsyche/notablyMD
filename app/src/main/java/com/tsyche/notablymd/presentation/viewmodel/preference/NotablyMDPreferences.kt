@@ -213,6 +213,14 @@ class NotablyMDPreferences private constructor(private val context: Context) {
     val quickTileShowStatus =
         BooleanPreference("quickTileShowStatus", preferences, true, R.string.quick_tile_show_status)
 
+    val transcriptionService =
+        StringPreference(
+            "transcriptionService",
+            preferences,
+            "system_default",
+            R.string.transcription_service,
+        )
+
     val autoSaveAfterIdleTime =
         IntPreference(
             "autoSaveAfterIdleTime",
