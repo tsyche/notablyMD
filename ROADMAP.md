@@ -1,14 +1,6 @@
 # NotablyMD Roadmap
 
-## Recently Completed
-
-1. **Complete markdown write-back** (`EnhancedMarkdownManager`) — `convertToMarkdown`/`parseBodyAndSpansFromMarkdown` wired in; GFM task list serialization/deserialization for Type.LIST notes
-2. **Complete bidirectional sync** (`BidirectionalSync`) — `syncFromFileToDatabase` and `handleFileDeleted` implemented using DAO; file→DB path now functional
-3. **Search autofocus** (`SearchFragment`) — keyboard auto-shows on initial navigation to search screen via `post {}` fix
-4. **Voice-to-Note Widget** — one-tap recording from home screen, speech-to-text, auto note creation, 850+ lines of test coverage
-5. **Phase 3 UI: Sync + Conflict + Migration** — sync status toolbar indicators, conflict resolution dialog, migration utility with batch processing
-
----
+**Shipped history:** [ROADMAP_SHIPPED.md](ROADMAP_SHIPPED.md)
 
 ## In Progress
 
