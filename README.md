@@ -18,7 +18,7 @@
 
 
 ### Features
-[NotablyMD](https://github.com/Crustack/NotablyMD), but optimized for easy **cross-device sync** and **markdown-first storage**
+[NotallyX](https://github.com/Crustack/NotallyX), but optimized for easy **cross-device sync** and **markdown-first storage**
 
 * Create **rich text** notes with support for bold, italics, mono space and strike-through
 * Create **task lists** and order them with subtasks (+ auto-sort checked items to the end)
@@ -149,6 +149,6 @@ We welcome contributions! See [DEVELOPMENT_CHECKLIST.md](./DEVELOPMENT_CHECKLIST
 This project is licensed under **GPL 3.0 License** - see [LICENSE.md](./LICENSE.md) for details.
 
 ### Attribution
-The original Notally projects were developed by [OmGodse](https://github.com/OmGodse) and [Crustack](https://github.com/Crustack/NotablyMD) under the GPL 3.0 License.
+The original Notally projects were developed by [OmGodse](https://github.com/OmGodse/Notally) and [Crustack](https://github.com/Crustack/NotallyX) under the GPL 3.0 License.
 
 This markdown-first edition builds upon their excellent work to enable cross-device synchronization and universal markdown compatibility.

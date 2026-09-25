@@ -51,6 +51,9 @@
    - Device attribution in frontmatter, change tracking, selective sync by label/folder
    - Stretch goal — depends on sync being solid first
    - ~16h+
+8. **Docs site** (parked 2026-09-25)
+   - The inherited Docusaurus site and its Pages deploy were removed (Pages was never enabled; the copy still carried upstream text)
+   - Restore with `git checkout bfa47fc -- documentation .github/workflows/deploy.yaml`, rewrite for NotablyMD, then enable Pages (Settings > Pages > Source: GitHub Actions)
 
 ---
 
